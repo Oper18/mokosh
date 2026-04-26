@@ -207,7 +207,7 @@ export default {
       this.expanded = false;
     },
     onDownload(path) {
-      download(path, "photoprism-album.zip");
+      download(path, "mokosh-album.zip");
     },
   },
 };

@@ -1,4 +1,4 @@
-PhotoPrism: Browse Your Life in Pictures
+Mokosh: Browse Your Life in Pictures
 ========================================
 
 [![License: AGPL](https://img.shields.io/badge/license-AGPL%203.0-454377.svg)](https://docs.photoprism.app/license/agpl/)
@@ -8,7 +8,7 @@ PhotoPrism: Browse Your Life in Pictures
 [![Bluesky Social](https://dl.photoprism.app/img/badges/badge-bluesky.svg)](https://bsky.app/profile/photoprism.app)
 [![Mastodon](https://dl.photoprism.app/img/badges/badge-floss-social.svg)](https://floss.social/@photoprism)
 
-PhotoPrism® is an AI-Powered Photos App for the [Decentralized Web](https://en.wikipedia.org/wiki/Decentralized_web).
+Mokosh is an AI-Powered Photos App for the [Decentralized Web](https://en.wikipedia.org/wiki/Decentralized_web).
 It makes use of the latest technologies to tag and find pictures automatically without getting in your way.
 You can run it at home, on a private server, or in the cloud.
 
@@ -18,7 +18,7 @@ To get a first impression, you are welcome to play with our [public demo](https:
 
 ## Feature Overview ##
 
-**Our mission is to provide the most user- and privacy-friendly solution to keep your pictures organized and accessible.** That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality:
+**Our mission is to provide the most user- and privacy-friendly solution to keep your pictures organized and accessible.** That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality:
 
 <img align="right" height="270" src="https://dl.photoprism.app/img/ui/2025/iphone-crocus-540px.png">
 
@@ -30,7 +30,7 @@ To get a first impression, you are welcome to play with our [public demo](https:
 * Six high-resolution [World Maps](https://try.photoprism.app/library/places) and our [privacy-preserving geocoding service](https://docs.photoprism.app/getting-started/#maps-places) help bring back memories of your favorite trips and let you explore the world
 * Metadata can be extracted and merged from Exif, XMP, and other sources like Google Photos
 * [Use compatible apps](https://docs.photoprism.app/user-guide/native-apps/) like [PhotoSync](https://link.photoprism.app/photosync) to back up iOS and Android phones in the background
-* WebDAV clients such as [Microsoft's Windows Explorer](https://docs.photoprism.app/user-guide/sync/webdav/#__tabbed_1_2) and [Apple's Finder](https://docs.photoprism.app/user-guide/sync/webdav/#connect-to-a-webdav-server) can [connect directly to PhotoPrism](https://docs.photoprism.app/user-guide/sync/webdav/), allowing you to open, edit, and delete files from your computer as if they were local
+* WebDAV clients such as [Microsoft's Windows Explorer](https://docs.photoprism.app/user-guide/sync/webdav/#__tabbed_1_2) and [Apple's Finder](https://docs.photoprism.app/user-guide/sync/webdav/#connect-to-a-webdav-server) can [connect directly to Mokosh](https://docs.photoprism.app/user-guide/sync/webdav/), allowing you to open, edit, and delete files from your computer as if they were local
 
 Being completely [**self-funded and independent**](https://link.photoprism.app/membership), we can promise you that we will [never sell your data](https://www.photoprism.app/privacy) and that we will [always be transparent](https://www.photoprism.app/terms) about our software and services. Your data will never be shared with Google, Amazon, Microsoft or Apple unless you intentionally upload files to one of their services. 🔒
 
@@ -45,7 +45,7 @@ See our [Getting Started FAQ](https://docs.photoprism.app/getting-started/faq/#h
 
 ## Support Our Mission 💎 ##
 
-**PhotoPrism is 100% self-funded and independent.** Your [continued support](https://link.photoprism.app/membership) helps us [provide more features to the public](https://www.photoprism.app/oss/faq#what-functionality-is-generally-available), release [regular updates](https://docs.photoprism.app/release-notes/), and remain independent!
+**Mokosh is 100% self-funded and independent.** Your [continued support](https://link.photoprism.app/membership) helps us [provide more features to the public](https://www.photoprism.app/oss/faq#what-functionality-is-generally-available), release [regular updates](https://docs.photoprism.app/release-notes/), and remain independent!
 
 Our members [enjoy additional features](https://www.photoprism.app/kb/personal), including access to [interactive world maps](https://try.photoprism.app/library/places), and can join our private chat room to [connect with our team](https://www.photoprism.app/about/team). We currently have the following membership options:
 
@@ -110,4 +110,4 @@ We welcome [contributions](CONTRIBUTING.md) of any kind, including blog posts, t
 
 ----
 
-*PhotoPrism® is a [registered trademark](https://www.photoprism.app/trademark). By using the software and services we provide, you agree to our [Terms of Service](https://www.photoprism.app/terms), [Privacy Policy](https://www.photoprism.app/privacy), and [Code of Conduct](https://www.photoprism.app/code-of-conduct). Docs are [available](https://link.photoprism.app/github-docs) under the [CC BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/); [additional terms](https://github.com/photoprism/photoprism/blob/develop/assets/README.md) may apply.*
+*Mokosh is a [registered trademark](https://www.photoprism.app/trademark). By using the software and services we provide, you agree to our [Terms of Service](https://www.photoprism.app/terms), [Privacy Policy](https://www.photoprism.app/privacy), and [Code of Conduct](https://www.photoprism.app/code-of-conduct). Docs are [available](https://link.photoprism.app/github-docs) under the [CC BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/); [additional terms](https://github.com/photoprism/photoprism/blob/develop/assets/README.md) may apply.*

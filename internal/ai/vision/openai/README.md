@@ -1,14 +1,14 @@
-## PhotoPrism — OpenAI API Integration
+## Mokosh — OpenAI API Integration
 
 **Last Updated:** November 14, 2025
 
 ### Overview
 
-This package contains PhotoPrism’s adapter for the OpenAI Responses API. It enables existing caption and label workflows (`GenerateCaption`, `GenerateLabels`, and the `photoprism vision run` CLI) to call OpenAI models alongside TensorFlow and Ollama without changing worker or API code. The implementation focuses on predictable results, structured outputs, and clear observability so operators can opt in gradually.
+This package contains Mokosh’s adapter for the OpenAI Responses API. It enables existing caption and label workflows (`GenerateCaption`, `GenerateLabels`, and the `photoprism vision run` CLI) to call OpenAI models alongside TensorFlow and Ollama without changing worker or API code. The implementation focuses on predictable results, structured outputs, and clear observability so operators can opt in gradually.
 
 #### Constraints
 
-- OpenAI requests flow through the existing vision client (`internal/ai/vision/api_client.go`) and must honour PhotoPrism’s timeout, logging, and ACL rules.
+- OpenAI requests flow through the existing vision client (`internal/ai/vision/api_client.go`) and must honour Mokosh’s timeout, logging, and ACL rules.
 - Structured outputs are preferred but the adapter must gracefully handle free-form text; `output_text` responses are parsed both as JSON and as plain captions.
 - Costs should remain predictable: requests are limited to a single 720 px thumbnail (`detail=low`) and capped token budgets (512 caption, 1024 labels).
 - Secrets are supplied per model (`Service.Key`) with fallbacks to `OPENAI_API_KEY` / `_FILE`. Logs must redact sensitive data.
@@ -28,7 +28,7 @@ This package contains PhotoPrism’s adapter for the OpenAI Responses API. It en
 ### Prompt, Model, & Schema Guidance
 
 - **Models:** The adapter targets GPT‑5 vision tiers (e.g. `gpt-5-nano`, `gpt-5-mini`). These models support image inputs, structured outputs, and deterministic settings. Set `Name` to the exact provider identifier so defaults are applied correctly. Caption models share the same configuration surface and run through the same adapter.
-- **Prompts:** Defaults live in `defaults.go`. Captions use a single-sentence instruction; labels use `LabelPromptDefault` (or `LabelPromptNSFW` when PhotoPrism requests NSFW metadata). Custom prompts should retain schema reminders so structured outputs stay valid.
+- **Prompts:** Defaults live in `defaults.go`. Captions use a single-sentence instruction; labels use `LabelPromptDefault` (or `LabelPromptNSFW` when Mokosh requests NSFW metadata). Custom prompts should retain schema reminders so structured outputs stay valid.
 - **Schemas:** Labels use the JSON schema returned by `schema.LabelsJsonSchema(nsfw)`; the response format name is derived via `schema.JsonSchemaName` (e.g. `photoprism_vision_labels_v1`). Captions omit schemas unless operators explicitly request a structured format.
 - **When to keep defaults:** For most deployments, leaving `System`, `Prompt`, `Schema`, and `Options` unset yields stable output with minimal configuration. Override them only when domain-specific language or custom scoring is necessary, and add regression tests alongside.
 
@@ -38,7 +38,7 @@ Budget-conscious operators can experiment with lighter prompts or lower-resoluti
 
 - **Token budgets:** Captions request up to 512 output tokens; labels request up to 1024. Input tokens are typically ≤700 for a single 720 px thumbnail plus prompts.
 - **Latency:** GPT‑5 nano/mini vision calls typically complete in 3–8 s, depending on OpenAI region. Including reasoning metadata (`reasoning.effort=low`) has negligible impact but improves traceability.
-- **Costs:** Consult OpenAI’s pricing for the selected model. Multiply input/output tokens by the published rate. PhotoPrism currently sends one image per request to keep costs linear with photo count.
+- **Costs:** Consult OpenAI’s pricing for the selected model. Multiply input/output tokens by the published rate. Mokosh currently sends one image per request to keep costs linear with photo count.
 
 ### Configuration
 
@@ -79,7 +79,7 @@ Models:
       Key: ${OPENAI_API_KEY}
 ```
 
-Keep TensorFlow entries in place so PhotoPrism falls back when the external service is unavailable.
+Keep TensorFlow entries in place so Mokosh falls back when the external service is unavailable.
 
 #### Defaults
 
@@ -99,7 +99,7 @@ Keep TensorFlow entries in place so PhotoPrism falls back when the external serv
 
 #### Core Concepts
 
-- **Structured outputs:** PhotoPrism leverages OpenAI’s structured output capability as documented at <https://platform.openai.com/docs/guides/structured-outputs>. When a JSON schema is supplied, the adapter emits `text.format` with `type: "json_schema"` and a schema name derived from the content. The parser then prefers `output_json`, but also attempts to decode `output_text` payloads that contain JSON objects.
+- **Structured outputs:** Mokosh leverages OpenAI’s structured output capability as documented at <https://platform.openai.com/docs/guides/structured-outputs>. When a JSON schema is supplied, the adapter emits `text.format` with `type: "json_schema"` and a schema name derived from the content. The parser then prefers `output_json`, but also attempts to decode `output_text` payloads that contain JSON objects.
 - **Deterministic sampling:** GPT‑5 models are run with `temperature=0` and `top_p=0` to minimise variance, while still allowing developers to override values in `vision.yml` if needed.
 - **Reasoning metadata:** Requests include `reasoning.effort="low"` so OpenAI returns structured reasoning usage counters, helping operators track token consumption.
 - **Worker summaries:** The vision worker now logs either “updated …” or “processed … (no metadata changes detected)”, making reruns easy to audit.

@@ -1,4 +1,4 @@
-## PhotoPrism — NSFW Package
+## Mokosh — NSFW Package
 
 **Last Updated:** December 23, 2025
 
@@ -14,7 +14,7 @@
 
 ### Memory & Performance
 
-TensorFlow tensors allocate C memory and are freed by Go GC finalizers. To keep RSS bounded during long runs, PhotoPrism periodically triggers garbage collection to return freed tensor memory to the OS. Tune with:
+TensorFlow tensors allocate C memory and are freed by Go GC finalizers. To keep RSS bounded during long runs, Mokosh periodically triggers garbage collection to return freed tensor memory to the OS. Tune with:
 
 - `PHOTOPRISM_TF_GC_EVERY` (default **200**, `0` disables).  
   Lower values reduce peak RSS but increase GC overhead and can slow indexing.

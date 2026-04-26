@@ -40,7 +40,8 @@ func AlbumByUID(albumUID string) (album entity.Album, err error) {
 }
 
 // AlbumCoverByUID returns an album cover file based on the uid.
-func AlbumCoverByUID(uid string, public bool) (file entity.File, err error) {
+// An optional list of photo UIDs may be passed to restrict the cover to specific photos (e.g. for visitor sessions).
+func AlbumCoverByUID(uid string, public bool, photoUIDs ...entity.UIDs) (file entity.File, err error) {
 	if rnd.InvalidUID(uid, entity.AlbumUID) {
 		return file, fmt.Errorf("invalid album uid")
 	}
@@ -103,6 +104,11 @@ func AlbumCoverByUID(uid string, public bool) (file entity.File, err error) {
 	// Public pictures only?
 	if public {
 		stmt = stmt.Where("photos.photo_private = 0")
+	}
+
+	// Restrict to allowed photo UIDs when provided (e.g. visitor sessions with limited access).
+	if len(photoUIDs) > 0 && len(photoUIDs[0]) > 0 {
+		stmt = stmt.Where("files.photo_uid IN (?)", []string(photoUIDs[0]))
 	}
 
 	// Find first picture.

@@ -1,10 +1,10 @@
-## PhotoPrism — Thumbnails Package
+## Mokosh — Thumbnails Package
 
 **Last Updated:** March 6, 2026
 
 ### Overview
 
-`internal/thumb` builds thumbnails with libvips, handling resize/crop options, color management, metadata stripping, and format export (JPEG/PNG). It is used by PhotoPrism’s workers and CLI to generate cached thumbs consistently.
+`internal/thumb` builds thumbnails with libvips, handling resize/crop options, color management, metadata stripping, and format export (JPEG/PNG). It is used by Mokosh’s workers and CLI to generate cached thumbs consistently.
 
 ### Constraints
 

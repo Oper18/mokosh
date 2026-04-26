@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -29,7 +29,7 @@ import $api from "common/api";
 import $notify from "common/notify";
 import { $view } from "common/view";
 import { $lightbox } from "common/lightbox";
-import { PhotoClipboard } from "common/clipboard";
+import { PhotoClipboard, AlbumClipboard } from "common/clipboard";
 import $event from "common/event";
 import $log from "common/log";
 import { registerServiceWorker } from "common/pwa";
@@ -37,7 +37,7 @@ import $util from "common/util";
 import * as components from "component/components";
 import icons from "component/icons";
 import defaults from "component/defaults";
-import PhotoPrism from "app.vue";
+import Mokosh from "app.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "app/routes";
 import { $config, $session } from "app/session";
@@ -77,7 +77,7 @@ $config.update().finally(() => {
   // Check if running in public mode.
   const $isPublic = $config.isPublic();
 
-  let app = createApp(PhotoPrism);
+  let app = createApp(Mokosh);
 
   // Initialize language and detect its alignment.
   app.config.globalProperties.$language = $config.getLanguageLocale();
@@ -102,6 +102,7 @@ $config.update().finally(() => {
   app.config.globalProperties.$socket = Socket;
   app.config.globalProperties.$config = $config;
   app.config.globalProperties.$clipboard = PhotoClipboard;
+  app.config.globalProperties.$albumClipboard = AlbumClipboard;
   app.config.globalProperties.$util = $util;
   app.config.globalProperties.$sponsorFeatures = () => {
     return $config.load().finally(() => {

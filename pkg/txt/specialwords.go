@@ -172,7 +172,7 @@ var SpecialWords = map[string]string{
 	"tensorflow":         "TensorFlow",
 	"digitalocean":       "DigitalOcean",
 	"photosync":          "PhotoSync",
-	"photoprism":         "PhotoPrism",
+	"photoprism":         "Mokosh",
 	"macgyver":           "MacGyver",
 	"o'brien":            "O'Brien",
 	"mcgregor":           "McGregor",

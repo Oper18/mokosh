@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/photoprism"
 	"github.com/photoprism/photoprism/internal/photoprism/get"
@@ -32,7 +33,7 @@ const (
 //	@Failure	200		{file}	image/svg+xml
 //	@Success	200		{file}	image/jpg
 //	@Param		uid		path	string	true	"Album UID"
-//	@Param		token	path	string	true	"user-specific security token provided with session or 'public' when running PhotoPrism in public mode"
+//	@Param		token	path	string	true	"user-specific security token provided with session or 'public' when running Mokosh in public mode"
 //	@Param		size	path	string	true	"thumbnail size"	Enums(tile_50, tile_100, left_224, right_224, tile_224, tile_500, fit_720, tile_1080, fit_1280, fit_1600, fit_1920, fit_2048, fit_2560, fit_3840, fit_4096, fit_7680)
 //	@Router		/api/v1/albums/{uid}/t/{token}/{size} [get]
 func AlbumCover(router *gin.RouterGroup) {
@@ -55,32 +56,57 @@ func AlbumCover(router *gin.RouterGroup) {
 			return
 		}
 
+		// For visitor sessions that have photo-level (not album-level) shares, restrict cover
+		// to only photos accessible to that session. Image requests don't carry the X-Auth-Token
+		// header, so we look up the session via the per-session preview token in the URL.
+		var allowedPhotoUIDs entity.UIDs
+		if token := clean.UrlToken(c.Param("token")); token != "" {
+			if sessionID := entity.PreviewToken.Get(token); sessionID != "" && sessionID != entity.TokenConfig {
+				if sess, sessErr := entity.FindSession(sessionID); sessErr == nil && sess != nil && (sess.IsVisitor() || sess.NotRegistered()) {
+					albumDirectlyShared := false
+					for _, aUID := range sess.SharedAlbumUIDs() {
+						if aUID == uid {
+							albumDirectlyShared = true
+							break
+						}
+					}
+					if !albumDirectlyShared {
+						allowedPhotoUIDs = sess.SharedPhotoUIDs()
+					}
+				}
+			}
+		}
+
 		cache := get.CoverCache()
 		cacheKey := CacheKey(albumCover, uid, string(thumbName))
 
-		if cacheData, ok := cache.Get(cacheKey); ok {
-			log.Tracef("api: cache hit for %s [%s]", cacheKey, time.Since(start))
+		// Only use the shared cache for unrestricted requests; visitor-restricted covers
+		// must not be served to or pollute the cache used by other sessions.
+		if len(allowedPhotoUIDs) == 0 {
+			if cacheData, ok := cache.Get(cacheKey); ok {
+				log.Tracef("api: cache hit for %s [%s]", cacheKey, time.Since(start))
 
-			cached := cacheData.(ThumbCache)
+				cached := cacheData.(ThumbCache)
 
-			if !fs.FileExists(cached.FileName) {
-				log.Errorf("%s: %s not found", albumCover, uid)
-				c.Data(http.StatusOK, "image/svg+xml", albumIconSvg)
+				if !fs.FileExists(cached.FileName) {
+					log.Errorf("%s: %s not found", albumCover, uid)
+					c.Data(http.StatusOK, "image/svg+xml", albumIconSvg)
+					return
+				}
+
+				AddCoverCacheHeader(c)
+
+				if c.Query("download") != "" {
+					c.FileAttachment(cached.FileName, cached.ShareName)
+				} else {
+					c.File(cached.FileName)
+				}
+
 				return
 			}
-
-			AddCoverCacheHeader(c)
-
-			if c.Query("download") != "" {
-				c.FileAttachment(cached.FileName, cached.ShareName)
-			} else {
-				c.File(cached.FileName)
-			}
-
-			return
 		}
 
-		f, err := query.AlbumCoverByUID(uid, conf.Settings().Features.Private)
+		f, err := query.AlbumCoverByUID(uid, conf.Settings().Features.Private, allowedPhotoUIDs)
 
 		if err != nil {
 			log.Debugf("%s: %s contains no pictures, using generic cover", albumCover, uid)
@@ -126,8 +152,10 @@ func AlbumCover(router *gin.RouterGroup) {
 			return
 		}
 
-		cache.SetDefault(cacheKey, ThumbCache{thumbnail, f.ShareBase(0)})
-		log.Debugf("cached %s [%s]", cacheKey, time.Since(start))
+		if len(allowedPhotoUIDs) == 0 {
+			cache.SetDefault(cacheKey, ThumbCache{thumbnail, f.ShareBase(0)})
+			log.Debugf("cached %s [%s]", cacheKey, time.Since(start))
+		}
 
 		AddCoverCacheHeader(c)
 
@@ -150,7 +178,7 @@ func AlbumCover(router *gin.RouterGroup) {
 //	@Failure	200		{file}	image/svg+xml
 //	@Success	200		{file}	image/jpg
 //	@Param		uid		path	string	true	"Label UID"
-//	@Param		token	path	string	true	"user-specific security token provided with session or 'public' when running PhotoPrism in public mode"
+//	@Param		token	path	string	true	"user-specific security token provided with session or 'public' when running Mokosh in public mode"
 //	@Param		size	path	string	true	"thumbnail size"	Enums(tile_50, tile_100, left_224, right_224, tile_224, tile_500, fit_720, tile_1080, fit_1280, fit_1600, fit_1920, fit_2048, fit_2560, fit_3840, fit_4096, fit_7680)
 //	@Router		/api/v1/labels/{uid}/t/{token}/{size} [get]
 func LabelCover(router *gin.RouterGroup) {

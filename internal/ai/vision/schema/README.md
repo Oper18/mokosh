@@ -1,10 +1,10 @@
-## PhotoPrism — Vision Schema Reference
+## Mokosh — Vision Schema Reference
 
 **Last Updated:** November 14, 2025
 
 ### Overview
 
-This package contains the canonical label response specifications used by PhotoPrism’s external vision engines. It exposes two helpers:
+This package contains the canonical label response specifications used by Mokosh’s external vision engines. It exposes two helpers:
 
 - `LabelsJsonSchema(nsfw bool)` — returns a JSON **Schema** document tailored for OpenAI Responses requests, enabling strict validation of structured outputs.
 - `LabelsJson(nsfw bool)` — returns a literal JSON **sample** that Ollama-style models can mirror when they only support prompt-enforced structures.
@@ -15,12 +15,12 @@ Both helpers build on the same field set (`name`, `confidence`, `topicality`, an
 
 | Helper                    | Target Engine            | Format                                                 | Validation Style                                                                    | When To Use                                                                                                     |
 |:--------------------------|:-------------------------|:-------------------------------------------------------|:------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|
-| `LabelsJsonSchema(false)` | OpenAI (standard labels) | JSON Schema Draft                                      | Strong: OpenAI enforces field types/ranges server-side before returning a response. | When calling GPT‑vision models via `ApiFormatOpenAI` to ensure PhotoPrism receives well-formed label arrays.    |
+| `LabelsJsonSchema(false)` | OpenAI (standard labels) | JSON Schema Draft                                      | Strong: OpenAI enforces field types/ranges server-side before returning a response. | When calling GPT‑vision models via `ApiFormatOpenAI` to ensure Mokosh receives well-formed label arrays.    |
 | `LabelsJsonSchema(true)`  | OpenAI (labels + NSFW)   | JSON Schema Draft with additional boolean/float fields | Strong: same enforcement plus required NSFW fields.                                 | When `DetectNSFWLabels` or NSFW-specific prompts are active and the model must emit `nsfw` + `nsfw_confidence`. |
 | `LabelsJson(false)`       | Ollama (standard labels) | Plain JSON example                                     | Soft: model is nudged to mimic the structure through prompt instructions.           | When running self-hosted Ollama models that support “JSON mode” but do not consume JSON Schema definitions.     |
-| `LabelsJson(true)`        | Ollama (labels + NSFW)   | Plain JSON example with NSFW keys                      | Soft: prompts describe the required keys; the adapter validates after parsing.      | When Ollama prompts mention NSFW scoring or PhotoPrism sets `DetectNSFWLabels=true`.                            |
+| `LabelsJson(true)`        | Ollama (labels + NSFW)   | Plain JSON example with NSFW keys                      | Soft: prompts describe the required keys; the adapter validates after parsing.      | When Ollama prompts mention NSFW scoring or Mokosh sets `DetectNSFWLabels=true`.                            |
 
-**Key technical distinction:** OpenAI’s Responses API accepts a JSON Schema (see `LabelsJsonSchema*`) and guarantees compliance by rejecting invalid responses, while Ollama currently relies on prompt-directed output. For Ollama integrations we provide a representative JSON document (`LabelsJson*`) that models can imitate; PhotoPrism then normalizes and validates the results in Go.
+**Key technical distinction:** OpenAI’s Responses API accepts a JSON Schema (see `LabelsJsonSchema*`) and guarantees compliance by rejecting invalid responses, while Ollama currently relies on prompt-directed output. For Ollama integrations we provide a representative JSON document (`LabelsJson*`) that models can imitate; Mokosh then normalizes and validates the results in Go.
 
 ### Field Definitions
 
@@ -30,7 +30,7 @@ Both helpers build on the same field set (`name`, `confidence`, `topicality`, an
 - `nsfw` — boolean flag indicating sensitive content (required only in NSFW variants).
 - `nsfw_confidence` — normalized probability for the NSFW assessment (required only in NSFW variants).
 
-OpenAI schemas enforce these ranges/types, while Ollama prompts remind the model to emit matching keys. After parsing, PhotoPrism applies `LabelConfidenceDefault` and `normalizeLabelResult` to fill gaps and enforce naming rules.
+OpenAI schemas enforce these ranges/types, while Ollama prompts remind the model to emit matching keys. After parsing, Mokosh applies `LabelConfidenceDefault` and `normalizeLabelResult` to fill gaps and enforce naming rules.
 
 ### Usage Guidance
 
@@ -41,7 +41,7 @@ OpenAI schemas enforce these ranges/types, while Ollama prompts remind the model
    - Rely on the built-in samples from `LabelsJson` or include them directly in prompts via `model.SchemaInstructions()`.
    - Because enforcement happens after the response arrives, keep `Format: json` (default) and `Options.ForceJson=true` for label models to make parsing stricter.
 3. **Custom engines**:
-   - Reuse these helpers to stay compatible with PhotoPrism’s label DTOs.
+   - Reuse these helpers to stay compatible with Mokosh’s label DTOs.
    - When adding new fields, update both schema/sample versions so OpenAI and Ollama adapters remain aligned.
 
 ### References

@@ -76,7 +76,7 @@ Migration files live in `internal/entity/migrate/`.
 
 ## Architecture Overview
 
-PhotoPrism is a self-hosted photo management app. The backend is Go, the frontend is Vue 3 + Vuetify 3, and the database is MariaDB or SQLite (via GORM).
+Mokosh is a self-hosted photo management app. The backend is Go, the frontend is Vue 3 + Vuetify 3, and the database is MariaDB or SQLite (via GORM).
 
 ### Backend (`internal/`, `pkg/`, `cmd/`)
 

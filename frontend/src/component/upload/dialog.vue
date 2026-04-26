@@ -157,7 +157,7 @@ export default {
   data() {
     const isDemo = this.$config.get("demo");
     return {
-      accept: this.$config.get("uploadAllow"),
+      accept: this.$config.get("uploadAllow") || null,
       albums: [],
       selectedAlbums: [],
       albumsMenu: false,
@@ -489,4 +489,3 @@ export default {
   },
 };
 </script>
-

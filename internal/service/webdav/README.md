@@ -1,10 +1,10 @@
-## PhotoPrism — WebDAV Service Client
+## Mokosh — WebDAV Service Client
 
 **Last Updated:** March 7, 2026
 
 ### Overview
 
-`internal/service/webdav` contains the outbound WebDAV client used by PhotoPrism services and background workers. It wraps `github.com/emersion/go-webdav` with PhotoPrism-specific URL validation, control-operation timeouts, filesystem mapping, and error/logging behavior for remote uploads, downloads, and synchronization.
+`internal/service/webdav` contains the outbound WebDAV client used by Mokosh services and background workers. It wraps `github.com/emersion/go-webdav` with Mokosh-specific URL validation, control-operation timeouts, filesystem mapping, and error/logging behavior for remote uploads, downloads, and synchronization.
 
 ### Main Responsibilities
 

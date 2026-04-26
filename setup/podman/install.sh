@@ -39,6 +39,6 @@ sudo chmod u+rwx,g+rwx import database originals storage
 echo ""
 echo "Done! You can now customize your settings in the downloaded docker-compose.yml file:"
 echo ">> nano docker-compose.yml"
-echo "When you are done with the configuration, run 'make' to download and start PhotoPrism."
+echo "When you are done with the configuration, run 'make' to download and start Mokosh."
 echo "After waiting a few moments, you should be able to open the UI in a web browser by navigating to:"
 echo ">> http://localhost:2342/ (or the configured site URL if you have changed it)"

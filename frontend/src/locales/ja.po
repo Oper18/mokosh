@@ -2074,8 +2074,8 @@ msgid "Location"
 msgstr "場所"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "PhotoPrism が壊れたファイルを見つけたり、潜在的な問題が見つかったときはここにログメッセージが表示されます。"
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "Mokosh が壊れたファイルを見つけたり、潜在的な問題が見つかったときはここにログメッセージが表示されます。"
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2418,8 +2418,8 @@ msgid "Note:"
 msgstr "メモ:"
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "メモ: Nextcloud や PhotoPrism といった WebDAV サーバのみがバックアップやファイルアップロードのサービスとして設定できます。"
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "メモ: Nextcloud や Mokosh といった WebDAV サーバのみがバックアップやファイルアップロードのサービスとして設定できます。"
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2648,12 +2648,12 @@ msgid "Photo"
 msgstr "写真"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "PhotoPrism は100％自己資金で運営されている独立系企業です。"
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "Mokosh は100％自己資金で運営されている独立系企業です。"
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
-msgstr "PhotoPrism+ メンバーシップ"
+msgid "Mokosh+ Membership"
+msgstr "Mokosh+ メンバーシップ"
 
 #: src/app/routes.js:178
 msgid "Photos"
@@ -2757,8 +2757,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "データベースとアルバムのバックアップ、YAML サイドカーファイルが生成されないようにします。"
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "他のアプリが PhotoPrism を共有ネットワークドライブとしてアクセスできないようにします。"
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "他のアプリが Mokosh を共有ネットワークドライブとしてアクセスできないようにします。"
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3537,8 +3537,8 @@ msgstr "ご支援ありがとうございます！"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "そのため、PhotoPrism は自由、プライバシー、機能性を損なうことなく、必要なときに使えるように一から作り上げました。"
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "そのため、Mokosh は自由、プライバシー、機能性を損なうことなく、必要なときに使えるように一から作り上げました。"
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3952,12 +3952,12 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "WebDAV クライアントは PhotoPrism に次の URL で接続することができます:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "WebDAV クライアントは Mokosh に次の URL で接続することができます:"
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "Microsoft Windows エクスプローラや Apple Finder のような WebDAV クライアントは、直接 PhotoPrism に接続できます。"
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "Microsoft Windows エクスプローラや Apple Finder のような WebDAV クライアントは、直接 Mokosh に接続できます。"
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4382,8 +4382,8 @@ msgstr "アーカイブ"
 #~ msgid "Estimates"
 #~ msgstr "座標の推定"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "PhotoPrismがアップデートされました…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Mokoshがアップデートされました…"
 
 #~ msgid "Album Name"
 #~ msgstr "アルバム名"
@@ -4460,10 +4460,10 @@ msgstr "アーカイブ"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
+#~ "          Mokosh."
 #~ msgstr ""
 #~ "Microsoft の Windows エクスプローラー や Apple の Finder のような WebDAV クライアントは、\n"
-#~ "直接 PhotoPrism に接続できます。"
+#~ "直接 Mokosh に接続できます。"
 
 #~ msgid "Basic"
 #~ msgstr "基本"
@@ -4540,8 +4540,8 @@ msgstr "アーカイブ"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "何か問題が発生したようですが、オフラインなのでしょうか？"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
-#~ msgstr "PhotoPrismは、写真を通して切り取られた一瞬一瞬が貴重であると考え、その瞬間を何世代にもわたって大切にできるようにすることを使命としています。"
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgstr "Mokoshは、写真を通して切り取られた一瞬一瞬が貴重であると考え、その瞬間を何世代にもわたって大切にできるようにすることを使命としています。"
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
 #~ msgstr "今すぐ会員になることで、さらなる機能を享受し、私たちのミッションを支援することができます！"
@@ -4651,8 +4651,8 @@ msgstr "アーカイブ"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "最新技術を駆使して、邪魔にならないように自動的にタグ付けや写真検索を行います。"
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "PhotoPrism®は、分散型WebのためのAIを搭載した写真アプリです。"
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "Mokoshは、分散型WebのためのAIを搭載した写真アプリです。"
 
 #~ msgid "Uploader"
 #~ msgstr "アップローダー"
@@ -4690,8 +4690,8 @@ msgstr "アーカイブ"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "私たちのチームは、その機能が必要とするサポートの労力、私たちにかかるコスト、そしてその機能が一般的にすべての人に必要とされているか、主に組織や上級ユーザーから要求されているかによって、継続的にこれを評価しています。これにより、より多くの機能を一般に提供できるようになりますので、ユーザーの皆様には、私たちのミッションをサポートしていただくことをお勧めします。"
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
-#~ msgstr "PhotoPrismは100%自己資金で運営されています。ご寄付は、アップデート、ドキュメンテーション、サポートを提供するためにフルタイムで働くチームの費用をカバーするものではありません。ご登録いただくことで、より多くの特典をご利用いただけます。"
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgstr "Mokoshは100%自己資金で運営されています。ご寄付は、アップデート、ドキュメンテーション、サポートを提供するためにフルタイムで働くチームの費用をカバーするものではありません。ご登録いただくことで、より多くの特典をご利用いただけます。"
 
 #~ msgid "Shouldn't free software be free of costs?"
 #~ msgstr "フリーソフトはコストフリーであるべきではないか？"
@@ -4899,8 +4899,8 @@ msgstr "アーカイブ"
 #~ msgid "Spanish"
 #~ msgstr "スペイン語"
 
-#~ msgid "PhotoPrism® is a registered trademark of Michael Mayer."
-#~ msgstr "PhotoPrism®は Michael Mayer による登録商標です。"
+#~ msgid "Mokosh is a registered trademark of Michael Mayer."
+#~ msgstr "Mokoshは Michael Mayer による登録商標です。"
 
 #~ msgid "Requests endorsed by silver and gold sponsors receive a golden label and will be prioritized."
 #~ msgstr "シルバー、ゴールドスポンサーからの依頼にはゴールデンラベルが貼られ、優先的に処理されます。"
@@ -4914,8 +4914,8 @@ msgstr "アーカイブ"
 #~ msgid "You may use it as required to describe our software, run your own server, for educational purposes, but not for offering commercial goods, products, or services without prior written permission. In other words, please ask."
 #~ msgstr "あなたは必要に応じて私たちのソフトウェアを説明したり、あなたの独自のサーバーを運営したり、教育目的で利用できますが、書面による事前の許可なしに商業的なグッズ、商品、サービスのために使うことはできません。つまり、お問い合わせください。"
 
-#~ msgid "If you enjoy using PhotoPrism, please consider backing us on Patreon or GitHub Sponsors."
-#~ msgstr "PhotoPrismをご愛用いただいている皆様には、PatreonやGitHub Sponsorsでのご支援をお願いいたします。"
+#~ msgid "If you enjoy using Mokosh, please consider backing us on Patreon or GitHub Sponsors."
+#~ msgstr "Mokoshをご愛用いただいている皆様には、PatreonやGitHub Sponsorsでのご支援をお願いいたします。"
 
 #~ msgid "Let us know when we mistakenly label an idea as unfunded."
 #~ msgstr "私たちが間違って「資金不足」と表示したアイデアがあれば、教えてください。"
@@ -4941,8 +4941,8 @@ msgstr "アーカイブ"
 #~ msgid "Hide Private"
 #~ msgstr "プライベートな項目を隠す"
 
-#~ msgid "Let PhotoPrism create albums from past events."
-#~ msgstr "過去のイベントから PhotoPrism がアルバムを作成するのを許可します。"
+#~ msgid "Let Mokosh create albums from past events."
+#~ msgstr "過去のイベントから Mokosh がアルバムを作成するのを許可します。"
 
 #~ msgid "More than 50 results"
 #~ msgstr "50 件の結果"

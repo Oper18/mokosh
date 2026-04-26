@@ -1,10 +1,10 @@
 /*
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2026 Mokosh. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
-    <https://docs.photoprism.app/license/agpl>
+    <https://docs.mokosh.app/license/agpl>
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,13 +13,13 @@ Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
 
     The AGPL is supplemented by our Trademark and Brand Guidelines,
     which describe how our Brand Assets may be used:
-    <https://www.photoprism.app/trademark>
+    <https://www.mokosh.app/trademark>
 
-Feel free to send an email to hello@photoprism.app if you have questions,
+Feel free to send an email to info@wookie18.com if you have questions,
 want to support our work, or just want to say hello.
 
 Additional information can be found in our Developer Guide:
-<https://docs.photoprism.app/developer-guide/>
+<https://docs.mokosh.app/developer-guide/>
 
 */
 
@@ -33,7 +33,7 @@ const webpack = require("webpack");
 const isAnalyze = process.env?.BUILD_ENV === "analyze" || process.env?.NODE_ENV === "analyze";
 const isDev = isAnalyze || process.env?.BUILD_ENV === "development" || process.env?.NODE_ENV === "development";
 const isCustom = !!process.env.CUSTOM_SRC;
-const appName = process.env.CUSTOM_NAME ? process.env.CUSTOM_NAME : "PhotoPrism";
+const appName = process.env.CUSTOM_NAME ? process.env.CUSTOM_NAME : "Mokosh";
 const { VueLoaderPlugin } = require("vue-loader");
 const { VuetifyPlugin } = require("webpack-plugin-vuetify");
 const { DefinePlugin } = require("webpack");
@@ -207,6 +207,9 @@ const config = {
             options: {
               sourceMap: true,
               importLoaders: 1,
+              url: {
+                filter: (url) => !url.startsWith("/"),
+              },
             },
           },
           "resolve-url-loader",

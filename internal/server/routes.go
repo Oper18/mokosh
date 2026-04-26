@@ -40,6 +40,9 @@ func registerRoutes(router *gin.Engine, conf *config.Config) {
 		registerAPIDocs(APIv1)
 	}
 
+	// User Registration (public — no auth required).
+	api.RegisterUser(APIv1)
+
 	// User Sessions.
 	api.CreateSession(APIv1)
 	api.GetSession(APIv1)
@@ -112,13 +115,16 @@ func registerRoutes(router *gin.Engine, conf *config.Config) {
 	api.GetPhotoYaml(APIv1)
 	api.UpdatePhoto(APIv1)
 	api.GetPhotoDownload(APIv1)
-	// api.GetPhotoLinks(APIv1)
-	// api.CreatePhotoLink(APIv1)
-	// api.UpdatePhotoLink(APIv1)
-	// api.DeletePhotoLink(APIv1)
+	api.GetPhotoLinks(APIv1)
+	api.CreatePhotoLink(APIv1)
+	api.UpdatePhotoLink(APIv1)
+	api.DeletePhotoLink(APIv1)
 	api.ApprovePhoto(APIv1)
 	api.LikePhoto(APIv1)
 	api.DislikePhoto(APIv1)
+	api.GetPhotoReactions(APIv1)
+	api.ReactPhoto(APIv1)
+	api.DeletePhotoReaction(APIv1)
 	api.AddPhotoLabel(APIv1)
 	api.RemovePhotoLabel(APIv1)
 	api.UpdatePhotoLabel(APIv1)
@@ -132,6 +138,23 @@ func registerRoutes(router *gin.Engine, conf *config.Config) {
 	api.PhotoPrimary(APIv1)
 	api.PhotoUnstack(APIv1)
 
+	// Shares.
+	api.GetShares(APIv1)
+	api.UpdateSharePerm(APIv1)
+
+	// Teams.
+	api.GetTeams(APIv1)
+	api.GetTeam(APIv1)
+	api.CreateTeam(APIv1)
+	api.UpdateTeam(APIv1)
+	api.DeleteTeam(APIv1)
+	api.AddUserToTeam(APIv1)
+	api.RemoveUserFromTeam(APIv1)
+	api.AddTeamToAlbum(APIv1)
+	api.RemoveTeamFromAlbum(APIv1)
+	api.AddTeamToPhoto(APIv1)
+	api.RemoveTeamFromPhoto(APIv1)
+
 	// Photo Albums.
 	api.SearchAlbums(APIv1)
 	api.GetAlbum(APIv1)
@@ -144,6 +167,7 @@ func registerRoutes(router *gin.Engine, conf *config.Config) {
 	api.CreateAlbumLink(APIv1)
 	api.UpdateAlbumLink(APIv1)
 	api.DeleteAlbumLink(APIv1)
+	api.CreateAlbumInvite(APIv1)
 	api.LikeAlbum(APIv1)
 	api.DislikeAlbum(APIv1)
 	api.CloneAlbums(APIv1)

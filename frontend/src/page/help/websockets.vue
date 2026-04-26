@@ -2,7 +2,7 @@
   <div class="p-help p-help-websockets text-ltr text-selectable">
     <h3>
       Either the connection to the server is temporarily unavailable or there is a problem with the WebSocket configuration if you are using a reverse proxy in
-      front of PhotoPrism.
+      front of Mokosh.
     </h3>
 
     <p>

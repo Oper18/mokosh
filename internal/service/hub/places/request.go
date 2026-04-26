@@ -34,7 +34,7 @@ func GetRequest(reqUrl string, locale string) (r *http.Response, err error) {
 	if UserAgent != "" {
 		req.Header.Set(header.UserAgent, UserAgent)
 	} else {
-		req.Header.Set(header.UserAgent, "PhotoPrism/Test")
+		req.Header.Set(header.UserAgent, "Mokosh/Test")
 	}
 
 	// Set requested result locale.

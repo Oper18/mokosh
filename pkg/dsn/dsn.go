@@ -1,8 +1,8 @@
 /*
 Package dsn provides helpers for parsing database data source names, masking
-credentials, and sharing driver-specific defaults used throughout PhotoPrism.
+credentials, and sharing driver-specific defaults used throughout Mokosh.
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):

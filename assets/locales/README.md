@@ -1,6 +1,6 @@
 ## Backend Translations
 
-PhotoPrism uses [gettext](https://en.wikipedia.org/wiki/Gettext) for localizing frontend and backend.
+Mokosh uses [gettext](https://en.wikipedia.org/wiki/Gettext) for localizing frontend and backend.
 It's one of the most widely adopted standards for translating user interfaces.
  
 Human-readable messages like `File not found` are used as ids for finding matching translations, 

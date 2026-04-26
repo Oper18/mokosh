@@ -2074,8 +2074,8 @@ msgid "Location"
 msgstr "위치"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "PhotoPrism이 깨진 파일을 발견하거나 다른 잠재적인 문제가 있을 때마다 로그 메시지가 여기에 나타납니다."
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "Mokosh이 깨진 파일을 발견하거나 다른 잠재적인 문제가 있을 때마다 로그 메시지가 여기에 나타납니다."
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2418,8 +2418,8 @@ msgid "Note:"
 msgstr "노트:"
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "주의: Nextcloud 또는 PhotoPrism와 같은 WebDAV서버만 백업 및 파일 업로드를 위한 원격 서비스로 구성할 수 있습니다."
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "주의: Nextcloud 또는 Mokosh와 같은 WebDAV서버만 백업 및 파일 업로드를 위한 원격 서비스로 구성할 수 있습니다."
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2648,11 +2648,11 @@ msgid "Photo"
 msgstr "사진"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
+msgid "Mokosh is 100% self-funded and independent."
 msgstr "포토프리즘은 100% 자체 자금으로 독립적으로 운영됩니다."
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
+msgid "Mokosh+ Membership"
 msgstr "포토프리즘+ 멤버십"
 
 #: src/app/routes.js:178
@@ -2757,8 +2757,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "데이터베이스 및 앨범 백업과 YAML 사이드카 파일이 생성되지 않도록 합니다."
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "다른 앱이 공유 네트워크 드라이브로서 PhotoPrism에 액세스하지 못하도록 합니다."
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "다른 앱이 공유 네트워크 드라이브로서 Mokosh에 액세스하지 못하도록 합니다."
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3537,7 +3537,7 @@ msgstr "여러분의 성원에 감사드립니다!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
 msgstr "그렇기 때문에 포토프리즘은 처음부터 자유, 개인정보 보호, 기능에 영향을 주지 않으면서 필요한 곳 어디에서나 실행할 수 있도록 설계되었습니다."
 
 #: src/page/library/index.vue:72
@@ -3952,12 +3952,12 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "WebDAV 클라이언트는 다음 URL을 사용하여 PhotoPrism에 연결할 수 있습니다:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "WebDAV 클라이언트는 다음 URL을 사용하여 Mokosh에 연결할 수 있습니다:"
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "WebDAV 클라이언트 (예: 마이코로소프트 Windows Explorer 또는 애플 Finder) 직접적으로 PhotoPrism에 연결할 수 있습니다."
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "WebDAV 클라이언트 (예: 마이코로소프트 Windows Explorer 또는 애플 Finder) 직접적으로 Mokosh에 연결할 수 있습니다."
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4382,8 +4382,8 @@ msgstr "보관"
 #~ msgid "Estimates"
 #~ msgstr "견적"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "PhotoPrism 업데이트되었습니다…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Mokosh 업데이트되었습니다…"
 
 #~ msgid "Album Name"
 #~ msgstr "앨범 이름"
@@ -4458,8 +4458,8 @@ msgstr "보관"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
-#~ msgstr "WebDAV 클라이언트 (예: 마이코로소프트 Windows Explorer 또는 애플 Finder) 직접적으로 PhotoPrism에 연결할 수 있습니다."
+#~ "          Mokosh."
+#~ msgstr "WebDAV 클라이언트 (예: 마이코로소프트 Windows Explorer 또는 애플 Finder) 직접적으로 Mokosh에 연결할 수 있습니다."
 
 #~ msgid "Basic"
 #~ msgstr "기본"
@@ -4536,7 +4536,7 @@ msgstr "보관"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "문제가 발생했습니다. 오프라인 상태인가요?"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
 #~ msgstr "포토프리즘은 사진을 통해 포착한 모든 순간이 소중하다고 믿으며, 사람들이 그 순간을 오래도록 소중히 간직할 수 있도록 하는 것을 사명으로 삼고 있습니다."
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
@@ -4647,8 +4647,8 @@ msgstr "보관"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "최신 기술을 사용하여 방해 없이 자동으로 사진에 태그를 지정하고 찾습니다."
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "PhotoPrism®은 분산 웹을 위한 AI 기반 사진 앱입니다."
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "Mokosh은 분산 웹을 위한 AI 기반 사진 앱입니다."
 
 #~ msgid "Uploader"
 #~ msgstr "업로더"
@@ -4686,7 +4686,7 @@ msgstr "보관"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "우리 팀은 기능에 필요한 지원 노력, 비용, 일반적으로 모든 사람에게 필요한지 또는 주로 조직 및 고급 사용자가 요청하는지 여부에 따라 이를 지속적으로 평가합니다. 이를 통해 대중에게 더 많은 기능을 제공할 수 있으므로 모든 사용자가 우리의 임무를 지원하도록 권장합니다."
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
 #~ msgstr "포토프리즘은 100% 자체 자금으로 운영됩니다. 자발적인 기부는 업데이트, 문서 및 지원을 제공하기 위해 풀타임으로 일하는 팀의 비용을 충당하지 않습니다. 추가 혜택을 누리기 위해 가입할지 여부는 귀하의 결정입니다."
 
 #~ msgid "Shouldn't free software be free of costs?"
@@ -4898,8 +4898,8 @@ msgstr "보관"
 #~ msgid "Spanish"
 #~ msgstr "스페인어"
 
-#~ msgid "PhotoPrism® is a registered trademark of Michael Mayer."
-#~ msgstr "PhotoPrism® 은 Michael Mayer의 등록 상표입니다."
+#~ msgid "Mokosh is a registered trademark of Michael Mayer."
+#~ msgstr "Mokosh 은 Michael Mayer의 등록 상표입니다."
 
 #~ msgid "Requests endorsed by silver and gold sponsors receive a golden label and will be prioritized."
 #~ msgstr "실버 및 골드 스폰서가 승인한 요청은 골든 라벨을 받고 우선 순위가 지정됩니다."
@@ -4913,8 +4913,8 @@ msgstr "보관"
 #~ msgid "You may use it as required to describe our software, run your own server, for educational purposes, but not for offering commercial goods, products, or services without prior written permission. In other words, please ask."
 #~ msgstr "귀하는 교육 목적으로 당사 소프트웨어를 설명하고 자체 서버를 실행하는 데 필요한 대로 사용할 수 있지만 사전 서면 허가 없이 상업 상품, 제품 또는 서비스를 제공할 수 없습니다. 즉, 물어보십시오."
 
-#~ msgid "If you enjoy using PhotoPrism, please consider backing us on Patreon or GitHub Sponsors."
-#~ msgstr "PhotoPrism 사용이 마음에 드시면 Patreon 또는 GitHub 스폰서에서 저희를 후원해 주세요."
+#~ msgid "If you enjoy using Mokosh, please consider backing us on Patreon or GitHub Sponsors."
+#~ msgstr "Mokosh 사용이 마음에 드시면 Patreon 또는 GitHub 스폰서에서 저희를 후원해 주세요."
 
 #~ msgid "Let us know when we mistakenly label an idea as unfunded."
 #~ msgstr "아이디어에 자금이 지원되지 않는 것으로 잘못 레이블이 지정되면 알려주십시오."
@@ -4937,8 +4937,8 @@ msgstr "보관"
 #~ msgid "Hide Private"
 #~ msgstr "비공개 숨기기"
 
-#~ msgid "Let PhotoPrism create albums from past events."
-#~ msgstr "PhotoPrism이 지난 이벤트에서 앨범을 생성하도록합니다."
+#~ msgid "Let Mokosh create albums from past events."
+#~ msgstr "Mokosh이 지난 이벤트에서 앨범을 생성하도록합니다."
 
 #~ msgid "More than 50 results"
 #~ msgstr "50개이상의 결과를 발견함"

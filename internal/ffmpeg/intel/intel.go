@@ -1,8 +1,8 @@
 /*
 Package intel collects ffmpeg helpers for configuring Intel Quick Sync Video
-(QSV) encoders when building PhotoPrism transcoding pipelines.
+(QSV) encoders when building Mokosh transcoding pipelines.
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):

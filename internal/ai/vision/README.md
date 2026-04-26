@@ -1,12 +1,12 @@
-## PhotoPrism — Vision Package
+## Mokosh — Vision Package
 
 **Last Updated:** March 3, 2026
 
 ### Overview
 
-`internal/ai/vision` provides the shared model registry, request builders, and parsers that power PhotoPrism’s caption, label, face, NSFW, and future generate workflows. It reads `vision.yml`, normalizes models, and dispatches calls to one of three engines:
+`internal/ai/vision` provides the shared model registry, request builders, and parsers that power Mokosh’s caption, label, face, NSFW, and future generate workflows. It reads `vision.yml`, normalizes models, and dispatches calls to one of three engines:
 
-- **TensorFlow (built‑in)** — default Nasnet / NSFW / Facenet models, no remote service required. Long-running TensorFlow inference can accumulate C-allocated tensor memory until GC finalizers run, so PhotoPrism periodically triggers garbage collection to return that memory to the OS; tune with `PHOTOPRISM_TF_GC_EVERY` (default **200**, `0` disables). Lower values reduce peak RSS but increase GC overhead and can slow indexing, so keep the default unless memory pressure is severe.
+- **TensorFlow (built‑in)** — default Nasnet / NSFW / Facenet models, no remote service required. Long-running TensorFlow inference can accumulate C-allocated tensor memory until GC finalizers run, so Mokosh periodically triggers garbage collection to return that memory to the OS; tune with `PHOTOPRISM_TF_GC_EVERY` (default **200**, `0` disables). Lower values reduce peak RSS but increase GC overhead and can slow indexing, so keep the default unless memory pressure is severe.
 - **Ollama** — local or proxied multimodal LLMs. See [`ollama/README.md`](ollama/README.md) for tuning and schema details. The engine defaults to `${OLLAMA_BASE_URL:-http://ollama:11434}/api/generate`, trimming any trailing slash on the base URL; set `OLLAMA_BASE_URL=https://ollama.com` to opt into cloud defaults.
 - **OpenAI** — cloud Responses API. See [`openai/README.md`](openai/README.md) for prompts, schema variants, and header requirements.
 
@@ -14,7 +14,7 @@
 
 #### Models
 
-The `vision.yml` file is usually kept in the `storage/config` directory (override with `PHOTOPRISM_VISION_YAML`). It defines a list of models under `Models:`. Key fields are captured below. If a type is omitted entirely, PhotoPrism will auto-append the built-in defaults (labels, nsfw, face, caption) so you no longer need placeholder stanzas. The `Thresholds` block is optional; missing or out-of-range values fall back to defaults.
+The `vision.yml` file is usually kept in the `storage/config` directory (override with `PHOTOPRISM_VISION_YAML`). It defines a list of models under `Models:`. Key fields are captured below. If a type is omitted entirely, Mokosh will auto-append the built-in defaults (labels, nsfw, face, caption) so you no longer need placeholder stanzas. The `Thresholds` block is optional; missing or out-of-range values fall back to defaults.
 
 | Field                   | Default                                | Notes                                                                              |
 |:------------------------|:---------------------------------------|:-----------------------------------------------------------------------------------|
@@ -106,7 +106,7 @@ Configures the endpoint URL, method, format, and authentication for [Ollama](oll
 | `FileScheme`                       | set by engine alias (`data` or `base64`) | Controls image transport.                                                                                                                                                                                |
 | `Disabled`                         | `false`                                  | Disable the endpoint without removing the model.                                                                                                                                                         |
 
-> **Authentication:** All credentials and identifiers support `${ENV_VAR}` expansion. `Service.Key` sets `Authorization: Bearer <token>`; `Username`/`Password` injects HTTP basic authentication into the service URI when it is not already present. When `Service.Key` is empty, PhotoPrism defaults to `OPENAI_API_KEY` (OpenAI engine) or `OLLAMA_API_KEY` (Ollama engine), also honoring their `_FILE` counterparts. Key and schema file paths must reference readable regular files (directories are ignored/rejected).
+> **Authentication:** All credentials and identifiers support `${ENV_VAR}` expansion. `Service.Key` sets `Authorization: Bearer <token>`; `Username`/`Password` injects HTTP basic authentication into the service URI when it is not already present. When `Service.Key` is empty, Mokosh defaults to `OPENAI_API_KEY` (OpenAI engine) or `OLLAMA_API_KEY` (Ollama engine), also honoring their `_FILE` counterparts. Key and schema file paths must reference readable regular files (directories are ignored/rejected).
 
 ### Field Behavior & Precedence
 
@@ -203,7 +203,7 @@ Models:
 
 ### Model Unload on Idle
 
-PhotoPrism currently keeps TensorFlow models resident for the lifetime of the process to avoid repeated load costs. A future “model unload on idle” mode would track last-use timestamps and close the TensorFlow session/graph after a configurable idle period, releasing the model’s memory footprint back to the OS. The trade-off is higher latency and CPU overhead when a model is used again, plus extra I/O to reload weights. This may be attractive for low-frequency or memory-constrained deployments but would slow continuous indexing jobs, so it is not enabled today.
+Mokosh currently keeps TensorFlow models resident for the lifetime of the process to avoid repeated load costs. A future “model unload on idle” mode would track last-use timestamps and close the TensorFlow session/graph after a configurable idle period, releasing the model’s memory footprint back to the OS. The trade-off is higher latency and CPU overhead when a model is used again, plus extra I/O to reload weights. This may be attractive for low-frequency or memory-constrained deployments but would slow continuous indexing jobs, so it is not enabled today.
 
 ### Troubleshooting
 

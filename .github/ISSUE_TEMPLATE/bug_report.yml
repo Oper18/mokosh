@@ -65,7 +65,7 @@ body:
       label: Which Software Versions Do You Use?
       description: Include all relevant software versions so we can reproduce the environment.
       placeholder: |
-        - PhotoPrism Architecture & Build Number (AMD64, ARM64, ARMv7, ...):
+        - Mokosh Architecture & Build Number (AMD64, ARM64, ARMv7, ...):
         - Database Type & Version (MariaDB, MySQL, SQLite, ...):
         - Operating System Types & Versions (Linux, Windows, Android, ...):
         - Browser Types & Versions (Firefox, Chrome, Safari on iPhone, ...):
@@ -76,7 +76,7 @@ body:
   - type: textarea
     id: installation-device
     attributes:
-      label: On What Device Is PhotoPrism Installed?
+      label: On What Device Is Mokosh Installed?
       description: Provide hardware details, especially for performance, import, or indexing issues.
       placeholder: |
         - Device / Processor Type (Raspberry Pi 4, Intel Core i7-3770, AMD Ryzen 7 3800X, ...):

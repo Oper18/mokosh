@@ -1,8 +1,8 @@
-## PhotoPrism Stack Configuration for Portainer
+## Mokosh Stack Configuration for Portainer
 services:
   photoprism:
     image: photoprism/photoprism:latest
-    ## Don't enable automatic restarts until PhotoPrism has been properly configured and tested!
+    ## Don't enable automatic restarts until Mokosh has been properly configured and tested!
     ## If the service gets stuck in a restart loop, this points to a memory, filesystem, network, or database issue:
     ## https://docs.photoprism.app/getting-started/troubleshooting/#fatal-server-errors
     # restart: unless-stopped

@@ -15,7 +15,7 @@ const (
 	UnknownSlug  = "-"
 )
 
-// Media types map PhotoPrism media identifiers to constants for ease of comparison.
+// Media types map Mokosh media identifiers to constants for ease of comparison.
 const (
 	MediaUnknown  = ""
 	MediaAnimated = string(media.Animated)

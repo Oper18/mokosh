@@ -41,7 +41,7 @@ func NewManifest(c Config) (m *Manifest) {
 		ShortName:       txt.Clip(c.Name, 32),
 		Description:     c.Description,
 		Categories:      Categories,
-		Developer:       PhotoPrism,
+		Developer:       Mokosh,
 		DisplayOverride: DisplayOverride,
 		Display:         c.Mode,
 		Orientation:     "any",

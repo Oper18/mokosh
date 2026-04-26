@@ -51,10 +51,10 @@ func TestOptions_SetOptionsFromFile(t *testing.T) {
 func TestOptions_LoadDoesNotOverrideEdition(t *testing.T) {
 	c := NewOptions(NewTestContext([]string{}))
 	assert.Equal(t, "ce", c.Edition)
-	assert.Equal(t, "PhotoPrism", c.Name)
-	assert.Equal(t, "PhotoPrism®", c.About)
+	assert.Equal(t, "Mokosh", c.Name)
+	assert.Equal(t, "Mokosh", c.About)
 	assert.Equal(t, "test", c.Version)
-	assert.Equal(t, "(c) 2018-2025 PhotoPrism UG. All rights reserved.", c.Copyright)
+	assert.Equal(t, "(c) 2018-2025 Mokosh. All rights reserved.", c.Copyright)
 
 	dir := t.TempDir()
 	fileName := filepath.Join(dir, "options.yml")
@@ -71,10 +71,10 @@ func TestOptions_LoadDoesNotOverrideEdition(t *testing.T) {
 
 	assert.NoError(t, c.Load(fileName))
 	assert.Equal(t, "ce", c.Edition)
-	assert.Equal(t, "PhotoPrism", c.Name)
-	assert.Equal(t, "PhotoPrism®", c.About)
+	assert.Equal(t, "Mokosh", c.Name)
+	assert.Equal(t, "Mokosh", c.About)
 	assert.Equal(t, "test", c.Version)
-	assert.Equal(t, "(c) 2018-2025 PhotoPrism UG. All rights reserved.", c.Copyright)
+	assert.Equal(t, "(c) 2018-2025 Mokosh. All rights reserved.", c.Copyright)
 	assert.Equal(t, 4242, c.HttpPort)
 }
 

@@ -146,10 +146,15 @@ func (c *Config) PasswordResetUri() string {
 	return c.options.PasswordResetUri
 }
 
-// RegisterUri returns the user registration page URI, if any.
+// RegisterUri returns the user registration page URI.
+// Falls back to the default frontend path when not explicitly configured.
 func (c *Config) RegisterUri() string {
 	if c.Public() {
 		return ""
+	}
+
+	if c.options.RegisterUri == "" {
+		return c.FrontendUri("/register")
 	}
 
 	return c.options.RegisterUri

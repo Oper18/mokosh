@@ -23,7 +23,7 @@ func TestClientRegistry_PutFindListRotate(t *testing.T) {
 			UUID:         rnd.UUIDv7(),
 			Name:         "pp-node-a",
 			Role:         cluster.RoleInstance,
-			AppName:      "PhotoPrism",
+			AppName:      "Mokosh",
 			AppVersion:   "1.0.0",
 			Theme:        "theme-v1",
 			SiteUrl:      "https://photos.example.com",
@@ -49,7 +49,7 @@ func TestClientRegistry_PutFindListRotate(t *testing.T) {
 		assert.True(t, rnd.IsUUID(got.UUID))
 		assert.Equal(t, "pp-node-a", got.Name)
 		assert.Equal(t, cluster.RoleInstance, got.Role)
-		assert.Equal(t, "PhotoPrism", got.AppName)
+		assert.Equal(t, "Mokosh", got.AppName)
 		assert.Equal(t, "1.0.0", got.AppVersion)
 		assert.Equal(t, "theme-v1", got.Theme)
 		assert.Equal(t, "http://pp-node-a:2342", got.AdvertiseUrl)
@@ -116,7 +116,7 @@ func TestClientRegistry_PutFindListRotate(t *testing.T) {
 	if assert.NotNil(t, got2) {
 		assert.Equal(t, "prod", got2.Labels["env"])
 		assert.Equal(t, "https://photos.example.org", got2.SiteUrl)
-		assert.Equal(t, "PhotoPrism", got2.AppName)
+		assert.Equal(t, "Mokosh", got2.AppName)
 		assert.Equal(t, "1.1.0", got2.AppVersion)
 		assert.Equal(t, "theme-v1", got2.Theme)
 	}

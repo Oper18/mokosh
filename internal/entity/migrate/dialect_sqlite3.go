@@ -147,4 +147,36 @@ var DialectSQLite3 = Migrations{
 		Stage:      "main",
 		Statements: []string{"UPDATE photos SET indexed_at = checked_at WHERE indexed_at IS NULL;"},
 	},
+	{
+		ID:         "20260407-000001",
+		Dialect:    "sqlite3",
+		Stage:      "main",
+		Statements: []string{"CREATE TABLE IF NOT EXISTS `teams` (\n  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,\n  `team_uid` varchar(42) NOT NULL DEFAULT '',\n  `team_name` varchar(200) NOT NULL DEFAULT '',\n  `user_uid` varchar(42) NOT NULL DEFAULT '',\n  `created_at` datetime,\n  `updated_at` datetime\n);", "CREATE UNIQUE INDEX IF NOT EXISTS `uix_teams_team_uid` ON `teams` (`team_uid`);", "CREATE INDEX IF NOT EXISTS `idx_teams_team_name` ON `teams` (`team_name`);", "CREATE INDEX IF NOT EXISTS `idx_teams_user_uid` ON `teams` (`user_uid`);", "CREATE TABLE IF NOT EXISTS `teams_users` (\n  `uid` varchar(42) NOT NULL DEFAULT '',\n  `team_uid` varchar(42) NOT NULL DEFAULT '',\n  `user_uid` varchar(42) NOT NULL DEFAULT '',\n  PRIMARY KEY (`uid`, `team_uid`)\n);", "CREATE INDEX IF NOT EXISTS `idx_teams_users_team_uid` ON `teams_users` (`team_uid`);", "CREATE INDEX IF NOT EXISTS `idx_teams_users_user_uid` ON `teams_users` (`user_uid`);", "CREATE TABLE IF NOT EXISTS `teams_albums` (\n  `uid` varchar(42) NOT NULL DEFAULT '',\n  `team_uid` varchar(42) NOT NULL DEFAULT '',\n  `album_uid` varchar(42) NOT NULL DEFAULT '',\n  PRIMARY KEY (`uid`, `team_uid`)\n);", "CREATE INDEX IF NOT EXISTS `idx_teams_albums_team_uid` ON `teams_albums` (`team_uid`);", "CREATE INDEX IF NOT EXISTS `idx_teams_albums_album_uid` ON `teams_albums` (`album_uid`);", "CREATE TABLE IF NOT EXISTS `teams_photos` (\n  `uid` varchar(42) NOT NULL DEFAULT '',\n  `team_uid` varchar(42) NOT NULL DEFAULT '',\n  `photo_uid` varchar(42) NOT NULL DEFAULT '',\n  PRIMARY KEY (`uid`, `team_uid`)\n);", "CREATE INDEX IF NOT EXISTS `idx_teams_photos_team_uid` ON `teams_photos` (`team_uid`);", "CREATE INDEX IF NOT EXISTS `idx_teams_photos_photo_uid` ON `teams_photos` (`photo_uid`);"},
+	},
+	{
+		ID:      "20260419-000002",
+		Dialect: "sqlite3",
+		Stage:   "main",
+		Statements: []string{
+			"DROP TABLE IF EXISTS reactions;",
+			"CREATE TABLE IF NOT EXISTS `reactions` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, `photo_uid` varchar(42) DEFAULT '', `user_uid` varchar(42) DEFAULT '', `emoji` varchar(64) DEFAULT NULL, `comment` text DEFAULT NULL, `created_at` datetime);",
+			"CREATE INDEX IF NOT EXISTS `idx_reactions_photo_uid` ON `reactions` (`photo_uid`);",
+			"CREATE INDEX IF NOT EXISTS `idx_reactions_user_uid` ON `reactions` (`user_uid`);",
+		},
+	},
+	{
+		ID:         "20260420-000001",
+		Dialect:    "sqlite3",
+		Stage:      "main",
+		Statements: []string{"ALTER TABLE links ADD COLUMN link_name varchar(160) NOT NULL DEFAULT '';"},
+	},
+	{
+		ID:      "20260420-000002",
+		Dialect: "sqlite3",
+		Stage:   "main",
+		Statements: []string{
+			"DROP INDEX IF EXISTS idx_auth_users_user_name;",
+			"CREATE UNIQUE INDEX IF NOT EXISTS uix_auth_users_user_name ON auth_users (user_name) WHERE user_name != '' AND user_name IS NOT NULL;",
+		},
+	},
 }

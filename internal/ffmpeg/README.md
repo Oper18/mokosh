@@ -1,4 +1,4 @@
-## PhotoPrism — FFmpeg Integration
+## Mokosh — FFmpeg Integration
 
 **Last Updated:** November 22, 2025
 
@@ -21,7 +21,7 @@
 
 #### Non-Goals
 
-- Full coverage of every FFmpeg codec or container; the package focuses on MP4/H.264 paths required by PhotoPrism.
+- Full coverage of every FFmpeg codec or container; the package focuses on MP4/H.264 paths required by Mokosh.
 - Direct management of FFmpeg installation or GPU availability.
 
 ### Encoders, Containers, & Hardware

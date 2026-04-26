@@ -92,12 +92,12 @@ func NewTestContext(args []string) *cli.Context {
 	// Create new command-line test app.
 	app := cli.NewApp()
 	app.Name = "photoprism"
-	app.Usage = "PhotoPrism®"
+	app.Usage = "Mokosh"
 	app.Description = ""
 	app.Version = "test"
-	app.Copyright = "(c) 2018-2025 PhotoPrism UG. All rights reserved."
+	app.Copyright = "(c) 2018-2025 Mokosh. All rights reserved."
 	app.Flags = config.Flags.Cli()
-	app.Commands = PhotoPrism
+	app.Commands = Mokosh
 	app.HelpName = app.Name
 	app.CustomAppHelpTemplate = ""
 	app.HideHelp = true
@@ -105,8 +105,8 @@ func NewTestContext(args []string) *cli.Context {
 	app.Action = func(*cli.Context) error { return nil }
 	app.EnableBashCompletion = false
 	app.Metadata = map[string]any{
-		"Name":    "PhotoPrism",
-		"About":   "PhotoPrism®",
+		"Name":    "Mokosh",
+		"About":   "Mokosh",
 		"Edition": "ce",
 		"Version": "test",
 	}

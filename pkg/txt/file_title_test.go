@@ -25,8 +25,8 @@ func TestFileTitle(t *testing.T) {
 	t.Run("ILoveYou", func(t *testing.T) {
 		assert.Equal(t, "Love You!", FileTitle("i_love_you!"))
 	})
-	t.Run("PhotoPrism", func(t *testing.T) {
-		assert.Equal(t, "PhotoPrism: Browse Your Life in Pictures", FileTitle("photoprism: Browse your life in pictures"))
+	t.Run("Mokosh", func(t *testing.T) {
+		assert.Equal(t, "Mokosh: Browse Your Life in Pictures", FileTitle("photoprism: Browse your life in pictures"))
 	})
 	t.Run("Dash", func(t *testing.T) {
 		assert.Equal(t, "Photo Lover", FileTitle("photo-lover"))

@@ -12,6 +12,7 @@ export default class Link extends Model {
       ShareUID: "",
       Slug: "",
       Token: "",
+      Name: "",
       Expires: 0,
       Views: 0,
       MaxViews: 0,

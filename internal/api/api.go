@@ -1,7 +1,7 @@
 /*
 Package api provides REST-API authentication and request handlers.
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -42,7 +42,7 @@ import (
 	_ "github.com/photoprism/photoprism/pkg/i18n"
 )
 
-//	@title						PhotoPrism API
+//	@title						Mokosh API
 //	@description				API request bodies and responses are usually JSON-encoded, except for binary data and some of the OAuth2 endpoints. Note that the `Content-Type` header must be set to `application/json` for this, as the request may otherwise fail with error 400.
 //	@description				When clients have a valid access token, e.g. obtained through the `POST /api/v1/session` or `POST /api/v1/oauth/token` endpoint, they can use a standard Bearer Authorization header to authenticate their requests. Submitting the access token with a custom `X-Auth-Token` header is supported as well.
 //	@externalDocs.description	Learn more ›

@@ -1,7 +1,7 @@
-# Copyright © 2018 - 2025 PhotoPrism UG. All rights reserved.
+# Copyright © 2026 Mokosh. All rights reserved.
 #
-# Questions? Email us at hello@photoprism.app or visit our website to learn
-# more about our team, products and services: https://www.photoprism.app/
+# Questions? Email us at info@wookie18.com or visit our website to learn
+# more about our team, products and services: https://mokosh.app/
 
 UID := $(shell id -u)
 GID := $(shell id -g)

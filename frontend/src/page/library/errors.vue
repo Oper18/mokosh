@@ -71,7 +71,7 @@
           {{ $gettext(`No warnings or error containing this keyword. Note that search is case-sensitive.`) }}
         </div>
         <div v-else>
-          {{ $gettext(`Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues.`) }}
+          {{ $gettext(`Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues.`) }}
         </div>
       </v-alert>
     </div>

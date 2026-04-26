@@ -18,7 +18,7 @@ func TestNewFeedback(t *testing.T) {
 
 func TestSendFeedback(t *testing.T) {
 	t.Run("Success", func(t *testing.T) {
-		c := NewConfig("test", "testdata/new.yml", "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+		c := NewConfig("test", "testdata/new.yml", "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 
 		feedback := Feedback{
 			Category:      "Bug Report",

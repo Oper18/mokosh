@@ -1,4 +1,4 @@
-## PhotoPrism — Core Package
+## Mokosh — Core Package
 
 **Last Updated:** March 3, 2026
 

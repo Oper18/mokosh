@@ -31,7 +31,7 @@
     display: none;
 }
 
-#photoprism.container {
+#mokosh.container {
     position: fixed;
     max-width: 100%;
     top: 0;
@@ -58,7 +58,7 @@ div.logo-large {
     transform: translate(-50%, -50%);
 }
 
-#photoprism.container.splash-screen {
+#mokosh.container.splash-screen {
     background: #141417;
 }
 
@@ -203,7 +203,7 @@ a.logo-large {
 .splash-center progress,
 #busy-overlay .splash-center progress {
     width: 180px;
-    accent-color: #c8c2e8;
+    accent-color: #943DF0;
     color-scheme: dark;
 }
 

@@ -1,5 +1,5 @@
 services:
-  ## PhotoPrism (Development Environment for Nvidia)
+  ## Mokosh (Development Environment for Nvidia)
   photoprism:
     build: .
     image: photoprism/photoprism:develop

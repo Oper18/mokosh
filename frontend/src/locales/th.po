@@ -2074,8 +2074,8 @@ msgid "Location"
 msgstr "ที่ตั้ง"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "ข้อความบันทึกจะปรากฏที่นี่ทุกครั้งที่ PhotoPrism เจอไฟล์เสีย หรือมีปัญหาอื่นๆ ที่อาจเกิดขึ้น"
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "ข้อความบันทึกจะปรากฏที่นี่ทุกครั้งที่ Mokosh เจอไฟล์เสีย หรือมีปัญหาอื่นๆ ที่อาจเกิดขึ้น"
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2418,8 +2418,8 @@ msgid "Note:"
 msgstr "บันทึก:"
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "หมายเหตุ: เฉพาะเซิร์ฟเวอร์ WebDAV เช่น Nextcloud หรือ PhotoPrism เท่านั้นที่สามารถกำหนดค่าเป็นบริการระยะไกลสำหรับการสำรองข้อมูลและการอัปโหลดไฟล์"
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "หมายเหตุ: เฉพาะเซิร์ฟเวอร์ WebDAV เช่น Nextcloud หรือ Mokosh เท่านั้นที่สามารถกำหนดค่าเป็นบริการระยะไกลสำหรับการสำรองข้อมูลและการอัปโหลดไฟล์"
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2648,12 +2648,12 @@ msgid "Photo"
 msgstr "รูปถ่าย"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "PhotoPrism ใช้เงินตัวเอง 100% และเป็นอิสระ"
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "Mokosh ใช้เงินตัวเอง 100% และเป็นอิสระ"
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
-msgstr "PhotoPrism+ การเป็นสมาชิก"
+msgid "Mokosh+ Membership"
+msgstr "Mokosh+ การเป็นสมาชิก"
 
 #: src/app/routes.js:178
 msgid "Photos"
@@ -2757,8 +2757,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "ป้องกันการสำรองข้อมูลฐานข้อมูลและอัลบั้ม รวมถึงไฟล์ช่วยเหลือ YAML ไม่ให้ถูกสร้างขึ้น"
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "ป้องกันไม่ให้แอปอื่นเข้าถึง PhotoPrism เป็นไดรฟ์เครือข่ายที่ใช้ร่วมกัน"
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "ป้องกันไม่ให้แอปอื่นเข้าถึง Mokosh เป็นไดรฟ์เครือข่ายที่ใช้ร่วมกัน"
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3537,8 +3537,8 @@ msgstr "ขอบคุณสำหรับการสนับสนุน!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "นั่นเป็นเหตุผลที่ PhotoPrism ถูกสร้างขึ้นใหม่ทั้งหมดเพื่อให้ทำงานได้ทุกที่ที่คุณต้องการ โดยไม่กระทบต่อเสรีภาพ ความเป็นส่วนตัว หรือฟังก์ชันการทำงาน"
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "นั่นเป็นเหตุผลที่ Mokosh ถูกสร้างขึ้นใหม่ทั้งหมดเพื่อให้ทำงานได้ทุกที่ที่คุณต้องการ โดยไม่กระทบต่อเสรีภาพ ความเป็นส่วนตัว หรือฟังก์ชันการทำงาน"
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3952,12 +3952,12 @@ msgid "WebDAV"
 msgstr "เว็บDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "ไคลเอ็นต์ WebDAV สามารถเชื่อมต่อกับ PhotoPrism โดยใช้ URL ต่อไปนี้:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "ไคลเอ็นต์ WebDAV สามารถเชื่อมต่อกับ Mokosh โดยใช้ URL ต่อไปนี้:"
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "ไคลเอนต์ WebDAV เช่น Windows Explorer ของ Microsoft หรือ Finder ของ Apple สามารถเชื่อมต่อโดยตรงกับ PhotoPrism"
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "ไคลเอนต์ WebDAV เช่น Windows Explorer ของ Microsoft หรือ Finder ของ Apple สามารถเชื่อมต่อโดยตรงกับ Mokosh"
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4382,8 +4382,8 @@ msgstr "คลังเก็บเอกสารสำคัญ"
 #~ msgid "Estimates"
 #~ msgstr "ประมาณการ"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "PhotoPrism ได้รับการอัพเดต…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Mokosh ได้รับการอัพเดต…"
 
 #~ msgid "Album Name"
 #~ msgstr "ชื่ออัลบั้ม"
@@ -4458,8 +4458,8 @@ msgstr "คลังเก็บเอกสารสำคัญ"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
-#~ msgstr "ไคลเอ็นต์ WebDAV เช่น Windows Explorer ของ Microsoft หรือ Finder ของ Apple สามารถเชื่อมต่อกับ PhotoPrism ได้โดยตรง"
+#~ "          Mokosh."
+#~ msgstr "ไคลเอ็นต์ WebDAV เช่น Windows Explorer ของ Microsoft หรือ Finder ของ Apple สามารถเชื่อมต่อกับ Mokosh ได้โดยตรง"
 
 #~ msgid "Basic"
 #~ msgstr "ขั้นพื้นฐาน"
@@ -4536,8 +4536,8 @@ msgstr "คลังเก็บเอกสารสำคัญ"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "เกิดข้อผิดพลาด คุณออฟไลน์อยู่หรือไม่"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
-#~ msgstr "ที่ PhotoPrism เราเชื่อว่าทุกช่วงเวลาที่บันทึกผ่านภาพถ่ายนั้นมีค่า และพันธกิจของเราคือการช่วยให้ผู้คนสามารถรักษาช่วงเวลาเหล่านั้นไว้ชั่วลูกชั่วหลาน"
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgstr "ที่ Mokosh เราเชื่อว่าทุกช่วงเวลาที่บันทึกผ่านภาพถ่ายนั้นมีค่า และพันธกิจของเราคือการช่วยให้ผู้คนสามารถรักษาช่วงเวลาเหล่านั้นไว้ชั่วลูกชั่วหลาน"
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
 #~ msgstr "สมัครเป็นสมาชิกวันนี้เพื่อรับคุณสมบัติเพิ่มเติมและสนับสนุนภารกิจของเรา!"
@@ -4647,8 +4647,8 @@ msgstr "คลังเก็บเอกสารสำคัญ"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "ใช้เทคโนโลยีล่าสุดในการแท็กและค้นหารูปภาพโดยอัตโนมัติโดยไม่รบกวนคุณ"
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "PhotoPrism® คือแอปรูปภาพที่ขับเคลื่อนโดย AI สำหรับเว็บแบบกระจายอำนาจ"
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "Mokosh คือแอปรูปภาพที่ขับเคลื่อนโดย AI สำหรับเว็บแบบกระจายอำนาจ"
 
 #~ msgid "Uploader"
 #~ msgstr "ผู้อัปโหลด"
@@ -4686,8 +4686,8 @@ msgstr "คลังเก็บเอกสารสำคัญ"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "ทีมงานของเราประเมินสิ่งนี้อย่างต่อเนื่อง โดยขึ้นอยู่กับความพยายามในการสนับสนุนที่ฟีเจอร์ต้องการ ค่าใช้จ่ายสำหรับเรา และไม่ว่าโดยทั่วไปแล้วทุกคนต้องการหรือต้องการโดยองค์กรและผู้ใช้ขั้นสูงเป็นหลัก เนื่องจากสิ่งนี้ช่วยให้เราสามารถให้บริการคุณลักษณะต่างๆ แก่สาธารณะได้มากขึ้น เราจึงสนับสนุนให้ผู้ใช้ทุกคนสนับสนุนภารกิจของเรา"
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
-#~ msgstr "PhotoPrism ใช้เงินตัวเอง 100% การบริจาคโดยสมัครใจไม่ครอบคลุมค่าใช้จ่ายของทีมที่ทำงานเต็มเวลาเพื่อแจ้งข้อมูลอัปเดต เอกสาร และการสนับสนุนแก่คุณ เป็นการตัดสินใจของคุณว่าคุณต้องการสมัครเพื่อรับสิทธิประโยชน์เพิ่มเติมหรือไม่"
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgstr "Mokosh ใช้เงินตัวเอง 100% การบริจาคโดยสมัครใจไม่ครอบคลุมค่าใช้จ่ายของทีมที่ทำงานเต็มเวลาเพื่อแจ้งข้อมูลอัปเดต เอกสาร และการสนับสนุนแก่คุณ เป็นการตัดสินใจของคุณว่าคุณต้องการสมัครเพื่อรับสิทธิประโยชน์เพิ่มเติมหรือไม่"
 
 #~ msgid "Shouldn't free software be free of costs?"
 #~ msgstr "ซอฟต์แวร์ฟรีไม่ควรมีค่าใช้จ่ายใช่หรือไม่"

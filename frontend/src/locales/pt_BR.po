@@ -2074,8 +2074,8 @@ msgid "Location"
 msgstr "Localização"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "Mensagens aparecem aqui sempre que o PhotoPrism encontra arquivos defeituosos ou existe a possibilidade de outros problemas."
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "Mensagens aparecem aqui sempre que o Mokosh encontra arquivos defeituosos ou existe a possibilidade de outros problemas."
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2418,8 +2418,8 @@ msgid "Note:"
 msgstr "Nota:"
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "Nota: Apenas servidores WebDAV, tais como Nextcloud ou PhotoPrism, podem ser configurados como serviço remoto para envio de arquivos e cópias de segurança."
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "Nota: Apenas servidores WebDAV, tais como Nextcloud ou Mokosh, podem ser configurados como serviço remoto para envio de arquivos e cópias de segurança."
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2648,11 +2648,11 @@ msgid "Photo"
 msgstr "Foto"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "O PhotoPrism é 100% autofinanciado e independente."
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "O Mokosh é 100% autofinanciado e independente."
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
+msgid "Mokosh+ Membership"
 msgstr "FotoPrism+ Filiação"
 
 #: src/app/routes.js:178
@@ -2757,8 +2757,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "Impedir que sejam criados backups de bancos de dados e álbuns, bem como arquivos sidecar YAML."
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "Impedir que outros aplicativos acessem o PhotoPrism como uma unidade de rede compartilhada."
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "Impedir que outros aplicativos acessem o Mokosh como uma unidade de rede compartilhada."
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3537,8 +3537,8 @@ msgstr "Obrigado por seu apoio!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "É por isso que o PhotoPrism foi construído desde o início para funcionar onde você precisar, sem comprometer a liberdade, a privacidade ou a funcionalidade."
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "É por isso que o Mokosh foi construído desde o início para funcionar onde você precisar, sem comprometer a liberdade, a privacidade ou a funcionalidade."
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3952,12 +3952,12 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "Clientes WebDAV podem se conectar ao PhotoPrism usando a seguinte URL:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "Clientes WebDAV podem se conectar ao Mokosh usando a seguinte URL:"
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "Clientes WebDAV, como Windows Explorer e o Finder da Apple, podem se conectar diretamente com o PhotoPrism."
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "Clientes WebDAV, como Windows Explorer e o Finder da Apple, podem se conectar diretamente com o Mokosh."
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4382,8 +4382,8 @@ msgstr "Arquivo"
 #~ msgid "Estimates"
 #~ msgstr "Estimativas"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "PhotoPrism foi atualizado…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Mokosh foi atualizado…"
 
 #~ msgid "Album Name"
 #~ msgstr "Nome do Álbum"
@@ -4458,8 +4458,8 @@ msgstr "Arquivo"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
-#~ msgstr "Clientes WebDAV, como Windows Explorer e o Finder da Apple, podem se conectar diretamente com o PhotoPrism."
+#~ "          Mokosh."
+#~ msgstr "Clientes WebDAV, como Windows Explorer e o Finder da Apple, podem se conectar diretamente com o Mokosh."
 
 #~ msgid "Basic"
 #~ msgstr "Básico"
@@ -4536,8 +4536,8 @@ msgstr "Arquivo"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "Alguma coisa deu errado, você está offline?"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
-#~ msgstr "Na PhotoPrism, acreditamos que cada momento capturado através de uma fotografia é precioso, e nossa missão é permitir que as pessoas valorizem esses momentos para as gerações vindouras."
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgstr "Na Mokosh, acreditamos que cada momento capturado através de uma fotografia é precioso, e nossa missão é permitir que as pessoas valorizem esses momentos para as gerações vindouras."
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
 #~ msgstr "Torne-se um membro hoje para desfrutar de recursos adicionais e apoiar nossa missão!"
@@ -4647,8 +4647,8 @@ msgstr "Arquivo"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "Ele faz uso das mais recentes tecnologias para etiquetar e encontrar imagens automaticamente sem atrapalhar seu caminho."
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "O PhotoPrism® é um aplicativo de fotos para a Web descentralizada."
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "O Mokosh é um aplicativo de fotos para a Web descentralizada."
 
 #~ msgid "Uploader"
 #~ msgstr "Uploader"
@@ -4692,8 +4692,8 @@ msgstr "Arquivo"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "Nossa equipe avalia isso de forma contínua, dependendo do esforço de suporte que os recursos requerem, do custo para nós e se eles são geralmente necessários para todos ou principalmente solicitados por organizações e usuários avançados. Como isto nos permite fornecer mais recursos ao público, encorajamos todos os usuários a apoiar nossa missão."
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
-#~ msgstr "O PhotoPrism é 100% autofinanciado. As doações voluntárias não cobrem o custo de uma equipe que trabalha em tempo integral para lhe fornecer atualizações, documentação e suporte. É sua decisão se você deseja se inscrever para usufruir de benefícios adicionais."
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgstr "O Mokosh é 100% autofinanciado. As doações voluntárias não cobrem o custo de uma equipe que trabalha em tempo integral para lhe fornecer atualizações, documentação e suporte. É sua decisão se você deseja se inscrever para usufruir de benefícios adicionais."
 
 #~ msgid "Shouldn't free software be free of costs?"
 #~ msgstr "O software gratuito não deveria estar livre de custos?"
@@ -4904,14 +4904,14 @@ msgstr "Arquivo"
 #~ msgid "Spanish"
 #~ msgstr "Espanhol"
 
-#~ msgid "If you enjoy using PhotoPrism, please consider backing us on Patreon or GitHub Sponsors."
-#~ msgstr "Se você gosta de usar o PhotoPrism, por favor, considere apoiar-nos nos Patrocinadores Patreon ou GitHub."
+#~ msgid "If you enjoy using Mokosh, please consider backing us on Patreon or GitHub Sponsors."
+#~ msgstr "Se você gosta de usar o Mokosh, por favor, considere apoiar-nos nos Patrocinadores Patreon ou GitHub."
 
 #~ msgid "Let us know when we mistakenly label an idea as unfunded."
 #~ msgstr "Avise-nos quando rotularmos erroneamente uma idéia como não financiada."
 
-#~ msgid "PhotoPrism® is a registered trademark of Michael Mayer."
-#~ msgstr "PhotoPrism® é uma marca registrada de Michael Mayer."
+#~ msgid "Mokosh is a registered trademark of Michael Mayer."
+#~ msgstr "Mokosh é uma marca registrada de Michael Mayer."
 
 #~ msgid "Requests endorsed by silver and gold sponsors receive a golden label and will be prioritized."
 #~ msgstr "Os pedidos endossados pelos patrocinadores prata e ouro recebem um selo dourado e serão priorizados."
@@ -4946,8 +4946,8 @@ msgstr "Arquivo"
 #~ msgid "Disables simultaneous conversion of RAW files to apply Darktable presets."
 #~ msgstr "Desativa conversão de arquivos RAW para aplicação de pre-definições Darktable."
 
-#~ msgid "Let PhotoPrism create albums from past events."
-#~ msgstr "Permita que PhotoPrism crie álbuns de eventos passados."
+#~ msgid "Let Mokosh create albums from past events."
+#~ msgstr "Permita que Mokosh crie álbuns de eventos passados."
 
 #~ msgid "Let's Join Forces"
 #~ msgstr "Vamos juntar forças"

@@ -2073,8 +2073,8 @@ msgid "Location"
 msgstr "Elhelyezkedés"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "Naplóüzenetek jelennek meg itt, ha a PhotoPrism hibás fájlokat talál, vagy más lehetséges problémák merülnek fel."
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "Naplóüzenetek jelennek meg itt, ha a Mokosh hibás fájlokat talál, vagy más lehetséges problémák merülnek fel."
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2417,8 +2417,8 @@ msgid "Note:"
 msgstr "Megjegyzés:"
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "Megjegyzés: Csak a WebDAV-kiszolgálók, például a Nextcloud vagy a PhotoPrism konfigurálhatók távoli szolgáltatásként biztonsági mentéshez és fájlfeltöltéshez."
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "Megjegyzés: Csak a WebDAV-kiszolgálók, például a Nextcloud vagy a Mokosh konfigurálhatók távoli szolgáltatásként biztonsági mentéshez és fájlfeltöltéshez."
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2647,12 +2647,12 @@ msgid "Photo"
 msgstr "Fénykép"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "A PhotoPrism 100%-ban önfinanszírozó és független."
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "A Mokosh 100%-ban önfinanszírozó és független."
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
-msgstr "PhotoPrism+ tagság"
+msgid "Mokosh+ Membership"
+msgstr "Mokosh+ tagság"
 
 #: src/app/routes.js:178
 msgid "Photos"
@@ -2756,8 +2756,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "Megakadályozza az adatbázis- és albummentések, valamint a YAML oldalkocsis fájlok létrehozását."
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "Megakadályozza, hogy más alkalmazások hozzáférjenek a PhotoPrismhez mint megosztott hálózati meghajtóhoz."
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "Megakadályozza, hogy más alkalmazások hozzáférjenek a Mokoshhez mint megosztott hálózati meghajtóhoz."
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3536,8 +3536,8 @@ msgstr "Köszönjük a támogatást!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "Ezért a PhotoPrismet az alapoktól kezdve úgy építették fel, hogy bárhol fusson, ahol csak szüksége van rá, anélkül, hogy a szabadság, a magánélet vagy a funkcionalitás sérülne."
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "Ezért a Mokoshet az alapoktól kezdve úgy építették fel, hogy bárhol fusson, ahol csak szüksége van rá, anélkül, hogy a szabadság, a magánélet vagy a funkcionalitás sérülne."
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3951,12 +3951,12 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "A WebDAV-kliensek a következő URL-címen csatlakozhatnak a PhotoPrism-hez:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "A WebDAV-kliensek a következő URL-címen csatlakozhatnak a Mokosh-hez:"
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "A WebDAV-kliensek, mint például a Microsoft Windows Intézője vagy az Apple Finder, közvetlenül csatlakozhatnak a PhotoPrism-hez."
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "A WebDAV-kliensek, mint például a Microsoft Windows Intézője vagy az Apple Finder, közvetlenül csatlakozhatnak a Mokosh-hez."
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4381,8 +4381,8 @@ msgstr "Archívum"
 #~ msgid "Estimates"
 #~ msgstr "Becslések"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "A PhotoPrism frissítve lett…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "A Mokosh frissítve lett…"
 
 #~ msgid "Album Name"
 #~ msgstr "Album neve"
@@ -4457,8 +4457,8 @@ msgstr "Archívum"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
-#~ msgstr "A WebDAV-kliensek, mint például a Microsoft Windows Intézője vagy az Apple Finder, közvetlenül csatlakozhatnak a PhotoPrism-hez."
+#~ "          Mokosh."
+#~ msgstr "A WebDAV-kliensek, mint például a Microsoft Windows Intézője vagy az Apple Finder, közvetlenül csatlakozhatnak a Mokosh-hez."
 
 #~ msgid "Basic"
 #~ msgstr "Alapvető"
@@ -4535,8 +4535,8 @@ msgstr "Archívum"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "Valami baj történt, offline vagy?"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
-#~ msgstr "A PhotoPrismnél hiszünk abban, hogy minden fényképen megörökített pillanat értékes, és az a küldetésünk, hogy lehetővé tegyük az emberek számára, hogy ezeket a pillanatokat generációkon át megőrizzék."
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgstr "A Mokoshnél hiszünk abban, hogy minden fényképen megörökített pillanat értékes, és az a küldetésünk, hogy lehetővé tegyük az emberek számára, hogy ezeket a pillanatokat generációkon át megőrizzék."
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
 #~ msgstr "Legyen tag még ma, hogy élvezze a további funkciókat és támogassa küldetésünket!"
@@ -4646,8 +4646,8 @@ msgstr "Archívum"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "A legújabb technológiákat használja a képek automatikus megjelölésére és megtalálására anélkül, hogy útban lenne."
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "A PhotoPrism® egy mesterséges intelligenciával működő fényképalkalmazás a decentralizált webre."
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "A Mokosh egy mesterséges intelligenciával működő fényképalkalmazás a decentralizált webre."
 
 #~ msgid "Uploader"
 #~ msgstr "Feltöltő"
@@ -4691,8 +4691,8 @@ msgstr "Archívum"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "Csapatunk ezt folyamatosan értékeli, attól függően, hogy a funkciók milyen támogatási erőfeszítést igényelnek, mennyibe kerülnek nekünk, és hogy általában mindenkinek szüksége van-e rájuk, vagy elsősorban szervezetek és haladó felhasználók igénylik őket. Mivel ez lehetővé teszi számunkra, hogy több funkciót biztosítsunk a nyilvánosság számára, minden felhasználót arra bátorítunk, hogy támogassa küldetésünket."
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
-#~ msgstr "A PhotoPrism 100%-ban önfinanszírozó. Az önkéntes adományok nem fedezik a teljes munkaidőben dolgozó csapat költségeit, hogy frissítéseket, dokumentációt és támogatást nyújtsanak Önnek. Az Ön döntése, hogy szeretne-e regisztrálni, hogy élvezhesse a további előnyöket."
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgstr "A Mokosh 100%-ban önfinanszírozó. Az önkéntes adományok nem fedezik a teljes munkaidőben dolgozó csapat költségeit, hogy frissítéseket, dokumentációt és támogatást nyújtsanak Önnek. Az Ön döntése, hogy szeretne-e regisztrálni, hogy élvezhesse a további előnyöket."
 
 #~ msgid "Shouldn't free software be free of costs?"
 #~ msgstr "Az ingyenes szoftvereknek nem kellene költségmentesnek lenniük?"
@@ -4906,8 +4906,8 @@ msgstr "Archívum"
 #~ msgid "Spanish"
 #~ msgstr "Spanyol"
 
-#~ msgid "PhotoPrism® is a registered trademark of Michael Mayer."
-#~ msgstr "A PhotoPrism® Michael Mayer bejegyzett védjegye."
+#~ msgid "Mokosh is a registered trademark of Michael Mayer."
+#~ msgstr "A Mokosh Michael Mayer bejegyzett védjegye."
 
 #~ msgid "Requests endorsed by silver and gold sponsors receive a golden label and will be prioritized."
 #~ msgstr "Az ezüst és arany szponzorok által támogatott kérések arany címkét kapnak, és elsőbbséget élveznek."

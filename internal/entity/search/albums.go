@@ -63,7 +63,18 @@ func UserAlbums(frm form.SearchAlbums, sess *entity.Session) (results AlbumResul
 
 		// Limit results by UID, owner and path.
 		if sess.IsVisitor() || sess.NotRegistered() {
-			s = s.Where("albums.album_uid IN (?) OR albums.published_at > ?", sess.SharedUIDs(), entity.Now())
+			albumUIDs := sess.SharedAlbumUIDs()
+			photoUIDs := sess.SharedPhotoUIDs()
+
+			// Include directly shared albums and albums that contain directly shared photos.
+			if len(photoUIDs) > 0 {
+				s = s.Where(
+					"albums.album_uid IN (?) OR albums.album_uid IN (SELECT album_uid FROM photos_albums WHERE hidden = 0 AND missing = 0 AND photo_uid IN (?)) OR albums.published_at > ?",
+					albumUIDs, photoUIDs, entity.Now(),
+				)
+			} else {
+				s = s.Where("albums.album_uid IN (?) OR albums.published_at > ?", albumUIDs, entity.Now())
+			}
 		} else if acl.Rules.DenyAll(aclResource, aclRole, acl.Permissions{acl.AccessAll, acl.AccessLibrary}) {
 			s = s.Where("albums.album_uid IN (?) OR albums.created_by = ? OR albums.published_at > ?", sess.SharedUIDs(), user.UserUID, entity.Now())
 		}
@@ -212,6 +223,31 @@ func UserAlbums(frm form.SearchAlbums, sess *entity.Session) (results AlbumResul
 	// Query database.
 	if result := s.Scan(&results); result.Error != nil {
 		return results, result.Error
+	}
+
+	// For visitor sessions with photo shares, mask albums that contain shared photos but are not
+	// directly shared: show them as "Private" to avoid leaking album names and metadata.
+	if sess != nil && (sess.IsVisitor() || sess.NotRegistered()) {
+		albumUIDs := sess.SharedAlbumUIDs()
+		directShares := make(map[string]struct{}, len(albumUIDs))
+
+		for _, uid := range albumUIDs {
+			directShares[uid] = struct{}{}
+		}
+
+		for i := range results {
+			if _, direct := directShares[results[i].AlbumUID]; !direct {
+				results[i].AlbumTitle = "Private"
+				results[i].AlbumDescription = ""
+				results[i].AlbumCaption = ""
+				results[i].AlbumNotes = ""
+				results[i].AlbumLocation = ""
+				results[i].AlbumCategory = ""
+				// Clear the precomputed cover hash so the frontend uses the /albums/{uid}/t/...
+				// endpoint, which filters cover candidates to the visitor's accessible photos.
+				results[i].Thumb = ""
+			}
+		}
 	}
 
 	// Log number of results.

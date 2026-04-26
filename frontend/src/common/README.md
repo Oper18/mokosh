@@ -4,7 +4,7 @@
 
 ### Focus Management
 
-PhotoPrism uses a shared view helper to maintain predictable focus across pages and dialogs:
+Mokosh uses a shared view helper to maintain predictable focus across pages and dialogs:
 
 - [`frontend/src/common/view.js`](https://github.com/photoprism/photoprism/blob/develop/frontend/src/common/view.js)
 
@@ -12,7 +12,7 @@ This helper tracks the currently active component, applies focus when views chan
 
 #### Session Storage & Web View Notes
 
-When integrating third-party clients such as native mobile apps that embed the PhotoPrism web UI in a web view and pre-populate browser storage, keep the following behavior in mind:
+When integrating third-party clients such as native mobile apps that embed the Mokosh web UI in a web view and pre-populate browser storage, keep the following behavior in mind:
 
 - Storage keys are namespaced per app site via `storageNamespace` and use the format `pp:<storageNamespace>:<key>`. When no namespace is available, the fallback prefix is `pp:root:`.
 - Session restore requires both `session.token` and `session.id`. A token-only write does not create an authenticated session state during startup.
@@ -30,7 +30,7 @@ When integrating third-party clients such as native mobile apps that embed the P
 
 Preferred integration contract for new native or web view clients:
 
-1. Read `storageNamespace` from the client config so the keys match the current PhotoPrism site.
+1. Read `storageNamespace` from the client config so the keys match the current Mokosh site.
 2. Decide whether the session should be ephemeral or persistent:
    - Set `localStorage["pp:<storageNamespace>:session"] = "true"` for ephemeral auth stored in namespaced `sessionStorage`.
    - Set `localStorage["pp:<storageNamespace>:session"] = "false"` or leave it unset for persistent auth stored in namespaced `localStorage`.

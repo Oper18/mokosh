@@ -1,6 +1,6 @@
 @echo off
 
-echo Starting PhotoPrism and MariaDB...
+echo Starting Mokosh and MariaDB...
 
 docker compose up -d
 docker compose logs -f

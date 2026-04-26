@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Common file extensions used throughout PhotoPrism.
+// Common file extensions used throughout Mokosh.
 const (
 	ExtNone     = ""
 	ExtLocal    = ".local"

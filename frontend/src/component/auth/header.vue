@@ -1,7 +1,11 @@
 <template>
   <div class="auth-header">
     <div id="auth-logo" class="logo text-center">
-      <img :src="$config.getIcon()" :alt="config.name" />
+      <img
+        :src="$config.getIcon()"
+        :alt="config.name"
+        style="max-height:100px;width:auto;"
+      />
     </div>
   </div>
 </template>

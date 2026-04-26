@@ -2,7 +2,7 @@
 
 ### Overview
 
-The API package exposes PhotoPrism’s HTTP endpoints via Gin handlers. Each file under `internal/api` contains the handlers, request/response DTOs, and Swagger annotations for a specific feature area. Handlers remain thin: they validate input, enforce security or ACL checks, and delegate domain work to services in `internal/photoprism`, `internal/service`, or other internal packages. Keep exported types aligned with the REST schema and avoid embedding business logic directly in handlers.
+The API package exposes Mokosh’s HTTP endpoints via Gin handlers. Each file under `internal/api` contains the handlers, request/response DTOs, and Swagger annotations for a specific feature area. Handlers remain thin: they validate input, enforce security or ACL checks, and delegate domain work to services in `internal/photoprism`, `internal/service`, or other internal packages. Keep exported types aligned with the REST schema and avoid embedding business logic directly in handlers.
 
 ### Routing & Wiring
 

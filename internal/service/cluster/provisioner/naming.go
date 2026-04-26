@@ -59,7 +59,7 @@ func GenerateCredentials(conf *config.Config, nodeUUID, nodeName string) (dbName
 	return
 }
 
-// BuildDSN returns a DSN suitable for PhotoPrism nodes given a database driver.
+// BuildDSN returns a DSN suitable for Mokosh nodes given a database driver.
 // Currently, "mysql"/"mariadb" are supported; other drivers log a warning and fall back to MySQL format.
 func BuildDSN(driver, host string, port int, user, pass, name string) string {
 	d := strings.ToLower(driver)

@@ -1,4 +1,4 @@
-// Media types supported by PhotoPrism:
+// Media types supported by Mokosh:
 export const Animated = "animated";
 export const Audio = "audio";
 export const Document = "document";

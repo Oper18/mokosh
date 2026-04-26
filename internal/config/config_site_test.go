@@ -152,7 +152,7 @@ func TestConfig_SiteFavicon(t *testing.T) {
 
 func TestConfig_SitePreview(t *testing.T) {
 	c := NewConfig(CliTestContext())
-	assert.Equal(t, "https://i.photoprism.app/prism?cover=64&style=centered%20dark&caption=none&title=PhotoPrism", c.SitePreview())
+	assert.Equal(t, "https://i.photoprism.app/prism?cover=64&style=centered%20dark&caption=none&title=Mokosh", c.SitePreview())
 	c.options.SitePreview = "http://preview.jpg"
 	assert.Equal(t, "http://preview.jpg", c.SitePreview())
 	c.options.SitePreview = "preview123.jpg"
@@ -176,19 +176,19 @@ func TestConfig_SiteAuthor(t *testing.T) {
 func TestConfig_SiteTitle(t *testing.T) {
 	c := NewConfig(CliTestContext())
 
-	assert.Equal(t, "PhotoPrism", c.SiteTitle())
+	assert.Equal(t, "Mokosh", c.SiteTitle())
 	c.options.SiteTitle = "Cats"
 	assert.Equal(t, "Cats", c.SiteTitle())
-	c.options.SiteTitle = "PhotoPrism"
-	assert.Equal(t, "PhotoPrism", c.SiteTitle())
+	c.options.SiteTitle = "Mokosh"
+	assert.Equal(t, "Mokosh", c.SiteTitle())
 }
 
 func TestConfig_SiteCaption(t *testing.T) {
 	c := NewConfig(CliTestContext())
 
 	assert.Equal(t, "", c.SiteCaption())
-	c.options.SiteCaption = "PhotoPrism App"
-	assert.Equal(t, "PhotoPrism App", c.SiteCaption())
+	c.options.SiteCaption = "Mokosh App"
+	assert.Equal(t, "Mokosh App", c.SiteCaption())
 	c.options.SiteCaption = ""
 	assert.Equal(t, "", c.SiteCaption())
 }

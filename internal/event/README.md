@@ -1,4 +1,4 @@
-## PhotoPrism — Event System
+## Mokosh — Event System
 
 **Last Updated:** November 22, 2025
 

@@ -59,7 +59,7 @@ func TestGetClientConfig(t *testing.T) {
 		req, _ := http.NewRequest(http.MethodGet, "/api/v1/config", nil)
 		req.RemoteAddr = "10.10.0.5:1234"
 		header.SetAuthorization(req, token)
-		req.Header.Set(header.UserAgent, "PhotoPrism Portal/1.0")
+		req.Header.Set(header.UserAgent, "Mokosh Portal/1.0")
 
 		w := httptest.NewRecorder()
 		app.ServeHTTP(w, req)

@@ -1,11 +1,11 @@
 ========================================================================
-PhotoPrism for Cloud Servers
+Mokosh for Cloud Servers
 ========================================================================
 
 SOFTWARE INCLUDED
 ------------------------------------------------------------------------
 
-PhotoPrism latest, AGPL 3
+Mokosh latest, AGPL 3
 Docker CE latest, Apache 2
 Traefik 3.4, MIT
 MariaDB 11, GPL 2
@@ -14,7 +14,7 @@ Watchtower latest, Apache 2
 GETTING STARTED
 ------------------------------------------------------------------------
 
-Run this script as root to install PhotoPrism on a cloud server e.g.
+Run this script as root to install Mokosh on a cloud server e.g.
 at DigitalOcean:
 
   bash <(curl -s https://dl.photoprism.app/cloud/digitalocean/setup.sh)
@@ -35,7 +35,7 @@ as root on your server. To open a terminal:
 
   ssh root@<YOUR SERVER IP>
 
-Data and all config files related to PhotoPrism can be found in
+Data and all config files related to Mokosh can be found in
 
   /opt/photoprism
 
@@ -54,7 +54,7 @@ config and for advanced users only.
 SYSTEM REQUIREMENTS
 ------------------------------------------------------------------------
 
-We recommend hosting PhotoPrism on a server with at least 2 cores and
+We recommend hosting Mokosh on a server with at least 2 cores and
 4 GB of memory. Beyond these minimum requirements, the amount of RAM
 should match the number of cores. Indexing large photo and video
 collections significantly benefits from fast, local SSD storage.

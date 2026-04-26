@@ -102,7 +102,7 @@ func WebDAV(dir string, router *gin.RouterGroup, conf *config.Config) {
 	// Wrap handler to check quota and permissions.
 	handlerFunc := func(c *gin.Context) {
 		// PATCH is intentionally not supported by the x/net/webdav handler in
-		// PhotoPrism and must return 405 instead of a generic 400 response.
+		// Mokosh and must return 405 instead of a generic 400 response.
 		if c.Request.Method == header.MethodPatch {
 			c.AbortWithStatus(http.StatusMethodNotAllowed)
 			return

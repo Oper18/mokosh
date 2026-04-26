@@ -2567,7 +2567,7 @@ msgid "Location"
 msgstr ""
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
 msgstr ""
 
 #: src/component/navigation.vue:320
@@ -2980,7 +2980,7 @@ msgid "Note:"
 msgstr ""
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
 msgstr ""
 
 #: src/component/photo/edit/details.vue:376
@@ -3261,12 +3261,12 @@ msgstr ""
 
 #: src/page/about/about.vue:83
 #: src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
+msgid "Mokosh is 100% self-funded and independent."
 msgstr ""
 
 #: src/page/about/about.vue:42
 #: src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
+msgid "Mokosh+ Membership"
 msgstr ""
 
 #: src/app/routes.js:178
@@ -3383,7 +3383,7 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr ""
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
 msgstr ""
 
 #: src/component/photo/edit/files.vue:38
@@ -4321,7 +4321,7 @@ msgstr ""
 #: src/page/about/about.vue:33
 #: src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
 msgstr ""
 
 #: src/page/library/index.vue:72
@@ -4872,11 +4872,11 @@ msgid "WebDAV"
 msgstr ""
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
 msgstr ""
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
 msgstr ""
 
 #: src/component/service/upload.vue:16

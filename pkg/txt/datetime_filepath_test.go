@@ -61,11 +61,11 @@ func TestDateFromFilePath(t *testing.T) {
 	})
 	t.Run("Num2020Num1212Num20130518Num142022ThreeDNum657EbdJpg", func(t *testing.T) {
 		result := DateFromFilePath("/2020/1212/20130518_142022_3D657EBD.jpg")
-		assert.True(t, result.IsZero(), "\"/2020/1212/20130518_142022_3D657EBD.jpg\" should not generate a valid Date. This is the filename which PhotoPrism generates when importing photos")
+		assert.True(t, result.IsZero(), "\"/2020/1212/20130518_142022_3D657EBD.jpg\" should not generate a valid Date. This is the filename which Mokosh generates when importing photos")
 	})
 	t.Run("Num20130518Num142022ThreeDNum657EbdJpg", func(t *testing.T) {
 		result := DateFromFilePath("20130518_142022_3D657EBD.jpg")
-		assert.True(t, result.IsZero(), "\"20130518_142022_3D657EBD.jpg\" should not generate a valid Date. This is the filename which PhotoPrism generates when importing photos")
+		assert.True(t, result.IsZero(), "\"20130518_142022_3D657EBD.jpg\" should not generate a valid Date. This is the filename which Mokosh generates when importing photos")
 	})
 	t.Run("TelegramNum2020Num01Num30Num09Num57EighteenJpg", func(t *testing.T) {
 		result := DateFromFilePath("telegram_2020_01_30_09_57_18.jpg")

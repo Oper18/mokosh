@@ -2,11 +2,11 @@
 
 ### Overview
 
-The `commands` package hosts the CLI implementation for the PhotoPrism binary. Command wiring begins in `commands.go`, where each `*cli.Command` is registered on the shared slice consumed by `cmd/photoprism/photoprism.go`. Supporting utilities such as flag builders, shared error handling, and helper structs are colocated with their related command files. Keep commands cohesive: each file should focus on a single functional area (for example, `download.go` for the downloader entry point and `download_impl.go` for reusable logic). Whenever you introduce new commands, align naming with existing patterns and expose `--json` or `--yes` options when automation benefits from them.
+The `commands` package hosts the CLI implementation for the Mokosh binary. Command wiring begins in `commands.go`, where each `*cli.Command` is registered on the shared slice consumed by `cmd/photoprism/photoprism.go`. Supporting utilities such as flag builders, shared error handling, and helper structs are colocated with their related command files. Keep commands cohesive: each file should focus on a single functional area (for example, `download.go` for the downloader entry point and `download_impl.go` for reusable logic). Whenever you introduce new commands, align naming with existing patterns and expose `--json` or `--yes` options when automation benefits from them.
 
 ### How Commands Are Registered
 
-- Add a new `*cli.Command` to the `PhotoPrism` slice in `commands.go`.
+- Add a new `*cli.Command` to the `Mokosh` slice in `commands.go`.
 - Provide a localized `Before` hook when a command needs configuration loading or authentication checks that differ from the defaults.
 - Reuse helpers from `internal/config` for option binding instead of reimplementing flag parsing. Field definitions belong in the shared flag modules so `photoprism show config-options` stays accurate.
 - Prefer storing command-specific implementations in `<name>_impl.go` files that can be imported in tests. Invoke the implementation from the `Action` function to avoid duplicating logic between CLI entry points and tests.

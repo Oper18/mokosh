@@ -1178,30 +1178,23 @@ func (m *Photo) DeletePermanently() (files Files, err error) {
 	return files, UnscopedDb().Delete(m).Error
 }
 
-// React adds or updates a user reaction.
-func (m *Photo) React(user *User, reaction react.Emoji) error {
+// React adds or updates a user reaction with an optional comment.
+func (m *Photo) React(user *User, emoji react.Emoji, comment string) error {
 	if user == nil {
 		return fmt.Errorf("unknown user")
 	}
 
-	if reaction.Unknown() {
-		return m.UnReact(user)
-	}
-
-	return NewReaction(m.PhotoUID, user.GetUID()).React(reaction).Save()
+	r := NewReaction(m.PhotoUID, user.GetUID()).WithEmoji(emoji.String()).WithComment(comment)
+	return r.Create()
 }
 
-// UnReact deletes a previous user reaction, if any.
+// UnReact deletes all reactions by the user for this photo.
 func (m *Photo) UnReact(user *User) error {
 	if user == nil {
 		return fmt.Errorf("unknown user")
 	}
 
-	if r := FindReaction(m.PhotoUID, user.GetUID()); r != nil {
-		return r.Delete()
-	}
-
-	return nil
+	return Db().Delete(&Reaction{}, "photo_uid = ? AND user_uid = ?", m.PhotoUID, user.GetUID()).Error
 }
 
 // SetFavorite updates the favorite flag of a photo.

@@ -16,7 +16,7 @@
       </v-card-title>
 
       <v-card-text class="text-body-2">
-        {{ $gettext(`WebDAV clients can connect to PhotoPrism using the following URL:`) }}
+        {{ $gettext(`WebDAV clients can connect to Mokosh using the following URL:`) }}
       </v-card-text>
 
       <v-card-text class="text-body-2">

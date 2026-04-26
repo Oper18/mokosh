@@ -125,7 +125,7 @@ func TestPasscode_Delete(t *testing.T) {
 	t.Run("UidNotSet", func(t *testing.T) {
 		m := &Passcode{
 			UID:          "",
-			KeyURL:       "otpauth://totp/PhotoPrism:bob?algorithm=SHA1&digits=6&issuer=PhotoPrism%20Pro&period=30",
+			KeyURL:       "otpauth://totp/Mokosh:bob?algorithm=SHA1&digits=6&issuer=Mokosh%20Pro&period=30",
 			RecoveryCode: "123",
 		}
 

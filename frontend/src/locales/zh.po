@@ -2074,8 +2074,8 @@ msgid "Location"
 msgstr "位置"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "每当 PhotoPrism 遇到损坏的文件或其他潜在问题时，日志消息就会出现在这里。"
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "每当 Mokosh 遇到损坏的文件或其他潜在问题时，日志消息就会出现在这里。"
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2418,8 +2418,8 @@ msgid "Note:"
 msgstr "注意："
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "注意：只能将 WebDAV 服务器（如 Nextcloud 或 PhotoPrism）配置为远程服务，以进行备份和文件上传。"
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "注意：只能将 WebDAV 服务器（如 Nextcloud 或 Mokosh）配置为远程服务，以进行备份和文件上传。"
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2649,11 +2649,11 @@ msgid "Photo"
 msgstr "相片"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "PhotoPrism是100%自筹资金和独立的。"
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "Mokosh是100%自筹资金和独立的。"
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
+msgid "Mokosh+ Membership"
 msgstr "照片棱镜+会员资格"
 
 #: src/app/routes.js:178
@@ -2758,8 +2758,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "防止创建数据库和相册备份以及 YAML sidecar 文件。"
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "防止其他应用程序将 PhotoPrism 作为共享网络驱动器访问。"
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "防止其他应用程序将 Mokosh 作为共享网络驱动器访问。"
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3539,8 +3539,8 @@ msgstr "感谢你的支持!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "这就是为什么PhotoPrism从一开始就能在你需要的地方运行，而不影响自由、隐私或功能。"
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "这就是为什么Mokosh从一开始就能在你需要的地方运行，而不影响自由、隐私或功能。"
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3954,12 +3954,12 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "WebDAV 客户端可以使用以下 URL 连接到 PhotoPrism："
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "WebDAV 客户端可以使用以下 URL 连接到 Mokosh："
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "WebDAV 客户端（例如 Microsoft 的 Windows 资源管理器或 Apple 的 Finder）可以直接连接到 PhotoPrism。"
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "WebDAV 客户端（例如 Microsoft 的 Windows 资源管理器或 Apple 的 Finder）可以直接连接到 Mokosh。"
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4384,8 +4384,8 @@ msgstr "归档"
 #~ msgid "Estimates"
 #~ msgstr "估算"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "PhotoPrism 更新啦…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Mokosh 更新啦…"
 
 #~ msgid "Album Name"
 #~ msgstr "相册名称"
@@ -4462,10 +4462,10 @@ msgstr "归档"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
+#~ "          Mokosh."
 #~ msgstr ""
 #~ "WebDAV客户端，如微软的Windows Explorer或苹果的Finder，可以直接连接到\n"
-#~ "          PhotoPrism。"
+#~ "          Mokosh。"
 
 #~ msgid "Basic"
 #~ msgstr "基本"
@@ -4542,8 +4542,8 @@ msgstr "归档"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "出了点问题，你下线了吗？"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
-#~ msgstr "在PhotoPrism，我们相信通过照片捕捉到的每一个瞬间都是珍贵的，我们的使命是让人们能够珍惜这些瞬间，世代传承。"
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgstr "在Mokosh，我们相信通过照片捕捉到的每一个瞬间都是珍贵的，我们的使命是让人们能够珍惜这些瞬间，世代传承。"
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
 #~ msgstr "今天就成为会员，享受更多的功能，并支持我们的使命!"
@@ -4653,8 +4653,8 @@ msgstr "归档"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "它利用最新的技术，在不妨碍你的情况下自动标记和查找图片。"
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "PhotoPrism®是一个人工智能驱动的去中心化网络的照片应用程序。"
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "Mokosh是一个人工智能驱动的去中心化网络的照片应用程序。"
 
 #~ msgid "Uploader"
 #~ msgstr "上传者"
@@ -4692,8 +4692,8 @@ msgstr "归档"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "我们的团队根据所需的支持工作、服务器和许可成本，以及这些功能是大家普遍需要的还是主要由组织和高级用户要求的，持续地决定这一点。由于这使我们能够向公众提供更多的功能，我们鼓励所有用户支持我们的任务。"
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
-#~ msgstr "PhotoPrism是100%自筹资金的开源软件项目。自愿捐款并不能保证支付一个全职工作的团队对软件进行更新、支持所产生的费用。您可以决定是否要注册以享受额外的好处。"
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgstr "Mokosh是100%自筹资金的开源软件项目。自愿捐款并不能保证支付一个全职工作的团队对软件进行更新、支持所产生的费用。您可以决定是否要注册以享受额外的好处。"
 
 #~ msgid "Shouldn't free software be free of costs?"
 #~ msgstr "免费软件不应该是免费使用的吗？"
@@ -4909,8 +4909,8 @@ msgstr "归档"
 #~ msgid "Spanish"
 #~ msgstr "Español"
 
-#~ msgid "PhotoPrism® is a registered trademark of Michael Mayer."
-#~ msgstr "PhotoPrism® 是 Michael Mayer 的注册商标。"
+#~ msgid "Mokosh is a registered trademark of Michael Mayer."
+#~ msgstr "Mokosh 是 Michael Mayer 的注册商标。"
 
 #~ msgid "Requests endorsed by silver and gold sponsors receive a golden label and will be prioritized."
 #~ msgstr "由银牌和金牌赞助商认可的申请会得到一个金色标签，并将被优先考虑。"
@@ -4924,8 +4924,8 @@ msgstr "归档"
 #~ msgid "You may use it as required to describe our software, run your own server, for educational purposes, but not for offering commercial goods, products, or services without prior written permission. In other words, please ask."
 #~ msgstr "出于教育目的，您可以根据需要使用它来描述我们的软件，运行您自己的服务器，但未经事先书面许可，不得用于提供商业产品，产品或服务。换句话说，请询问。"
 
-#~ msgid "If you enjoy using PhotoPrism, please consider backing us on Patreon or GitHub Sponsors."
-#~ msgstr "如果你喜欢使用PhotoPrism，请考虑在Patreon或GitHub上支持我们的赞助商。"
+#~ msgid "If you enjoy using Mokosh, please consider backing us on Patreon or GitHub Sponsors."
+#~ msgstr "如果你喜欢使用Mokosh，请考虑在Patreon或GitHub上支持我们的赞助商。"
 
 #~ msgid "Let us know when we mistakenly label an idea as unfunded."
 #~ msgstr "当我们错误地将一个想法标为无资金支持时，请告诉我们。"
@@ -4951,8 +4951,8 @@ msgstr "归档"
 #~ msgid "Hide Private"
 #~ msgstr "隐藏私人内容"
 
-#~ msgid "Let PhotoPrism create albums from past events."
-#~ msgstr "让PhotoPrism根据过去的事件创建相册。"
+#~ msgid "Let Mokosh create albums from past events."
+#~ msgstr "让Mokosh根据过去的事件创建相册。"
 
 #~ msgid "More than 50 results"
 #~ msgstr "找到超过50个结果"

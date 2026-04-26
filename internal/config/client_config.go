@@ -756,6 +756,10 @@ func (c *Config) ClientSession(sess *entity.Session) (cfg *ClientConfig) {
 		cfg.Settings = c.SessionSettings(sess)
 	case sess.GetUser().IsVisitor():
 		cfg = c.ClientShare()
+		if sess.HasSharePerm(entity.PermReact) {
+			cfg.ACL[acl.ResourcePhotos] = acl.GrantReactShared
+			cfg.Settings.Features.Reactions = true
+		}
 	case sess.GetUser().IsRegistered():
 		cfg = c.ClientUser(false).ApplyACL(acl.Rules, sess.GetUserRole())
 		cfg.Settings = c.SessionSettings(sess)

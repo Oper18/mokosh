@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jinzhu/gorm"
-
-	"github.com/photoprism/photoprism/pkg/react"
+	"github.com/photoprism/photoprism/pkg/rnd"
 )
 
-// Reaction represents a human response to content such as photos and albums.
+// Reaction represents a user's emoji reaction and/or comment on a photo.
+// Multiple reactions per user are allowed; each row is independent.
 type Reaction struct {
-	UID       string     `gorm:"type:VARBINARY(42);primary_key;auto_increment:false" json:"UID,omitempty" yaml:"UID,omitempty"`
-	UserUID   string     `gorm:"type:VARBINARY(42);primary_key;auto_increment:false" json:"UserUID,omitempty" yaml:"UserUID,omitempty"`
-	Reaction  string     `gorm:"type:VARBINARY(64);primary_key;auto_increment:false" json:"Reaction,omitempty" yaml:"Reaction,omitempty"`
-	Reacted   int        `json:"Reacted,omitempty" yaml:"Reacted,omitempty"`
-	ReactedAt *time.Time `sql:"index" json:"ReactedAt,omitempty" yaml:"ReactedAt,omitempty"`
+	ID        uint      `gorm:"primary_key" json:"ID"`
+	PhotoUID  string    `gorm:"type:VARBINARY(42);index" json:"PhotoUID,omitempty"`
+	UserUID   string    `gorm:"type:VARBINARY(42);index" json:"UserUID,omitempty"`
+	Emoji     string    `gorm:"type:VARBINARY(64)" json:"Emoji,omitempty"`
+	Comment   *string   `gorm:"type:TEXT" json:"Comment,omitempty"`
+	CreatedAt time.Time `json:"CreatedAt"`
 }
 
 // TableName returns the entity table name.
@@ -23,116 +23,82 @@ func (Reaction) TableName() string {
 	return "reactions"
 }
 
-// NewReaction creates a new Reaction struct.
-func NewReaction(uid, userUid string) *Reaction {
+// NewReaction creates a new Reaction for the given photo and user.
+func NewReaction(photoUID, userUID string) *Reaction {
 	return &Reaction{
-		UID:     uid,
-		UserUID: userUid,
+		PhotoUID: photoUID,
+		UserUID:  userUID,
 	}
 }
 
-// FindReaction returns the matching Reaction record or nil if it was not found.
-func FindReaction(uid, userUid string) (m *Reaction) {
-	if uid == "" || userUid == "" {
-		return nil
-	}
-
-	m = &Reaction{}
-
-	if Db().First(m, "uid = ? AND user_uid = ?", uid, userUid).Error != nil {
-		return nil
-	}
-
+// WithEmoji sets the emoji on the reaction.
+func (m *Reaction) WithEmoji(emoji string) *Reaction {
+	m.Emoji = emoji
 	return m
 }
 
-// React adds a react.Emoji reaction.
-func (m *Reaction) React(emo react.Emoji) *Reaction {
-	m.Reaction = emo.String()
-	m.Reacted += 1
+// WithComment sets the comment on the reaction.
+func (m *Reaction) WithComment(comment string) *Reaction {
+	if comment != "" {
+		m.Comment = &comment
+	}
 	return m
 }
 
-// Emoji returns the reaction Emoji.
-func (m *Reaction) Emoji() react.Emoji {
-	return react.Emoji(m.Reaction)
+// Empty checks whether both emoji and comment are unset.
+func (m *Reaction) Empty() bool {
+	return m.Emoji == "" && (m.Comment == nil || *m.Comment == "")
 }
 
-// String returns the user reaction as string.
-func (m *Reaction) String() string {
-	if m == nil {
-		return "Reaction<nil>"
-	}
-
-	return m.Reaction
-}
-
-// InvalidUID checks if the entity or user uid are missing or incorrect.
+// InvalidUID checks if the photo or user uid is missing.
 func (m *Reaction) InvalidUID() bool {
-	return m.UID == "" || m.UserUID == ""
+	return m.PhotoUID == "" || m.UserUID == ""
 }
 
-// Unknown checks if the reaction data is missing or incorrect.
-func (m *Reaction) Unknown() bool {
-	if m.InvalidUID() {
-		return true
-	}
-
-	return len(m.Reaction) == 0
+// Invalid checks if the reaction cannot be saved.
+func (m *Reaction) Invalid() bool {
+	return m.InvalidUID() || m.Empty()
 }
 
-// Save updates the record in the database or inserts a new record if it does not already exist.
-func (m *Reaction) Save() (err error) {
-	if m.Unknown() {
-		return fmt.Errorf("unknown reaction")
+// FindReactionByID returns the reaction with the given ID or nil.
+func FindReactionByID(id uint) *Reaction {
+	if id == 0 {
+		return nil
 	}
-
-	if m.ReactedAt == nil {
-		return m.Create()
+	m := &Reaction{}
+	if Db().First(m, "id = ?", id).Error != nil {
+		return nil
 	}
-
-	reactedAt := TimeStamp()
-
-	values := Values{"reaction": m.Reaction, "reacted": gorm.Expr("reacted + 1"), "reacted_at": reactedAt}
-
-	if err = Db().Model(Reaction{}).
-		Where("uid = ? AND user_uid = ?", m.UID, m.UserUID).
-		UpdateColumns(values).Error; err == nil {
-		m.Reacted += 1
-		m.ReactedAt = reactedAt
-	}
-
-	return err
+	return m
 }
 
-// Create inserts a new Reaction.
-func (m *Reaction) Create() (err error) {
-	if m.Unknown() {
-		return fmt.Errorf("reaction invalid")
+// FindUserReactions returns all reactions left by a user for a photo.
+func FindUserReactions(photoUID, userUID string) []Reaction {
+	if rnd.InvalidUID(photoUID, 0) || rnd.InvalidUID(userUID, 0) {
+		return nil
 	}
-
-	r := &Reaction{UID: m.UID, UserUID: m.UserUID, Reaction: m.Reaction, Reacted: m.Reacted, ReactedAt: TimeStamp()}
-
-	if err = Db().Create(r).Error; err == nil {
-		m.ReactedAt = r.ReactedAt
+	var results []Reaction
+	if Db().Where("photo_uid = ? AND user_uid = ?", photoUID, userUID).
+		Order("created_at DESC").
+		Find(&results).Error != nil {
+		return nil
 	}
-
-	return err
+	return results
 }
 
-// Delete deletes the Reaction.
+// Create inserts a new Reaction row.
+func (m *Reaction) Create() error {
+	if m.Invalid() {
+		return fmt.Errorf("reaction is invalid")
+	}
+	m.CreatedAt = *TimeStamp()
+	return Db().Create(m).Error
+}
+
+// Delete removes this Reaction from the database.
 func (m *Reaction) Delete() error {
-	if m.InvalidUID() {
-		return fmt.Errorf("reaction invalid")
+	if m.ID == 0 {
+		return fmt.Errorf("reaction has no id")
 	}
-
-	// Delete record.
-	err := Db().Delete(m, "uid = ? AND user_uid = ?", m.UID, m.UserUID).Error
-
-	// Ok?
-	if err == nil {
-		m.ReactedAt = nil
-	}
-
-	return err
+	return Db().Delete(m, "id = ?", m.ID).Error
 }

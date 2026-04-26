@@ -50,8 +50,8 @@ func TestTitle(t *testing.T) {
 	t.Run("TestAddLabel", func(t *testing.T) {
 		assert.Equal(t, "TestAddLabel", Title("testAddLabel"))
 	})
-	t.Run("PhotoPrism", func(t *testing.T) {
-		assert.Equal(t, "PhotoPrism", Title("photoprism"))
+	t.Run("Mokosh", func(t *testing.T) {
+		assert.Equal(t, "Mokosh", Title("photoprism"))
 	})
 	t.Run("Youtube", func(t *testing.T) {
 		assert.Equal(t, "YouTube", Title("youtube"))

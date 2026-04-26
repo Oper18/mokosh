@@ -2071,8 +2071,8 @@ msgid "Location"
 msgstr "Τοποθεσία"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "Τα μηνύματα καταγραφής εμφανίζονται εδώ κάθε φορά που το PhotoPrism συναντά προβληματικά αρχεία ή υπάρχουν άλλα πιθανά προβλήματα."
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "Τα μηνύματα καταγραφής εμφανίζονται εδώ κάθε φορά που το Mokosh συναντά προβληματικά αρχεία ή υπάρχουν άλλα πιθανά προβλήματα."
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2415,8 +2415,8 @@ msgid "Note:"
 msgstr "Σημείωση:"
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "Σημείωση: Μόνο οι διακομιστές WebDAV, όπως το Nextcloud ή το PhotoPrism, μπορούν να ρυθμιστούν ως απομακρυσμένη υπηρεσία για τη δημιουργία αντιγράφων ασφαλείας και το ανέβασμα αρχείων."
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "Σημείωση: Μόνο οι διακομιστές WebDAV, όπως το Nextcloud ή το Mokosh, μπορούν να ρυθμιστούν ως απομακρυσμένη υπηρεσία για τη δημιουργία αντιγράφων ασφαλείας και το ανέβασμα αρχείων."
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2645,12 +2645,12 @@ msgid "Photo"
 msgstr "Φωτογραφία"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "Το PhotoPrism είναι 100% αυτοχρηματοδοτούμενο και ανεξάρτητο."
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "Το Mokosh είναι 100% αυτοχρηματοδοτούμενο και ανεξάρτητο."
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
-msgstr "PhotoPrism+ Μέλος"
+msgid "Mokosh+ Membership"
+msgstr "Mokosh+ Μέλος"
 
 #: src/app/routes.js:178
 msgid "Photos"
@@ -2754,8 +2754,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "Αποτροπή της δημιουργίας αντιγράφων ασφαλείας της βάσης δεδομένων και των άλμπουμ, καθώς και των αρχείων YAML sidecar."
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "Αποτροπή της πρόσβασης άλλων εφαρμογών στο PhotoPrism ως κοινόχρηστη μονάδα δίσκου δικτύου."
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "Αποτροπή της πρόσβασης άλλων εφαρμογών στο Mokosh ως κοινόχρηστη μονάδα δίσκου δικτύου."
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3534,8 +3534,8 @@ msgstr "Ευχαριστούμε για την υποστήριξή σας!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "Γι' αυτό το λόγο το PhotoPrism δημιουργήθηκε από την αρχή για να λειτουργεί όπου το χρειάζεστε, χωρίς να διακυβεύεται η ελευθερία, η ιδιωτικότητα ή η λειτουργικότητα."
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "Γι' αυτό το λόγο το Mokosh δημιουργήθηκε από την αρχή για να λειτουργεί όπου το χρειάζεστε, χωρίς να διακυβεύεται η ελευθερία, η ιδιωτικότητα ή η λειτουργικότητα."
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3949,12 +3949,12 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "Οι πελάτες WebDAV μπορούν να συνδεθούν στο PhotoPrism χρησιμοποιώντας την ακόλουθη διεύθυνση URL:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "Οι πελάτες WebDAV μπορούν να συνδεθούν στο Mokosh χρησιμοποιώντας την ακόλουθη διεύθυνση URL:"
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "Οι πελάτες WebDAV, όπως ο Windows Explorer της Microsoft ή το Finder της Apple, μπορούν να συνδεθούν απευθείας στο PhotoPrism. "
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "Οι πελάτες WebDAV, όπως ο Windows Explorer της Microsoft ή το Finder της Apple, μπορούν να συνδεθούν απευθείας στο Mokosh. "
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4379,8 +4379,8 @@ msgstr "Αρχείο"
 #~ msgid "Estimates"
 #~ msgstr "Εκτιμήσεις"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "Το PhotoPrism έχει ενημερωθεί…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Το Mokosh έχει ενημερωθεί…"
 
 #~ msgid "Album Name"
 #~ msgstr "Όνομα Συλλογής"
@@ -4455,8 +4455,8 @@ msgstr "Αρχείο"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
-#~ msgstr "Οι πελάτες WebDAV, όπως ο Windows Explorer της Microsoft ή το Finder της Apple, μπορούν να συνδεθούν απευθείας στο PhotoPrism."
+#~ "          Mokosh."
+#~ msgstr "Οι πελάτες WebDAV, όπως ο Windows Explorer της Microsoft ή το Finder της Apple, μπορούν να συνδεθούν απευθείας στο Mokosh."
 
 #~ msgid "Basic"
 #~ msgstr "Βασικό"
@@ -4533,8 +4533,8 @@ msgstr "Αρχείο"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "Κάτι πήγε στραβά, είστε εκτός σύνδεσης;"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
-#~ msgstr "Στη PhotoPrism, πιστεύουμε ότι κάθε στιγμή που αποτυπώνεται σε μια φωτογραφία είναι πολύτιμη και η αποστολή μας είναι να δώσουμε στους ανθρώπους τη δυνατότητα να διατηρήσουν αυτές τις στιγμές για τις επόμενες γενιές."
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgstr "Στη Mokosh, πιστεύουμε ότι κάθε στιγμή που αποτυπώνεται σε μια φωτογραφία είναι πολύτιμη και η αποστολή μας είναι να δώσουμε στους ανθρώπους τη δυνατότητα να διατηρήσουν αυτές τις στιγμές για τις επόμενες γενιές."
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
 #~ msgstr "Γίνετε μέλος σήμερα για να απολαμβάνετε πρόσθετες λειτουργίες και να υποστηρίζετε την αποστολή μας!"
@@ -4644,8 +4644,8 @@ msgstr "Αρχείο"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "Χρησιμοποιεί τις τελευταίες τεχνολογίες για την αυτόματη επισήμανση και εύρεση φωτογραφιών χωρίς να σας εμποδίζει."
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "Το PhotoPrism® είναι μια εφαρμογή φωτογραφιών με τεχνητή νοημοσύνη για τον αποκεντρωμένο ιστό."
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "Το Mokosh είναι μια εφαρμογή φωτογραφιών με τεχνητή νοημοσύνη για τον αποκεντρωμένο ιστό."
 
 #~ msgid "Uploader"
 #~ msgstr "Ανεβάζω"
@@ -4689,8 +4689,8 @@ msgstr "Αρχείο"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "Η ομάδα μας το αξιολογεί αυτό σε συνεχή βάση, ανάλογα με την προσπάθεια υποστήριξης που απαιτούν οι λειτουργίες, το κόστος για εμάς και το αν χρειάζονται γενικά από όλους ή αν ζητούνται κυρίως από οργανισμούς και προχωρημένους χρήστες. Καθώς αυτό μας επιτρέπει να παρέχουμε περισσότερα χαρακτηριστικά στο κοινό, ενθαρρύνουμε όλους τους χρήστες να υποστηρίξουν την αποστολή μας."
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
-#~ msgstr "Η PhotoPrism είναι 100% αυτοχρηματοδοτούμενη. Οι εθελοντικές δωρεές δεν καλύπτουν το κόστος μιας ομάδας που εργάζεται με πλήρη απασχόληση για να σας παρέχει ενημερώσεις, τεκμηρίωση και υποστήριξη. Είναι δική σας απόφαση αν θέλετε να εγγραφείτε για να απολαμβάνετε πρόσθετα οφέλη."
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgstr "Η Mokosh είναι 100% αυτοχρηματοδοτούμενη. Οι εθελοντικές δωρεές δεν καλύπτουν το κόστος μιας ομάδας που εργάζεται με πλήρη απασχόληση για να σας παρέχει ενημερώσεις, τεκμηρίωση και υποστήριξη. Είναι δική σας απόφαση αν θέλετε να εγγραφείτε για να απολαμβάνετε πρόσθετα οφέλη."
 
 #~ msgid "Shouldn't free software be free of costs?"
 #~ msgstr "Το ελεύθερο λογισμικό δεν θα έπρεπε να είναι απαλλαγμένο από κόστος;"

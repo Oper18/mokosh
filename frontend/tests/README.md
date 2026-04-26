@@ -4,7 +4,7 @@
 
 ### Purpose
 
-This guide documents the frontend test and lint workflows for PhotoPrism.  
+This guide documents the frontend test and lint workflows for Mokosh.  
 It is intended for both humans and coding agents.
 
 Use this file when you need to:
@@ -97,9 +97,9 @@ Note: TestCafe is available in the development environment but is currently not 
    - `cd frontend && npm run lint`
    - `cd frontend && npm run test-component`
    - `cd frontend && npm run build`
-   - `cd frontend && env BUILD_ENV=production NODE_ENV=production CUSTOM_SRC="../plus/frontend" CUSTOM_NAME="PhotoPrism+" npm run build`
-   - `cd frontend && env BUILD_ENV=production NODE_ENV=production CUSTOM_SRC="../pro/frontend" CUSTOM_NAME="PhotoPrism Pro" npm run build`
-   - `cd frontend && env BUILD_ENV=production NODE_ENV=production CUSTOM_SRC="../portal/frontend" CUSTOM_NAME="PhotoPrism Portal" npm run build`
+   - `cd frontend && env BUILD_ENV=production NODE_ENV=production CUSTOM_SRC="../plus/frontend" CUSTOM_NAME="Mokosh+" npm run build`
+   - `cd frontend && env BUILD_ENV=production NODE_ENV=production CUSTOM_SRC="../pro/frontend" CUSTOM_NAME="Mokosh Pro" npm run build`
+   - `cd frontend && env BUILD_ENV=production NODE_ENV=production CUSTOM_SRC="../portal/frontend" CUSTOM_NAME="Mokosh Portal" npm run build`
 5. If dependencies changed, regenerate notices with `make notice`.
 6. Revert the trial changes if validation fails.
 

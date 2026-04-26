@@ -79,7 +79,7 @@ func TestBuildFlatAndNode(t *testing.T) {
 
 func TestRenderMarkdown_Headings(t *testing.T) {
 	data := MarkdownData{
-		App:         App{Name: "PhotoPrism", Edition: "ce", Version: "test"},
+		App:         App{Name: "Mokosh", Edition: "ce", Version: "test"},
 		GeneratedAt: "",
 		BaseHeading: 2,
 		Short:       true, // hide flags table to focus on headings
@@ -112,7 +112,7 @@ func TestRenderMarkdown_HiddenColumn(t *testing.T) {
 		},
 	}
 	base := MarkdownData{
-		App:         App{Name: "PhotoPrism", Edition: "ce", Version: "test"},
+		App:         App{Name: "Mokosh", Edition: "ce", Version: "test"},
 		GeneratedAt: "",
 		BaseHeading: 2,
 		Short:       false,
@@ -153,7 +153,7 @@ func TestRenderMarkdown_ShortOmitsFlags(t *testing.T) {
 		},
 	}
 	data := MarkdownData{
-		App:         App{Name: "PhotoPrism", Edition: "ce", Version: "test"},
+		App:         App{Name: "Mokosh", Edition: "ce", Version: "test"},
 		GeneratedAt: "",
 		BaseHeading: 2,
 		Short:       true,

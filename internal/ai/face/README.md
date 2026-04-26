@@ -4,7 +4,7 @@
 
 ### Overview
 
-This document captures the current state of PhotoPrism's face detection and embedding pipeline following the October 2025 optimizations. It should be used as the canonical reference when assessing detection quality, tuning configuration, or integrating downstream tooling that depends on FaceNet embeddings.
+This document captures the current state of Mokosh's face detection and embedding pipeline following the October 2025 optimizations. It should be used as the canonical reference when assessing detection quality, tuning configuration, or integrating downstream tooling that depends on FaceNet embeddings.
 
 Key changes:
 
@@ -17,7 +17,7 @@ Key changes:
 
 ### Detection Pipeline
 
-PhotoPrism now supports two interchangeable detection engines:
+Mokosh now supports two interchangeable detection engines:
 
 - **Pigo** — CPU-only cascade classifier, retains historical behaviour.
 - **ONNX SCRFD 0.5g** — ONNX Runtime-backed CNN that delivers higher recall on occluded or off-axis faces. The ONNX engine consumes 720 px thumbnails (model input 640 px), schedules work on the meta/vision workers, and defaults to half the available CPUs (minimum 1 thread). The engine is enabled automatically when `FACE_ENGINE=auto` and the bundled [SCRFD model](https://yakhyo.github.io/facial-analysis/) is present (the prebuilt runtime targets glibc ≥ 2.27 on x86_64/arm64). Operators can switch at runtime via `photoprism --face-engine=<auto|pigo|onnx>` or `photoprism faces reset --engine=<auto|pigo|onnx>` for a full re-index.
@@ -48,7 +48,7 @@ Runtime selection lives in `Config.FaceEngine()`; `auto` resolves to ONNX when t
 
 #### Memory Management
 
-FaceNet embeddings are generated through TensorFlow bindings that allocate tensors in C memory. Those allocations are released by Go GC finalizers, so long-running indexing jobs can show steadily rising RSS even when the Go heap stays small. To keep memory bounded during extended face indexing runs, PhotoPrism now triggers periodic garbage collection and returns freed C-allocated tensor buffers to the OS. You can tune this behavior with `PHOTOPRISM_TF_GC_EVERY` (default **200**; set to `0` to disable). Lower values reduce peak RSS but increase GC overhead and can slow indexing, so keep the default unless memory pressure is severe.
+FaceNet embeddings are generated through TensorFlow bindings that allocate tensors in C memory. Those allocations are released by Go GC finalizers, so long-running indexing jobs can show steadily rising RSS even when the Go heap stays small. To keep memory bounded during extended face indexing runs, Mokosh now triggers periodic garbage collection and returns freed C-allocated tensor buffers to the OS. You can tune this behavior with `PHOTOPRISM_TF_GC_EVERY` (default **200**; set to `0` to disable). Lower values reduce peak RSS but increase GC overhead and can slow indexing, so keep the default unless memory pressure is severe.
 
 #### Normalization
 

@@ -1316,7 +1316,7 @@ func TestAlbum_ZipName(t *testing.T) {
 
 		assert.Equal(t, "christmas-2030.zip", result)
 	})
-	t.Run("PhotoPrismAlbumNum1234Zip", func(t *testing.T) {
+	t.Run("MokoshAlbumNum1234Zip", func(t *testing.T) {
 		album := Album{AlbumSlug: "a", AlbumUID: "1234"}
 		result := album.ZipName()
 

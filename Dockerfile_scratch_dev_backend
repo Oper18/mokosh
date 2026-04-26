@@ -1,0 +1,35 @@
+# Dockerfile_scratch_dev_backend — Go development container.
+# Runs the backend via `go run` with the source tree mounted.
+# Frontend assets are served from the shared source volume (built by the frontend container).
+
+FROM golang:1.25-bookworm
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    CGO_CFLAGS="-g -O2 -Wno-return-local-addr" \
+    GOFLAGS="-mod=mod" \
+    TF_CPP_MIN_LOG_LEVEL=1 \
+    MALLOC_ARENA_MAX=2
+
+# Install CGO and runtime dependencies.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+        pkg-config \
+        libvips-dev libjpeg-dev libpng-dev libwebp-dev \
+        libheif-dev libraw-dev \
+        ffmpeg exiftool imagemagick \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install TensorFlow C library (required for CGo compilation even when TF is
+# disabled at runtime via PHOTOPRISM_DISABLE_TENSORFLOW=true).
+COPY scripts/dist/install-tensorflow.sh /tmp/install-tensorflow.sh
+RUN bash /tmp/install-tensorflow.sh /usr/local && ldconfig && rm /tmp/install-tensorflow.sh
+
+WORKDIR /go/src/github.com/photoprism/photoprism
+
+# Pre-download modules; this layer is cached until go.mod/go.sum change.
+COPY go.mod go.sum ./
+RUN go mod download
+
+EXPOSE 2342
+
+CMD ["go", "run", "-tags", "debug", "./cmd/photoprism/photoprism.go", "start"]

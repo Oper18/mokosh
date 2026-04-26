@@ -1,20 +1,20 @@
 #### Base Image: Ubuntu 25.04 (Plucky Puffin)
 FROM ubuntu:plucky
 
-# Copyright © 2018 - 2025 PhotoPrism UG. All rights reserved.
+# Copyright © 2018 - 2025 Mokosh. All rights reserved.
 #
 # Questions? Email us at hello@photoprism.app or visit our website to learn
 # more about our team, products and services: https://www.photoprism.app/
 
 # Add Open Container Initiative (OCI) annotations.
 # See: https://github.com/opencontainers/image-spec/blob/main/annotations.md
-LABEL org.opencontainers.image.title="PhotoPrism® Build Image (Ubuntu 25.04)"
+LABEL org.opencontainers.image.title="Mokosh Build Image (Ubuntu 25.04)"
 LABEL org.opencontainers.image.description="Ubuntu 25.04 (Plucky Puffin)"
 LABEL org.opencontainers.image.url="https://hub.docker.com/repository/docker/photoprism/develop"
 LABEL org.opencontainers.image.source="https://github.com/photoprism/photoprism"
 LABEL org.opencontainers.image.documentation="https://docs.photoprism.app/developer-guide/setup/"
-LABEL org.opencontainers.image.authors="PhotoPrism UG <hello@photoprism.app>"
-LABEL org.opencontainers.image.vendor="PhotoPrism UG"
+LABEL org.opencontainers.image.authors="Mokosh <hello@photoprism.app>"
+LABEL org.opencontainers.image.vendor="Mokosh"
 
 # Declare build parameters.
 ARG TARGETARCH

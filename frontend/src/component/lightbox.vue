@@ -86,6 +86,23 @@
       @show="onShowMenu"
       @hide="onHideMenu"
     ></p-lightbox-menu>
+    <div
+      v-if="shareVisible"
+      style="position: fixed; inset: 0; z-index: 10000;"
+      @click.stop="shareVisible = false"
+    ></div>
+    <p-share-popover
+      v-if="shareModel"
+      :visible="shareVisible"
+      :model="shareModel"
+      @close="shareVisible = false"
+    ></p-share-popover>
+    <p-reaction-dialog
+      v-if="reactModel"
+      :visible="reactVisible"
+      :model="reactModel"
+      @close="reactVisible = false"
+    ></p-reaction-dialog>
   </v-dialog>
 </template>
 
@@ -126,13 +143,14 @@ const VIDEO_REMOTE_EVENT_TYPES = ["connect", "connecting", "disconnect"];
 
 import PLightboxMenu from "component/lightbox/menu.vue";
 import PSidebarInfo from "component/sidebar/info.vue";
+import PReactionDialog from "component/reaction/dialog.vue";
 
 const appStorage = getAppStorage();
 const appSessionStorage = getAppSessionStorage();
 
 export default {
   name: "PLightbox",
-  components: [PLightboxMenu, PSidebarInfo],
+  components: [PLightboxMenu, PSidebarInfo, PReactionDialog],
   emits: ["enter", "leave"],
   expose: ["onShortCut"],
   data() {
@@ -162,7 +180,13 @@ export default {
       canLike: this.$config.allow("photos", "manage") && features.favorites,
       canDownload: this.$config.allow("photos", "download") && features.download,
       canArchive: this.$config.allow("photos", "delete") && features.archive,
+      canShare: this.$config.allow("photos", "share") && features.share,
+      canReact: this.$config.allow("photos", "react") && features.reactions,
       canManageAlbums: this.$config.allow("albums", "manage"),
+      shareModel: null,
+      shareVisible: false,
+      reactModel: null,
+      reactVisible: false,
       canFullscreen: $fullscreen.isSupported() && (!this.$isMobile || this.$config.featExperimental()), // see https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenEnabled
       wasFullscreen: $fullscreen.isEnabled(),
       isZoomable: true,
@@ -403,6 +427,8 @@ export default {
       this.canLike = this.$config.allow("photos", "manage") && this.$config.feature("favorites");
       this.canDownload = this.$config.allow("photos", "download") && this.$config.feature("download");
       this.canArchive = this.$config.allow("photos", "delete") && this.$config.feature("archive");
+      this.canShare = this.$config.allow("photos", "share") && this.$config.feature("share");
+      this.canReact = this.$config.allow("photos", "react") && this.$config.feature("reactions");
       this.canManageAlbums = this.$config.allow("albums", "manage");
     },
     // Displays the thumbnail images and/or videos that belong to the specified models in the lightbox.
@@ -1342,6 +1368,44 @@ export default {
           });
         }
 
+        // Add share button if user has permission to share photos.
+        if (this.canShare) {
+          lightbox.pswp.ui.registerElement({
+            name: "share-button",
+            className: "pswp__button--share-button pswp__button--mdi hidden-shared-only",
+            title: this.$gettext("Share"),
+            ariaLabel: this.$gettext("Share"),
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<path d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.86L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z" id="pswp__icn-share" />`,
+              outlineID: "pswp__icn-share",
+              size: 24,
+            },
+            onClick: (ev) => this.onControlClick(ev, this.onShare),
+          });
+        }
+
+        // Add reaction button if user has permission to react.
+        if (this.canReact) {
+          lightbox.pswp.ui.registerElement({
+            name: "react-button",
+            className: "pswp__button--react-button pswp__button--mdi",
+            title: this.$gettext("Reactions"),
+            ariaLabel: this.$gettext("Reactions"),
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" id="pswp__icn-react" />`,
+              outlineID: "pswp__icn-react",
+              size: 24,
+            },
+            onClick: (ev) => this.onControlClick(ev, this.onReact),
+          });
+        }
+
         // Add an action menu with additional options if there's at least one menu item.
         if (this.menuActions().filter((action) => action.visible).length > 0) {
           lightbox.pswp.ui.registerElement({
@@ -1366,6 +1430,26 @@ export default {
     // Returns the available menu actions.
     menuActions() {
       return [
+        {
+          name: "share",
+          icon: "mdi-share-variant",
+          text: this.$gettext("Share"),
+          disabled: !this.model,
+          visible: this.canShare && !this.model?.Archived,
+          click: () => {
+            this.onShare();
+          },
+        },
+        {
+          name: "react",
+          icon: "mdi-comment-outline",
+          text: this.$gettext("Reactions"),
+          disabled: !this.model,
+          visible: this.canReact,
+          click: () => {
+            this.onReact();
+          },
+        },
         {
           name: "cover",
           icon: "mdi-image-album",
@@ -1579,6 +1663,12 @@ export default {
       if (this.$refs.menu) {
         this.$refs.menu.hide();
       }
+
+      // Hide share popover when slide changes.
+      this.shareVisible = false;
+
+      // Hide reaction dialog when slide changes.
+      this.reactVisible = false;
 
       // Set current slide (model) list index.
       if (typeof pswp.currIndex === "number") {
@@ -2370,6 +2460,22 @@ export default {
       this.$notify.success(this.$gettext("Downloading…"));
 
       new Photo().find(this.model.UID).then((p) => p.downloadAll());
+    },
+    onShare() {
+      if (!this.model?.UID) {
+        return;
+      }
+
+      this.shareModel = new Photo({ UID: this.model.UID });
+      this.shareVisible = true;
+    },
+    onReact() {
+      if (!this.model?.UID) {
+        return;
+      }
+
+      this.reactModel = new Photo({ UID: this.model.UID });
+      this.reactVisible = true;
     },
     onEdit() {
       this.pauseLightbox();

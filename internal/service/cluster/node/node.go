@@ -1,5 +1,5 @@
 /*
-Package node bootstraps a PhotoPrism node (instance or service) that joins a cluster Portal.
+Package node bootstraps a Mokosh node (instance or service) that joins a cluster Portal.
 
 Responsibilities include:
 
@@ -15,7 +15,7 @@ Responsibilities include:
 The package deliberately avoids importing Portal internals and communicates
 with the Portal using HTTP-only APIs.
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):

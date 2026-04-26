@@ -1,0 +1,71 @@
+# Dockerfile_scratch — builds the Mokosh binary from source and runs it.
+# Usage: docker build -f Dockerfile_scratch -t mokosh:local .
+
+# ── Stage 1: build ────────────────────────────────────────────────────────────
+FROM ubuntu:24.04 AS builder
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    GOPATH=/go \
+    GOBIN=/usr/local/bin \
+    GO111MODULE=on \
+    CGO_CFLAGS="-g -O2 -Wno-return-local-addr" \
+    PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/go/bin:/go/bin"
+
+# Install build dependencies (CGO requires libvips-dev; keep list minimal).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates curl git make pkg-config \
+        build-essential gcc g++ \
+        libvips-dev libjpeg-dev libpng-dev libwebp-dev \
+        libheif-dev libraw-dev \
+        nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Go 1.25.
+RUN curl -fsSL "https://dl.google.com/go/go1.25.0.linux-amd64.tar.gz" \
+        | tar -C /usr/local -xz
+
+WORKDIR /go/src/github.com/photoprism/photoprism
+
+# Copy the full source tree.
+COPY . .
+
+# Install JS dependencies and build the frontend.
+RUN npm ci --prefix frontend && npm run build --prefix frontend
+
+# Download Go module dependencies.
+RUN go mod download
+
+# Build the photoprism binary.
+RUN go build -v \
+        -ldflags="-s -w" \
+        -o /dist/photoprism \
+        ./cmd/photoprism/photoprism.go
+
+# Copy required runtime assets.
+RUN cp -r assets /dist/assets
+
+# ── Stage 2: runtime ──────────────────────────────────────────────────────────
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PHOTOPRISM_ASSETS_PATH="/photoprism/assets" \
+    PHOTOPRISM_STORAGE_PATH="/photoprism/storage" \
+    PHOTOPRISM_ORIGINALS_PATH="/photoprism/storage/originals" \
+    PHOTOPRISM_IMPORT_PATH="/photoprism/storage/import" \
+    PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin"
+
+# Install runtime dependencies only.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates tzdata libvips42 libjpeg-turbo8 libpng16-16 libwebp7 \
+        ffmpeg exiftool imagemagick libheif1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy binary and assets from the builder stage.
+COPY --from=builder /dist/photoprism /usr/local/bin/photoprism
+COPY --from=builder /dist/assets     /photoprism/assets
+
+WORKDIR /photoprism
+
+EXPOSE 2342
+
+CMD ["photoprism", "start"]

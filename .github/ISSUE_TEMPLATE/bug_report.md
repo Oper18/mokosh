@@ -49,7 +49,7 @@ Visit <https://docs.photoprism.app/getting-started/troubleshooting/browsers/> to
 
 #### 6. Which software versions do you use?
 
-(a) PhotoPrism Architecture & Build Number: AMD64, ARM64, ARMv7,...
+(a) Mokosh Architecture & Build Number: AMD64, ARM64, ARMv7,...
 
 (b) Database Type & Version: MariaDB, MySQL, SQLite,...
 
@@ -63,7 +63,7 @@ You can find the version/build number of the app in *Settings* by scrolling to t
 
 *Always provide database and operating system details if it is a backend, import, or indexing issue. Should it be a frontend issue, at a minimum we require you to provide web browser and operating system details. When reporting a performance problem, we ask that you provide us with complete information about your environment, as there may be more than one cause.*
 
-#### 7. On what kind of device is PhotoPrism installed?
+#### 7. On what kind of device is Mokosh installed?
 
 This is especially important if you are reporting a performance, import, or indexing issue. You can skip this if you're reporting a problem you found in our public demo, or if it's a completely unrelated issue, such as incorrect page layout.
 

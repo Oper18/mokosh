@@ -23,6 +23,20 @@ import (
 
 var albumMutex = sync.Mutex{}
 
+// albumContainsVisitorPhoto checks whether an album contains at least one photo
+// that is directly shared with the given visitor session.
+func albumContainsVisitorPhoto(albumUID string, s *entity.Session) bool {
+	photoUIDs := s.SharedPhotoUIDs()
+	if len(photoUIDs) == 0 {
+		return false
+	}
+
+	var n int
+	return entity.Db().Table("photos_albums").
+		Where("album_uid = ? AND photo_uid IN (?) AND hidden = 0 AND missing = 0", albumUID, photoUIDs).
+		Count(&n).Error == nil && n > 0
+}
+
 // SaveAlbumYaml saves the album metadata to a YAML backup file.
 func SaveAlbumYaml(album *entity.Album) {
 	if album == nil {
@@ -91,9 +105,12 @@ func GetAlbum(router *gin.RouterGroup) {
 		uid := clean.UID(c.Param("uid"))
 
 		// Visitors can only access shared content.
-		if (s.NotRegistered()) && !s.HasShare(uid) {
-			AbortForbidden(c)
-			return
+		if s.NotRegistered() && !s.HasShare(uid) {
+			// Also allow if the visitor has a directly shared photo that belongs to this album.
+			if !albumContainsVisitorPhoto(uid, s) {
+				AbortForbidden(c)
+				return
+			}
 		}
 
 		// Find album by UID.
@@ -106,8 +123,10 @@ func GetAlbum(router *gin.RouterGroup) {
 
 		// Other restricted users can only access their own or shared content.
 		if s.GetUser().HasSharedAccessOnly(acl.ResourceAlbums) && album.CreatedBy != s.UserUID && !s.HasShare(uid) {
-			AbortForbidden(c)
-			return
+			if !albumContainsVisitorPhoto(uid, s) {
+				AbortForbidden(c)
+				return
+			}
 		}
 
 		c.JSON(http.StatusOK, album)

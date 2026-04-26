@@ -54,7 +54,7 @@ func (Cell) TableName() string {
 	return "cells"
 }
 
-// UnknownLocation is PhotoPrism's default location.
+// UnknownLocation is Mokosh's default location.
 var UnknownLocation = Cell{
 	ID:           UnknownID,
 	Place:        &UnknownPlace,

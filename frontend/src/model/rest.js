@@ -100,6 +100,10 @@ export class Rest extends Model {
   updateLink(link) {
     let values = link.getValues(false);
 
+    // Perm is absent from __originalValues when the server omits the field (value 0),
+    // so we always inject it explicitly to ensure permission changes are sent.
+    values["Perm"] = typeof link.Perm === "number" ? link.Perm : 0;
+
     if (link.Token) {
       values["Token"] = link.getToken();
     }

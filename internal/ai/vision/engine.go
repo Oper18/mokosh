@@ -12,7 +12,7 @@ import (
 type ModelEngine = string
 
 const (
-	// EngineVision represents the default PhotoPrism vision service endpoints.
+	// EngineVision represents the default Mokosh vision service endpoints.
 	EngineVision ModelEngine = "vision"
 	// EngineTensorFlow represents on-device TensorFlow models.
 	EngineTensorFlow ModelEngine = "tensorflow"

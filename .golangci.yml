@@ -65,8 +65,8 @@ linters:
       # The words are case-insensitive.
       # Default: []
       extra-words:
-        - typo: "Photoprism"
-          correction: "PhotoPrism"
+        - typo: "Mokosh"
+          correction: "Mokosh"
       # Mode of the analysis:
       # - default: checks all the file content.
       # - restricted: checks only comments.

@@ -1,16 +1,16 @@
-## PhotoPrism 1-Click App for DigitalOcean
+## Mokosh 1-Click App for DigitalOcean
 
 Privately browse, organize, and share your photo collection.
 
 ### Description
 
-PhotoPrism® is a privately hosted app for browsing, organizing, and sharing your photo collection. It makes use of the latest technologies to tag and find pictures automatically without getting in your way. Say goodbye to uploading your visual memories to the cloud!
+Mokosh is a privately hosted app for browsing, organizing, and sharing your photo collection. It makes use of the latest technologies to tag and find pictures automatically without getting in your way. Say goodbye to uploading your visual memories to the cloud!
 
 To learn more, visit https://www.photoprism.app/ or try our [demo](https://try.photoprism.app/).
 
 ### Software Included
 
-- [PhotoPrism latest](https://docs.photoprism.app/release-notes/), AGPL 3
+- [Mokosh latest](https://docs.photoprism.app/release-notes/), AGPL 3
 - [Docker CE latest](https://docs.docker.com/engine/release-notes/), Apache 2
 - [Traefik 3.6](https://github.com/traefik/traefik/releases), MIT
 - [MariaDB 11](https://mariadb.com/kb/en/release-notes/), GPL 2
@@ -33,7 +33,7 @@ You can then access your instance by opening the following URL in a Web browser 
 https://YOUR-SERVER-IP/
 ```
 
-All files related to PhotoPrism can be found in `/opt/photoprism`. It is running as "photoprism" (UID 1000) by default.
+All files related to Mokosh can be found in `/opt/photoprism`. It is running as "photoprism" (UID 1000) by default.
 
 To edit the main config file containing services, storage paths, and basic settings (save changes by pressing *Ctrl+O*, then *Ctrl+X* to exit):
 
@@ -83,4 +83,4 @@ Note the first request may still fail while Traefik gets and installs the new ce
 
 ### System Requirements
 
-We recommend hosting PhotoPrism on a server with at least 2 cores and 4 GB of memory. Indexing and searching may be slow on smaller Droplets, depending on how many and what types of files you upload.
+We recommend hosting Mokosh on a server with at least 2 cores and 4 GB of memory. Indexing and searching may be slow on smaller Droplets, depending on how many and what types of files you upload.

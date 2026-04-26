@@ -83,8 +83,8 @@ func TestTypeUnicode(t *testing.T) {
 		},
 		{
 			name:  "About",
-			input: "PhotoPrism® Pro",
-			want:  "PhotoPrism® Pro",
+			input: "Mokosh Pro",
+			want:  "Mokosh Pro",
 		},
 		{
 			name:  "Empty",

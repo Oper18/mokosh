@@ -3,9 +3,10 @@
 .wallpaper {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: bottom center;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .background-welcome {
-    background-image: url(https://cdn.photoprism.app/wallpaper/welcome.jpg);
+    background-image: url(/static/img/wallpaper/background.png);
 }

@@ -1,8 +1,8 @@
 /*
 Package vaapi contains ffmpeg helpers for configuring VA-API hardware
-acceleration on compatible GPUs when building PhotoPrism encode pipelines.
+acceleration on compatible GPUs when building Mokosh encode pipelines.
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):

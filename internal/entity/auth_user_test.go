@@ -399,7 +399,7 @@ func TestUser_UpdateUsername(t *testing.T) {
 }
 
 func TestUser_SetUsername(t *testing.T) {
-	t.Run("PhotoPrism", func(t *testing.T) {
+	t.Run("Mokosh", func(t *testing.T) {
 		m := FindUserByName("admin")
 
 		if m == nil {

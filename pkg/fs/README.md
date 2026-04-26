@@ -1,10 +1,10 @@
-## PhotoPrism — pkg/fs
+## Mokosh — pkg/fs
 
 **Last Updated:** November 25, 2025
 
 ### Overview
 
-`pkg/fs` provides safe, cross-platform filesystem helpers used across PhotoPrism. It supplies permission constants, copy/move utilities with force-aware semantics, safe path joins, archive extraction with size limits, MIME and extension lookups, hashing, canonical path casing, and fast directory walking with ignore lists.
+`pkg/fs` provides safe, cross-platform filesystem helpers used across Mokosh. It supplies permission constants, copy/move utilities with force-aware semantics, safe path joins, archive extraction with size limits, MIME and extension lookups, hashing, canonical path casing, and fast directory walking with ignore lists.
 
 #### Goals
 

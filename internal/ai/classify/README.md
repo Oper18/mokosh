@@ -1,10 +1,10 @@
-## PhotoPrism — Classification Package
+## Mokosh — Classification Package
 
 **Last Updated:** March 6, 2026
 
 ### Overview
 
-`internal/ai/classify` wraps PhotoPrism’s TensorFlow-based image classification (labels). It loads SavedModel classifiers (Nasnet by default), prepares inputs, runs inference, and maps output probabilities to label rules.
+`internal/ai/classify` wraps Mokosh’s TensorFlow-based image classification (labels). It loads SavedModel classifiers (Nasnet by default), prepares inputs, runs inference, and maps output probabilities to label rules.
 
 ### How It Works
 
@@ -14,7 +14,7 @@
 
 ### Memory & Performance
 
-TensorFlow tensors allocate C memory and are freed by Go GC finalizers. To keep RSS bounded during long runs, PhotoPrism periodically triggers garbage collection to return freed tensor memory to the OS. Tune with:
+TensorFlow tensors allocate C memory and are freed by Go GC finalizers. To keep RSS bounded during long runs, Mokosh periodically triggers garbage collection to return freed tensor memory to the OS. Tune with:
 
 - `PHOTOPRISM_TF_GC_EVERY` (default **200**, `0` disables).  
   Lower values reduce peak RSS but increase GC overhead and can slow indexing.

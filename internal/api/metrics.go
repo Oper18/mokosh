@@ -43,14 +43,14 @@ const (
 	metricClusterNodes   = "nodes"
 	metricClusterInfo    = "info"
 
-	metricsAccountsHelp      = "active user and guest accounts on this PhotoPrism instance"
-	metricsFilesBytesHelp    = "filesystem usage in bytes for files indexed by this PhotoPrism instance"
-	metricsFilesRatioHelp    = "filesystem usage for files indexed by this PhotoPrism instance"
-	metricsAccountsRatioHelp = "account quota usage for this PhotoPrism instance"
-	metricsMediaCountHelp    = "media statistics for this PhotoPrism instance"
+	metricsAccountsHelp      = "active user and guest accounts on this Mokosh instance"
+	metricsFilesBytesHelp    = "filesystem usage in bytes for files indexed by this Mokosh instance"
+	metricsFilesRatioHelp    = "filesystem usage for files indexed by this Mokosh instance"
+	metricsAccountsRatioHelp = "account quota usage for this Mokosh instance"
+	metricsMediaCountHelp    = "media statistics for this Mokosh instance"
 	metricsBuildInfoHelp     = "information about the photoprism instance"
 	metricsClusterNodesHelp  = "registered cluster nodes grouped by role"
-	metricsClusterInfoHelp   = "cluster metadata for this PhotoPrism portal"
+	metricsClusterInfoHelp   = "cluster metadata for this Mokosh portal"
 )
 
 // GetMetrics provides a Prometheus-compatible metrics endpoint for monitoring the instance, including usage details and portal cluster metrics.

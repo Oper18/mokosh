@@ -1,6 +1,6 @@
 FROM golang:1
 
-LABEL maintainer="PhotoPrism UG <hello@photoprism.app>"
+LABEL maintainer="Mokosh <hello@photoprism.app>"
 
 # Set up project directory
 WORKDIR "/webdav"

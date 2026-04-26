@@ -1,10 +1,10 @@
-## PhotoPrism — Ollama Engine Integration
+## Mokosh — Ollama Engine Integration
 
 **Last Updated:** February 23, 2026
 
 ### Overview
 
-This package provides PhotoPrism’s native adapter for Ollama-compatible multimodal models. It lets Caption, Labels, and future Generate workflows call locally hosted models without changing worker logic, reusing the shared API client (`internal/ai/vision/api_client.go`) and result types (`LabelResult`, `CaptionResult`). Requests stay inside your infrastructure, rely on base64 thumbnails, and honor the same ACL, timeout, and logging hooks as the default TensorFlow engines. The adapter resolves `${OLLAMA_BASE_URL}/api/generate`, trimming trailing slashes and defaulting to `http://ollama:11434`; set `OLLAMA_BASE_URL=https://ollama.com` to opt into cloud defaults.
+This package provides Mokosh’s native adapter for Ollama-compatible multimodal models. It lets Caption, Labels, and future Generate workflows call locally hosted models without changing worker logic, reusing the shared API client (`internal/ai/vision/api_client.go`) and result types (`LabelResult`, `CaptionResult`). Requests stay inside your infrastructure, rely on base64 thumbnails, and honor the same ACL, timeout, and logging hooks as the default TensorFlow engines. The adapter resolves `${OLLAMA_BASE_URL}/api/generate`, trimming trailing slashes and defaulting to `http://ollama:11434`; set `OLLAMA_BASE_URL=https://ollama.com` to opt into cloud defaults.
 
 #### Constraints
 
@@ -49,7 +49,7 @@ This package provides PhotoPrism’s native adapter for Ollama-compatible multim
 - **Options**
   - Labels: default `Temperature` equals `DefaultTemperature` (0.1 unless configured), `TopP=0.9`, `Stop=["\n\n"]`.
   - Captions: only `Temperature` is set; other parameters inherit global defaults.
-  - Custom `Options` merge with engine defaults. Leave `ForceJson=true` for labels so PhotoPrism can reject malformed payloads early.
+  - Custom `Options` merge with engine defaults. Leave `ForceJson=true` for labels so Mokosh can reject malformed payloads early.
 
 ### Supported Ollama Vision Models
 
@@ -112,7 +112,7 @@ Guidelines:
 
 - Place new entries after the default TensorFlow models so they take precedence while Nasnet/NSFW remain as fallbacks.
 - Always specify the exact Ollama tag (`model:version`) so upgrades are deliberate.
-- `Service.Think` is optional and is sent only when non-empty. Keep it quoted (for example `"false"` or `"low"`) so YAML preserves it as a string; PhotoPrism serializes `"true"` / `"false"` as JSON booleans for Ollama compatibility.
+- `Service.Think` is optional and is sent only when non-empty. Keep it quoted (for example `"false"` or `"low"`) so YAML preserves it as a string; Mokosh serializes `"true"` / `"false"` as JSON booleans for Ollama compatibility.
 - Model support is not universal: `think:true` may fail on models that do not implement reasoning, and `think:false` can still yield empty `response` fields on some reasoning-capable models.
 - Keep option flags before positional arguments in CLI snippets (`photoprism vision run -m labels --count 1`).
 - If you proxy requests (e.g., through Traefik), set `Service.Key` to `Bearer <token>` and configure the proxy to inject/validate it.
@@ -155,4 +155,4 @@ Guidelines:
 - [ ] Add formal schema validation (JSON Schema or JTD) so malformed label responses fail fast before normalization.
 - [ ] Support multiple thumbnails per request once core workflows confirm the API contract (requires worker + UI changes).
 - [ ] Emit per-model latency and success metrics from the vision worker to simplify tuning when several Ollama engines run side-by-side.
-- [ ] Mirror any loader changes into PhotoPrism Plus/Pro templates to keep splash + browser checks consistent after enabling external engines.
+- [ ] Mirror any loader changes into Mokosh Plus/Pro templates to keep splash + browser checks consistent after enabling external engines.

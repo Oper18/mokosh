@@ -29,7 +29,7 @@ func TestGetRequest(t *testing.T) {
 
 		Retries = 1
 		RetryDelay = 0
-		UserAgent = "PhotoPrism/TestSuite"
+		UserAgent = "Mokosh/TestSuite"
 		Key = ""
 		Secret = ""
 

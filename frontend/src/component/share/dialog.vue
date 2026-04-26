@@ -45,6 +45,22 @@
                       >
                       </v-text-field>
                     </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        v-model="link.Name"
+                        :readonly="!isOwner"
+                        flat
+                        hide-details
+                        density="comfortable"
+                        variant="solo"
+                        autocorrect="off"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        :label="$gettext('Name')"
+                        :placeholder="$gettext('Display name')"
+                        class="input-name"
+                      ></v-text-field>
+                    </v-col>
                     <v-col cols="12" sm="6">
                       <v-select
                         v-model="link.Expires"
@@ -76,19 +92,23 @@
                         class="input-secret"
                       ></v-text-field>
                     </v-col>
-                    <!-- <v-col cols="12" sm="6" class="pa-2">
-                      <v-text-field
-                        v-model="link.Password"
-                        hide-details
-                        autocomplete="off"
-                        :label="label.pass"
-                        :placeholder="link.HasPassword ? '••••••••' : 'optional'"
-                        color="surface-variant"
-                        :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-                        :type="showPassword ? 'text' : 'password'"
-                        @click:append-inner="showPassword = !showPassword"
-                      ></v-text-field>
-                    </v-col> -->
+                    <v-col cols="12">
+                      <div class="text-caption text-medium-emphasis mb-1">{{ $gettext("Permissions") }}</div>
+                      <div class="d-flex flex-wrap ga-1">
+                        <v-chip
+                          v-for="perm in permOptions"
+                          :key="perm.value"
+                          :color="hasPermission(link, perm.value) ? 'primary' : undefined"
+                          :variant="hasPermission(link, perm.value) ? 'flat' : 'outlined'"
+                          size="small"
+                          :closable="false"
+                          style="cursor: pointer;"
+                          @click.stop="togglePermission(link, perm.value)"
+                        >
+                          {{ perm.label }}
+                        </v-chip>
+                      </div>
+                    </v-col>
                     <v-col cols="12" class="d-flex justify-space-between align-center ga-3">
                       <v-btn
                         variant="text"
@@ -115,13 +135,9 @@
           {{ $gettext(`People you share a link with will be able to view public contents.`, { name: model.modelName() }) }}
           {{ $gettext(`A click will copy it to your clipboard.`) }}
           {{ $gettext(`Any private photos and videos remain private and won't be shared.`) }}
-          {{ $gettext(`Alternatively, you can upload files directly to WebDAV servers like Nextcloud.`) }}
         </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn variant="flat" color="button" class="action-webdav" @click.stop="upload">
-          {{ $gettext(`WebDAV Upload`) }}
-        </v-btn>
         <v-btn variant="flat" color="button" class="action-close" @click.stop="confirm">
           {{ $gettext(`Close`) }}
         </v-btn>
@@ -131,6 +147,15 @@
 </template>
 <script>
 import * as options from "options/options";
+
+// Permission bitmask constants (must match internal/entity/auth_user_share.go).
+const PermNone = 1;
+const PermView = 2;
+const PermReact = 4;
+const PermComment = 8;
+const PermUpload = 16;
+const PermEdit = 32;
+const PermShare = 64;
 
 export default {
   name: "PShareDialog",
@@ -144,22 +169,23 @@ export default {
       default: () => {},
     },
   },
+  emits: ["close"],
   data() {
     return {
       expanded: [0],
       host: window.location.host,
-      showPassword: false,
       loading: false,
-      search: null,
       links: [],
       options: options,
-      label: {
-        url: this.$gettext("Service URL"),
-        user: this.$gettext("Username"),
-        pass: this.$gettext("Password"),
-        cancel: this.$gettext("Cancel"),
-        confirm: this.$gettext("Done"),
-      },
+      isOwner: this.$session.isUser(),
+      permOptions: [
+        { value: PermView, label: this.$gettext("View") },
+        { value: PermReact, label: this.$gettext("React") },
+        { value: PermComment, label: this.$gettext("Comment") },
+        { value: PermUpload, label: this.$gettext("Upload") },
+        { value: PermEdit, label: this.$gettext("Edit") },
+        { value: PermShare, label: this.$gettext("Share") },
+      ],
       rtl: this.$isRtl,
     };
   },
@@ -189,6 +215,24 @@ export default {
     },
     afterLeave() {
       this.$view.leave(this);
+    },
+    hasPermission(link, bit) {
+      if (link.Perm === 0) {
+        return bit === PermView;
+      }
+      return (link.Perm & bit) !== 0;
+    },
+    togglePermission(link, bit) {
+      let perm = link.Perm === 0 ? PermView : link.Perm;
+      if (perm & bit) {
+        perm = perm & ~bit;
+      } else {
+        perm = perm | bit;
+      }
+      if (!(perm & PermView)) {
+        perm = perm | PermView;
+      }
+      link.Perm = perm;
     },
     expires(link) {
       let result = this.$gettext("Expires");
@@ -244,9 +288,6 @@ export default {
           this.links.splice(index, 1);
         })
         .finally(() => (this.loading = false));
-    },
-    upload() {
-      this.$emit("upload");
     },
     close() {
       this.$emit("close");

@@ -33,8 +33,13 @@ import PAlbumDeleteDialog from "component/album/delete/dialog.vue";
 import PAuthHeader from "component/auth/header.vue";
 import PAuthFooter from "component/auth/footer.vue";
 
+// Reactions.
+import PReactionPanel from "component/reaction/panel.vue";
+import PReactionDialog from "component/reaction/dialog.vue";
+
 // Sharing.
 import PShareDialog from "component/share/dialog.vue";
+import PSharePopover from "component/share/popover.vue";
 
 // Settings.
 import PSettingsWebdav from "component/settings/webdav.vue";
@@ -109,7 +114,11 @@ export function install(app) {
   app.component("PAuthHeader", PAuthHeader);
   app.component("PAuthFooter", PAuthFooter);
 
+  app.component("PReactionPanel", PReactionPanel);
+  app.component("PReactionDialog", PReactionDialog);
+
   app.component("PShareDialog", PShareDialog);
+  app.component("PSharePopover", PSharePopover);
 
   app.component("PConfirmDialog", PConfirmDialog);
   app.component("PConfirmSponsor", PConfirmSponsor);

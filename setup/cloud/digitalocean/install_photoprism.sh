@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PhotoPrism Cloud Init Script
+# Mokosh Cloud Init Script
 # ============================
 #
 # Put this script in

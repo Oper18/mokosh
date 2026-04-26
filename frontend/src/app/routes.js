@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -36,6 +36,7 @@ import Settings from "page/settings.vue";
 import Admin from "page/admin.vue";
 import Cluster from "page/cluster.vue";
 import Login from "page/auth/login.vue";
+import Register from "page/auth/register.vue";
 import Discover from "page/discover.vue";
 import About from "page/about/about.vue";
 import License from "page/about/license.vue";
@@ -78,6 +79,19 @@ export default [
     name: loginRoute,
     path: "/login",
     component: Login,
+    meta: { title: siteTitle, requiresAuth: false, hideNav: true },
+    beforeEnter: (to, from, next) => {
+      if ($session.loginRequired()) {
+        next();
+      } else {
+        next({ name: $session.getDefaultRoute() });
+      }
+    },
+  },
+  {
+    name: "register",
+    path: "/register",
+    component: Register,
     meta: { title: siteTitle, requiresAuth: false, hideNav: true },
     beforeEnter: (to, from, next) => {
       if ($session.loginRequired()) {

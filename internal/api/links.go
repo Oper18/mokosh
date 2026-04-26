@@ -43,9 +43,11 @@ func UpdateLink(c *gin.Context) {
 
 	link := entity.FindLink(clean.Token(c.Param("link")))
 
+	link.LinkName = clean.Name(frm.LinkName)
 	link.SetSlug(frm.ShareSlug)
 	link.MaxViews = frm.MaxViews
 	link.LinkExpires = frm.LinkExpires
+	link.Perm = frm.Perm
 
 	if frm.LinkToken != "" {
 		link.LinkToken = strings.TrimSpace(strings.ToLower(frm.LinkToken))
@@ -63,11 +65,56 @@ func UpdateLink(c *gin.Context) {
 		return
 	}
 
+	syncLinkNameToVisitor(link)
+
 	UpdateClientConfig()
 
 	PublishAlbumEvent(StatusUpdated, link.ShareUID, c)
 
 	c.JSON(http.StatusOK, link)
+}
+
+// syncLinkNameToVisitor keeps auth_users.display_name in sync with link.LinkName.
+// If no visitor user exists for the link yet and a name is set, one is created.
+func syncLinkNameToVisitor(link *entity.Link) {
+	if link == nil {
+		return
+	}
+
+	var share entity.UserShare
+	err := entity.Db().Where("link_uid = ?", link.LinkUID).First(&share).Error
+
+	if err != nil {
+		// No UserShare for this link yet.
+		if link.LinkName == "" {
+			return
+		}
+		// Create a dedicated visitor user for this link.
+		visitor := entity.NewUser()
+		visitor.UserRole = acl.RoleVisitor.String()
+		visitor.CanLogin = false
+		visitor.DisplayName = link.LinkName
+		if createErr := visitor.Create(); createErr != nil {
+			log.Errorf("link: failed to create visitor user (%s)", createErr)
+			return
+		}
+		newShare := entity.NewUserShare(visitor.UserUID, link.ShareUID, link.Perm, nil)
+		newShare.LinkUID = link.LinkUID
+		if saveErr := newShare.Save(); saveErr != nil {
+			log.Errorf("link: failed to create user share for visitor (%s)", saveErr)
+		}
+		return
+	}
+
+	// Update the display name of the already-linked visitor user.
+	u := entity.FindUserByUID(share.UserUID)
+	if u == nil || !u.IsVisitor() {
+		return
+	}
+
+	if err := entity.Db().Model(u).UpdateColumn("display_name", link.LinkName).Error; err != nil {
+		log.Errorf("link: failed to sync display name to visitor user %s (%s)", u.UserUID, err)
+	}
 }
 
 // DeleteLink deletes a share link.
@@ -129,9 +176,15 @@ func CreateLink(c *gin.Context) {
 
 	link := entity.NewUserLink(uid, s.UserUID)
 
+	link.LinkName = clean.Name(frm.LinkName)
 	link.SetSlug(frm.ShareSlug)
 	link.MaxViews = frm.MaxViews
 	link.LinkExpires = frm.LinkExpires
+	if frm.Perm != 0 {
+		link.Perm = frm.Perm
+	} else {
+		link.Perm = entity.PermView
+	}
 
 	if frm.Password != "" {
 		if err := link.SetPassword(frm.Password); err != nil {
@@ -259,11 +312,17 @@ func GetAlbumLinks(router *gin.RouterGroup) {
 	})
 }
 
-/*
-
-// CreatePhotoLink adds a new photo share link and return it as JSON.
+// CreatePhotoLink adds a new photo share link and returns it as JSON.
 //
-//	@Tags 		Links, Photos
+//	@Summary	adds a new photo share link and returns it as JSON
+//	@Id			CreatePhotoLink
+//	@Tags		Links, Photos
+//	@Accept		json
+//	@Produce	json
+//	@Success	200						{object}	entity.Link
+//	@Failure	400,401,403,404,409,429	{object}	i18n.Response
+//	@Param		uid						path		string		true	"photo uid"
+//	@Param		link					body		form.Link	true	"link properties"
 //	@Router		/api/v1/photos/{uid}/links [post]
 func CreatePhotoLink(router *gin.RouterGroup) {
 	router.POST("/photos/:uid/links", func(c *gin.Context) {
@@ -282,9 +341,19 @@ func CreatePhotoLink(router *gin.RouterGroup) {
 	})
 }
 
-// UpdatePhotoLink updates an existing photo sharing link.
+// UpdatePhotoLink updates an existing photo share link and returns it as JSON.
 //
-// PUT /api/v1/photos/:uid/links/:link
+//	@Summary	updates an existing photo share link and returns it as JSON
+//	@Id			UpdatePhotoLink
+//	@Tags		Links, Photos
+//	@Accept		json
+//	@Produce	json
+//	@Success	200						{object}	entity.Link
+//	@Failure	400,401,403,409,429,500	{object}	i18n.Response
+//	@Param		uid						path		string		true	"photo uid"
+//	@Param		linkuid					path		string		true	"link uid"
+//	@Param		link					body		form.Link	true	"properties to update"
+//	@Router		/api/v1/photos/{uid}/links/{linkuid} [put]
 func UpdatePhotoLink(router *gin.RouterGroup) {
 	router.PUT("/photos/:uid/links/:link", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.ActionShare)
@@ -297,9 +366,17 @@ func UpdatePhotoLink(router *gin.RouterGroup) {
 	})
 }
 
-// DeletePhotoLink deletes a photo sharing link.
+// DeletePhotoLink deletes a photo share link.
 //
-// DELETE /api/v1/photos/:uid/links/:link
+//	@Summary	deletes a photo share link
+//	@Id			DeletePhotoLink
+//	@Tags		Links, Photos
+//	@Produce	json
+//	@Success	200				{object}	entity.Link
+//	@Failure	401,403,409,429	{object}	i18n.Response
+//	@Param		uid				path		string	true	"photo uid"
+//	@Param		linkuid			path		string	true	"link uid"
+//	@Router		/api/v1/photos/{uid}/links/{linkuid} [delete]
 func DeletePhotoLink(router *gin.RouterGroup) {
 	router.DELETE("/photos/:uid/links/:link", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.ActionShare)
@@ -312,9 +389,16 @@ func DeletePhotoLink(router *gin.RouterGroup) {
 	})
 }
 
-// GetPhotoLinks returns all share links for the given UID as JSON.
+// GetPhotoLinks returns all share links for the given photo UID as JSON.
 //
-// GET /api/v1/photos/:uid/links
+//	@Summary	returns all share links for the given photo UID as JSON
+//	@Id			GetPhotoLinks
+//	@Tags		Links, Photos
+//	@Produce	json
+//	@Success	200				{object}	entity.Link
+//	@Failure	401,403,404,429	{object}	i18n.Response
+//	@Param		uid				path		string	true	"photo uid"
+//	@Router		/api/v1/photos/{uid}/links [get]
 func GetPhotoLinks(router *gin.RouterGroup) {
 	router.GET("/photos/:uid/links", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.ActionShare)
@@ -326,13 +410,15 @@ func GetPhotoLinks(router *gin.RouterGroup) {
 		m, err := query.PhotoByUID(clean.UID(c.Param("uid")))
 
 		if err != nil {
-			AbortAlbumNotFound(c)
+			AbortEntityNotFound(c)
 			return
 		}
 
 		c.JSON(http.StatusOK, m.Links())
 	})
 }
+
+/*
 
 // CreateLabelLink adds a new label share link and return it as JSON.
 //

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -35,13 +35,13 @@ import (
 var version = "development"
 var log = event.Log
 
-const appName = "PhotoPrism"
-const appAbout = "PhotoPrism®"
+const appName = "Mokosh"
+const appAbout = "Mokosh"
 const appEdition = "ce"
-const appDescription = "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web." +
+const appDescription = "Mokosh is an AI-Powered Photos App for the Decentralized Web." +
 	" It makes use of the latest technologies to tag and find pictures automatically without getting in your way." +
 	" You can run it at home, on a private server, or in the cloud."
-const appCopyright = "(c) 2018-2025 PhotoPrism UG. All rights reserved."
+const appCopyright = "(c) 2018-2025 Mokosh. All rights reserved."
 
 // Metadata contains build specific information.
 var Metadata = map[string]any{
@@ -66,7 +66,7 @@ func main() {
 	app.Copyright = appCopyright
 	app.EnableBashCompletion = true
 	app.Flags = config.Flags.Cli()
-	app.Commands = commands.PhotoPrism
+	app.Commands = commands.Mokosh
 	app.Metadata = Metadata
 
 	if err := app.Run(os.Args); err != nil {

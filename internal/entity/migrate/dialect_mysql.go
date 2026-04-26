@@ -231,4 +231,34 @@ var DialectMySQL = Migrations{
 		Stage:      "main",
 		Statements: []string{"UPDATE photos SET indexed_at = checked_at WHERE indexed_at IS NULL;"},
 	},
+	{
+		ID:         "20260407-000001",
+		Dialect:    "mysql",
+		Stage:      "main",
+		Statements: []string{"CREATE TABLE IF NOT EXISTS `teams` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `team_uid` varbinary(42) NOT NULL DEFAULT '',\n  `team_name` varchar(200) NOT NULL DEFAULT '',\n  `user_uid` varbinary(42) NOT NULL DEFAULT '',\n  `created_at` datetime NOT NULL,\n  `updated_at` datetime NOT NULL,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `uix_teams_team_uid` (`team_uid`),\n  KEY `idx_teams_team_name` (`team_name`),\n  KEY `idx_teams_user_uid` (`user_uid`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", "CREATE TABLE IF NOT EXISTS `teams_users` (\n  `uid` varbinary(42) NOT NULL DEFAULT '',\n  `team_uid` varbinary(42) NOT NULL DEFAULT '',\n  `user_uid` varbinary(42) NOT NULL DEFAULT '',\n  PRIMARY KEY (`uid`, `team_uid`),\n  KEY `idx_teams_users_team_uid` (`team_uid`),\n  KEY `idx_teams_users_user_uid` (`user_uid`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", "CREATE TABLE IF NOT EXISTS `teams_albums` (\n  `uid` varbinary(42) NOT NULL DEFAULT '',\n  `team_uid` varbinary(42) NOT NULL DEFAULT '',\n  `album_uid` varbinary(42) NOT NULL DEFAULT '',\n  PRIMARY KEY (`uid`, `team_uid`),\n  KEY `idx_teams_albums_team_uid` (`team_uid`),\n  KEY `idx_teams_albums_album_uid` (`album_uid`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;", "CREATE TABLE IF NOT EXISTS `teams_photos` (\n  `uid` varbinary(42) NOT NULL DEFAULT '',\n  `team_uid` varbinary(42) NOT NULL DEFAULT '',\n  `photo_uid` varbinary(42) NOT NULL DEFAULT '',\n  PRIMARY KEY (`uid`, `team_uid`),\n  KEY `idx_teams_photos_team_uid` (`team_uid`),\n  KEY `idx_teams_photos_photo_uid` (`photo_uid`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;"},
+	},
+	{
+		ID:      "20260419-000002",
+		Dialect: "mysql",
+		Stage:   "main",
+		Statements: []string{
+			"DROP TABLE IF EXISTS `reactions`;",
+			"CREATE TABLE IF NOT EXISTS `reactions` (`id` int unsigned NOT NULL AUTO_INCREMENT, `photo_uid` varbinary(42) NOT NULL DEFAULT '', `user_uid` varbinary(42) NOT NULL DEFAULT '', `emoji` varbinary(64) DEFAULT NULL, `comment` text DEFAULT NULL, `created_at` datetime NOT NULL, PRIMARY KEY (`id`), KEY `idx_reactions_photo_uid` (`photo_uid`), KEY `idx_reactions_user_uid` (`user_uid`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
+		},
+	},
+	{
+		ID:         "20260420-000001",
+		Dialect:    "mysql",
+		Stage:      "main",
+		Statements: []string{"ALTER TABLE links ADD COLUMN IF NOT EXISTS link_name varchar(160) NOT NULL DEFAULT '';"},
+	},
+	{
+		ID:      "20260420-000002",
+		Dialect: "mysql",
+		Stage:   "main",
+		Statements: []string{
+			"ALTER TABLE auth_users DROP INDEX IF EXISTS idx_auth_users_user_name;",
+			"CREATE UNIQUE INDEX IF NOT EXISTS uix_auth_users_user_name ON auth_users ((NULLIF(user_name, '')));",
+		},
+	},
 }

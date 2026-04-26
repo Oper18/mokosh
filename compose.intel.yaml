@@ -1,5 +1,5 @@
 services:
-  ## PhotoPrism (Development Environment for Intel QSV hardware transcoding)
+  ## Mokosh (Development Environment for Intel QSV hardware transcoding)
   photoprism:
     build: .
     image: photoprism/photoprism:develop

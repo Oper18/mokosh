@@ -44,7 +44,7 @@ var UsersPath = "users"
 // Users is a convenience alias for slices of User.
 type Users []User
 
-// User represents an account that can authenticate with PhotoPrism.
+// User represents an account that can authenticate with Mokosh.
 type User struct {
 	ID            int           `gorm:"primary_key" json:"ID" yaml:"-"`
 	UUID          string        `gorm:"type:VARBINARY(64);column:user_uuid;index;" json:"UUID,omitempty" yaml:"UUID,omitempty"`
@@ -53,7 +53,7 @@ type User struct {
 	AuthMethod    string        `gorm:"type:VARBINARY(128);default:'';" json:"AuthMethod" yaml:"AuthMethod,omitempty"`
 	AuthIssuer    string        `gorm:"type:VARBINARY(255);default:'';" json:"AuthIssuer,omitempty" yaml:"AuthIssuer,omitempty"`
 	AuthID        string        `gorm:"type:VARBINARY(255);index;default:'';" json:"AuthID" yaml:"AuthID,omitempty"`
-	UserName      string        `gorm:"size:200;index;" json:"Name" yaml:"Name,omitempty"`
+	UserName      string        `gorm:"size:200;" json:"Name" yaml:"Name,omitempty"`
 	DisplayName   string        `gorm:"size:200;" json:"DisplayName" yaml:"DisplayName,omitempty"`
 	UserEmail     string        `gorm:"size:255;index;" json:"Email" yaml:"Email,omitempty"`
 	BackupEmail   string        `gorm:"size:255;" json:"BackupEmail,omitempty" yaml:"BackupEmail,omitempty"`
@@ -1221,9 +1221,12 @@ func (m *User) RegenerateTokens() error {
 	return m.Updates(Values{"preview_token": m.PreviewToken, "download_token": m.DownloadToken})
 }
 
-// RefreshShares updates the list of shares.
+// RefreshShares updates the list of shares, including albums and photos
+// accessible via team memberships.
 func (m *User) RefreshShares() *User {
-	m.UserShares = FindUserShares(m.GetUID())
+	direct := FindUserShares(m.GetUID())
+	team := FindTeamSharesForUser(m.GetUID())
+	m.UserShares = append(direct, team...)
 	return m
 }
 
@@ -1485,3 +1488,21 @@ func (m *User) SetAvatar(thumb, thumbSrc string) error {
 
 	return m.Updates(Values{"thumb": m.Thumb, "thumb_src": m.ThumbSrc})
 }
+
+// visitorForToken returns the per-link visitor user associated with the share
+// token, falling back to the shared &Visitor when no dedicated user exists.
+func visitorForToken(token string) *User {
+	links := FindLinks(token, "")
+	for i := range links {
+		var share UserShare
+		if err := Db().Where("link_uid = ?", links[i].LinkUID).First(&share).Error; err != nil {
+			continue
+		}
+		u := FindUserByUID(share.UserUID)
+		if u != nil && u.IsVisitor() && u.ID != Visitor.ID {
+			return u
+		}
+	}
+	return &Visitor
+}
+

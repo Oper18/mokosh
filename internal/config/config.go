@@ -1,7 +1,7 @@
 /*
 Package config provides global options, command-line flags, and user settings.
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -680,7 +680,7 @@ func (c *Config) SerialChecksum() string {
 // Name returns the app name.
 func (c *Config) Name() string {
 	if c.options.Name == "" {
-		return "PhotoPrism"
+		return "Mokosh"
 	}
 
 	return c.options.Name
@@ -689,7 +689,7 @@ func (c *Config) Name() string {
 // About returns the app about string.
 func (c *Config) About() string {
 	if c.options.About == "" {
-		return "PhotoPrism®"
+		return "Mokosh"
 	}
 
 	return c.options.About
@@ -998,7 +998,7 @@ func (c *Config) RenewApiKeysWithToken(token string) error {
 	return nil
 }
 
-// initHub initializes PhotoPrism hub config.
+// initHub initializes Mokosh hub config.
 func (c *Config) initHub() {
 	if c.hub != nil {
 		return
@@ -1041,7 +1041,7 @@ func (c *Config) initHub() {
 	}()
 }
 
-// Hub returns the PhotoPrism hub config.
+// Hub returns the Mokosh hub config.
 func (c *Config) Hub() *hub.Config {
 	c.initHub()
 

@@ -1,4 +1,4 @@
-## PhotoPrism — Metadata Pipeline
+## Mokosh — Metadata Pipeline
 
 **Last Updated:** February 11, 2026
 

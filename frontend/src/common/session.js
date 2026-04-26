@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -580,6 +580,10 @@ export default class Session {
     }
 
     return LoginPage === window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+  }
+
+  register(data) {
+    return $api.post("users/register", data);
   }
 
   login(username, password, code, token) {

@@ -49,7 +49,7 @@ func Token(size uint) string {
 }
 
 func TestNewConfig(t *testing.T) {
-	c := NewConfig("test", "testdata/new.yml", "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+	c := NewConfig("test", "testdata/new.yml", "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 
 	assert.IsType(t, &Config{}, c)
 }
@@ -72,7 +72,7 @@ func TestConfig_Refresh(t *testing.T) {
 	t.Run("Success", func(t *testing.T) {
 		fileName := fmt.Sprintf("testdata/hub.%s.yml", Token(8))
 
-		c := NewConfig("test", fileName, "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+		c := NewConfig("test", fileName, "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 
 		if err := c.Update(); err != nil {
 			t.Fatal(err)
@@ -133,7 +133,7 @@ func TestConfig_Refresh(t *testing.T) {
 
 func TestConfig_DecodeSession(t *testing.T) {
 	t.Run("Hub3Yml", func(t *testing.T) {
-		c := NewConfig("test", "testdata/hub3.yml", "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+		c := NewConfig("test", "testdata/hub3.yml", "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 
 		err := c.Load()
 
@@ -149,7 +149,7 @@ func TestConfig_DecodeSession(t *testing.T) {
 
 func TestConfig_Load(t *testing.T) {
 	t.Run("Hub1Yml", func(t *testing.T) {
-		c := NewConfig("test", "testdata/hub1.yml", "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+		c := NewConfig("test", "testdata/hub1.yml", "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 
 		if err := c.Load(); err != nil {
 			t.Log(err.Error())
@@ -162,7 +162,7 @@ func TestConfig_Load(t *testing.T) {
 		assert.Equal(t, "test", c.Version)
 	})
 	t.Run("Hub2Yml", func(t *testing.T) {
-		c := NewConfig("test", "testdata/hub2.yml", "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+		c := NewConfig("test", "testdata/hub2.yml", "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 
 		if err := c.Load(); err != nil {
 			t.Log(err.Error())
@@ -175,7 +175,7 @@ func TestConfig_Load(t *testing.T) {
 		assert.Equal(t, "test", c.Version)
 	})
 	t.Run("NotExistingFilename", func(t *testing.T) {
-		c := NewConfig("test", "testdata/hub_xxx.yml", "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+		c := NewConfig("test", "testdata/hub_xxx.yml", "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 
 		if err := c.Load(); err == nil {
 			t.Fatal("file should not exist")
@@ -191,7 +191,7 @@ func TestConfig_Save(t *testing.T) {
 	t.Run("ExistingFilename", func(t *testing.T) {
 		assert.FileExists(t, "testdata/hub1.yml")
 
-		c := NewConfig("test", "testdata/hub1.yml", "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+		c := NewConfig("test", "testdata/hub1.yml", "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 
 		if err := c.Load(); err != nil {
 			t.Log(err.Error())
@@ -234,7 +234,7 @@ func TestConfig_Save(t *testing.T) {
 		assert.Equal(t, "test", c.Version)
 	})
 	t.Run("NotExistingFilename", func(t *testing.T) {
-		c := NewConfig("test", "testdata/hub_new.yml", "zqkunt22r0bewti9", "test", "PhotoPrism/Test", "test")
+		c := NewConfig("test", "testdata/hub_new.yml", "zqkunt22r0bewti9", "test", "Mokosh/Test", "test")
 		c.Key = "F60F5B25D59C397989E3CD374F81CDD7710A4FCA"
 		c.Secret = "foo"
 		c.Session = "bar"

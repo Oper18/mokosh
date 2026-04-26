@@ -2074,8 +2074,8 @@ msgid "Location"
 msgstr "地點"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "日誌訊息會在PhotoPrism遇到損毀的檔案，或是其他問題出現時出現。"
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "日誌訊息會在Mokosh遇到損毀的檔案，或是其他問題出現時出現。"
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2418,8 +2418,8 @@ msgid "Note:"
 msgstr "注意："
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "注意：只能將 WebDAV 伺服器（如Nextcloud或PhotoPrism）設定為遠端服務，以進行備份和檔案上傳。"
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "注意：只能將 WebDAV 伺服器（如Nextcloud或Mokosh）設定為遠端服務，以進行備份和檔案上傳。"
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2648,12 +2648,12 @@ msgid "Photo"
 msgstr "相片"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "PhotoPrism 是獨立而且100%自籌資金的。"
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "Mokosh 是獨立而且100%自籌資金的。"
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
-msgstr "PhotoPrism+ 會員資格"
+msgid "Mokosh+ Membership"
+msgstr "Mokosh+ 會員資格"
 
 #: src/app/routes.js:178
 msgid "Photos"
@@ -2757,8 +2757,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "防止创建数据库和相册备份以及 YAML sidecar 文件。"
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "防止其他应用程序将 PhotoPrism 作为共享网络驱动器访问。"
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "防止其他应用程序将 Mokosh 作为共享网络驱动器访问。"
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3537,8 +3537,8 @@ msgstr "感谢你的支持!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "這就是為何 PhotoPrism 是從零開始建置，好讓您可以在任何您想要的地方運作的，無須向自由、隱私或是功能妥協。"
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "這就是為何 Mokosh 是從零開始建置，好讓您可以在任何您想要的地方運作的，無須向自由、隱私或是功能妥協。"
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3952,12 +3952,12 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "WebDAV客戶端可以使用以下URL連接到PhotoPrism："
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "WebDAV客戶端可以使用以下URL連接到Mokosh："
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "WebDAV客戶端（例如Microsoft的Windows資源管理器或Apple的Finder）可以直接連接到PhotoPrism。"
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "WebDAV客戶端（例如Microsoft的Windows資源管理器或Apple的Finder）可以直接連接到Mokosh。"
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4382,8 +4382,8 @@ msgstr "封存"
 #~ msgid "Estimates"
 #~ msgstr "估計"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "PhotoPrism更新囉…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Mokosh更新囉…"
 
 #~ msgid "Album Name"
 #~ msgstr "相簿名稱"
@@ -4460,10 +4460,10 @@ msgstr "封存"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
+#~ "          Mokosh."
 #~ msgstr ""
 #~ "WebDAV客戶端（例如Microsoft Windows的檔案總管或Apple的Finder）可以直接連接到\n"
-#~ "PhotoPrism。"
+#~ "Mokosh。"
 
 #~ msgid "Basic"
 #~ msgstr "基本"
@@ -4540,8 +4540,8 @@ msgstr "封存"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "出了点问题，你下线了吗？"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
-#~ msgstr "在PhotoPrism，我们相信通过照片捕捉到的每一个瞬间都是珍贵的，我们的使命是让人们能够珍惜这些瞬间，世代传承。"
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgstr "在Mokosh，我们相信通过照片捕捉到的每一个瞬间都是珍贵的，我们的使命是让人们能够珍惜这些瞬间，世代传承。"
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
 #~ msgstr "今天就成为会员，享受更多的功能，并支持我们的使命!"
@@ -4651,8 +4651,8 @@ msgstr "封存"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "它利用最新技術自動標記和查找圖片，而不會妨礙您。"
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "PhotoPrism® 是基於去中心化網絡的 AI 驅動的照片應用程序。"
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "Mokosh 是基於去中心化網絡的 AI 驅動的照片應用程序。"
 
 #~ msgid "Uploader"
 #~ msgstr "上传者"
@@ -4690,8 +4690,8 @@ msgstr "封存"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "我們的團隊會根據開發這些功能所需要付出的時間及精神，伺服器和認證成本，以及這些功能是每個人普遍都會需要的功能，還是主要是由組織和專業用戶的請求來持續的評估。由於這使我們能夠向大眾提供更多功能，因此我們鼓勵所有用戶支持我們的專案。"
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
-#~ msgstr "PhotoPrism是100%自籌資金的。自願捐款並不包括一個全職工作的團隊為您提供更新、文檔和支持的費用。您可以決定是否要註冊以享受額外的好處。"
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgstr "Mokosh是100%自籌資金的。自願捐款並不包括一個全職工作的團隊為您提供更新、文檔和支持的費用。您可以決定是否要註冊以享受額外的好處。"
 
 #~ msgid "Shouldn't free software be free of costs?"
 #~ msgstr "免費軟件不應該是沒有成本的嗎？"
@@ -4914,8 +4914,8 @@ msgstr "封存"
 #~ msgid "Spanish"
 #~ msgstr "西班牙文"
 
-#~ msgid "PhotoPrism® is a registered trademark of Michael Mayer."
-#~ msgstr "PhotoPrism®是 Michael Mayer 的註冊商標。"
+#~ msgid "Mokosh is a registered trademark of Michael Mayer."
+#~ msgstr "Mokosh是 Michael Mayer 的註冊商標。"
 
 #~ msgid "Requests endorsed by silver and gold sponsors receive a golden label and will be prioritized."
 #~ msgstr "由銀牌和金牌贊助商認可的請求將獲得金色標籤，並將被優先考慮。"
@@ -4929,8 +4929,8 @@ msgstr "封存"
 #~ msgid "You may use it as required to describe our software, run your own server, for educational purposes, but not for offering commercial goods, products, or services without prior written permission. In other words, please ask."
 #~ msgstr "出於教育目的，您可以根據需要使用它來描述我們的軟件，運行您自己的服務器，但未經事先書面許可，不得用於提供商業產品，產品或服務。換句話說，請詢問。"
 
-#~ msgid "If you enjoy using PhotoPrism, please consider backing us on Patreon or GitHub Sponsors."
-#~ msgstr "如果您喜歡使用 PhotoPrism，請考慮在 Patreon 或 GitHub 贊助商上支持我們。"
+#~ msgid "If you enjoy using Mokosh, please consider backing us on Patreon or GitHub Sponsors."
+#~ msgstr "如果您喜歡使用 Mokosh，請考慮在 Patreon 或 GitHub 贊助商上支持我們。"
 
 #~ msgid "Let us know when we mistakenly label an idea as unfunded."
 #~ msgstr "當我們錯誤地將一個想法標記為沒有資金時，請告訴我們。"
@@ -4959,8 +4959,8 @@ msgstr "封存"
 #~ msgid "Hide Private"
 #~ msgstr "隱藏私人內容"
 
-#~ msgid "Let PhotoPrism create albums from past events."
-#~ msgstr "讓 PhotoPrism 根據過去的事件創建相簿。"
+#~ msgid "Let Mokosh create albums from past events."
+#~ msgstr "讓 Mokosh 根據過去的事件創建相簿。"
 
 #~ msgid "More than 50 results"
 #~ msgstr "找到超過 50 個結果"

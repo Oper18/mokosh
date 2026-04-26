@@ -1,7 +1,7 @@
 
-          >> Running PhotoPrism on ARMv7-based devices (32-bit) <<
+          >> Running Mokosh on ARMv7-based devices (32-bit) <<
 
-You may use the following 32-bit Docker images to run PhotoPrism and MariaDB
+You may use the following 32-bit Docker images to run Mokosh and MariaDB
 on ARMv7-based devices:
 
   Stable Release     : photoprism/photoprism:armv7
@@ -31,7 +31,7 @@ this README file.
 
 - Your device should have at least 3 GB of physical memory and a 64-bit operating
   system (always use our ARM64 image if possible)
-- While PhotoPrism has been reported to work on devices with less memory, we take
+- While Mokosh has been reported to work on devices with less memory, we take
   no responsibility for instability or performance problems
 - RAW image conversion and TensorFlow are disabled on systems with 1 GB or
   less memory
@@ -51,7 +51,7 @@ this README file.
       - seccomp:unconfined
       - apparmor:unconfined
   ```
-- If you install PhotoPrism on a public server outside your home network, always
+- If you install Mokosh on a public server outside your home network, always
   run it behind a secure HTTPS reverse proxy such as Traefik or Caddy:
   https://docs.photoprism.app/getting-started/proxies/traefik/
 

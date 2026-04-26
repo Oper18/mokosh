@@ -903,7 +903,7 @@ func TestJSON(t *testing.T) {
 		assert.Equal(t, "", data.Keywords.String())
 		assert.Equal(t, "This is a\n\ndescription!", data.Caption)
 		assert.Equal(t, "This is the world.", data.Subject)
-		assert.Equal(t, "© 2011 PhotoPrism", data.Copyright)
+		assert.Equal(t, "© 2011 Mokosh", data.Copyright)
 		assert.Equal(t, 567, data.Height)
 		assert.Equal(t, 850, data.Width)
 		assert.Equal(t, 0.0, data.Lat)

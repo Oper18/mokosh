@@ -61,6 +61,6 @@
 
   if (!support.ok) {
     window.__PHOTOPRISM_SUPPORTS_REASON__ = support.reason;
-    showUnsupportedMessage('PhotoPrism requires a current version of Chrome, Safari, Edge, or Firefox. Please update your browser or switch to a supported device.');
+    showUnsupportedMessage('Mokosh requires a current version of Chrome, Safari, Edge, or Firefox. Please update your browser or switch to a supported device.');
   }
 })();

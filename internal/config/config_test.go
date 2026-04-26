@@ -88,14 +88,14 @@ func TestConfig_Name(t *testing.T) {
 	c := NewConfig(CliTestContext())
 
 	name := c.Name()
-	assert.Equal(t, "PhotoPrism", name)
+	assert.Equal(t, "Mokosh", name)
 }
 
 func TestConfig_About(t *testing.T) {
 	c := NewConfig(CliTestContext())
 
 	name := c.About()
-	assert.Equal(t, "PhotoPrism®", name)
+	assert.Equal(t, "Mokosh", name)
 }
 
 func TestConfig_Edition(t *testing.T) {

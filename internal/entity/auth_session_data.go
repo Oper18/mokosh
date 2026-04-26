@@ -98,3 +98,31 @@ func (data SessionData) SharedUIDs() UIDs {
 
 	return data.Shares
 }
+
+// SharedPhotoUIDs returns only photo UIDs from the session shares (UIDs starting with PhotoUID prefix 'p').
+func (data SessionData) SharedPhotoUIDs() UIDs {
+	all := data.SharedUIDs()
+	result := make(UIDs, 0, len(all))
+
+	for _, uid := range all {
+		if len(uid) == 16 && uid[0] == PhotoUID {
+			result = append(result, uid)
+		}
+	}
+
+	return result
+}
+
+// SharedAlbumUIDs returns only album UIDs from the session shares (UIDs starting with AlbumUID prefix 'a').
+func (data SessionData) SharedAlbumUIDs() UIDs {
+	all := data.SharedUIDs()
+	result := make(UIDs, 0, len(all))
+
+	for _, uid := range all {
+		if len(uid) == 16 && uid[0] == AlbumUID {
+			result = append(result, uid)
+		}
+	}
+
+	return result
+}

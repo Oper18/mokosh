@@ -1,6 +1,6 @@
 @echo off
 
-echo Stopping PhotoPrism and MariaDB...
+echo Stopping Mokosh and MariaDB...
 
 docker compose stop
 

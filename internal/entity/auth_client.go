@@ -29,7 +29,7 @@ const (
 // Clients is a convenience alias for slices of Client.
 type Clients []Client
 
-// Client represents an OAuth/OpenID client registered with PhotoPrism.
+// Client represents an OAuth/OpenID client registered with Mokosh.
 type Client struct {
 	ClientUID    string          `gorm:"type:VARBINARY(42);primary_key;auto_increment:false;" json:"-" yaml:"ClientUID"`
 	NodeUUID     string          `gorm:"type:VARBINARY(64);index;default:'';" json:"NodeUUID,omitempty" yaml:"NodeUUID,omitempty"`

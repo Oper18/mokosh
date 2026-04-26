@@ -49,7 +49,7 @@ function mountNavigation({
 
   const configMock = {
     ...baseConfig,
-    getName: baseConfig.getName || vi.fn(() => "PhotoPrism"),
+    getName: baseConfig.getName || vi.fn(() => "Mokosh"),
     getAbout: baseConfig.getAbout || vi.fn(() => "About"),
     getIcon: baseConfig.getIcon || vi.fn(() => "/icon.png"),
     getTier: baseConfig.getTier || vi.fn(() => 1),

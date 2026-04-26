@@ -49,7 +49,7 @@ export default {
 
     color: {
       type: String,
-      default: "#29d",
+      default: "#943DF0",
     },
 
     errorColor: {

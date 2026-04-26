@@ -16,7 +16,7 @@
             {{ $gettext("Our mission is to provide the most user- and privacy-friendly solution to keep your pictures organized and accessible.") }}
             {{
               $gettext(
-                "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+                "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
               )
             }}
           </strong>
@@ -25,7 +25,7 @@
 
       <template v-if="canUpgrade">
         <h3 class="py-2">
-          {{ $gettext("PhotoPrism+ Membership") }}
+          {{ $gettext("Mokosh+ Membership") }}
         </h3>
         <p>
           <span v-if="tier < 4">{{ $gettext("Become a member today, support our mission and enjoy our member benefits!") }}</span>
@@ -62,7 +62,7 @@
       <template v-else-if="isSuperAdmin">
         <h3 class="py-2">{{ $gettext("Thank You for Your Support!") }} <v-icon size="20" color="primary">mdi-heart</v-icon></h3>
         <p>
-          {{ $gettext("PhotoPrism is 100% self-funded and independent.") }}
+          {{ $gettext("Mokosh is 100% self-funded and independent.") }}
           {{
             $gettext("Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy.")
           }}
@@ -163,11 +163,8 @@
       </div>
 
       <p class="text-caption mt-6 mb-0 text-center text-ltr">
-        PhotoPrism® is a
-        <a href="https://www.photoprism.app/trademark" target="_blank" rel="noopener" class="text-link">registered trademark</a>. By using the software and
-        services we provide, you agree to our <a href="https://www.photoprism.app/terms" target="_blank" rel="noopener" class="text-link">Terms of Service</a>,
-        <a href="https://www.photoprism.app/privacy" target="_blank" rel="noopener" class="text-link">Privacy Policy</a>, and
-        <a href="https://www.photoprism.app/code-of-conduct" target="_blank" rel="noopener" class="text-link">Code of Conduct</a>.
+        Mokosh is open-source software.
+        <a href="https://github.com/Oper18/mokosh" target="_blank" rel="noopener" class="text-link">GitHub</a>
       </p>
     </div>
     <p-about-footer></p-about-footer>

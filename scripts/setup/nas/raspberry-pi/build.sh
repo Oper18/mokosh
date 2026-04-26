@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-# Builds a PhotoPrismPi SD card image for use with Raspberry Pi 4 and 5.
+# Builds a MokoshPi SD card image for use with Raspberry Pi 4 and 5.
 
 # Stop the script if an error occurs.
 set -e
 
-echo "Building PhotoPrismPi SD card image..."
+echo "Building MokoshPi SD card image..."
 
 # Build directory:
 DESTDIR=$(realpath "${1:-./setup/nas/raspberry-pi}")

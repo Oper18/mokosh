@@ -459,7 +459,7 @@ var Flags = CliFlags{
 		}}, {
 		Flag: &cli.BoolFlag{
 			Name:    "disable-webdav",
-			Usage:   "prevents other apps from accessing PhotoPrism as a shared network drive",
+			Usage:   "prevents other apps from accessing Mokosh as a shared network drive",
 			EnvVars: EnvVars("DISABLE_WEBDAV"),
 		}}, {
 		Flag: &cli.BoolFlag{

@@ -1,14 +1,11 @@
 package entity
 
-import "github.com/photoprism/photoprism/pkg/react"
-
 type ReactionMap map[string]Reaction
 
 func (m ReactionMap) Get(name string) Reaction {
 	if result, ok := m[name]; ok {
 		return result
 	}
-
 	return Reaction{}
 }
 
@@ -16,31 +13,25 @@ func (m ReactionMap) Pointer(name string) *Reaction {
 	if result, ok := m[name]; ok {
 		return &result
 	}
-
 	return &Reaction{}
 }
 
+var reactionComment = "Great shot!"
+
 var ReactionFixtures = ReactionMap{
-	"SubjectJohnLike": Reaction{
-		UID:       SubjectFixtures.Get("john-doe").SubjUID,
+	"PhotoAliceLove": {
+		ID:        1,
+		PhotoUID:  PhotoFixtures.Get("Photo01").PhotoUID,
 		UserUID:   UserFixtures.Get("alice").UserUID,
-		Reaction:  react.Like.String(),
-		Reacted:   1,
-		ReactedAt: TimeStamp(),
+		Emoji:     "❤️",
+		CreatedAt: *TimeStamp(),
 	},
-	"PhotoAliceLove": Reaction{
-		UID:       PhotoFixtures.Get("Photo01").PhotoUID,
-		UserUID:   UserFixtures.Pointer("alice").UserUID,
-		Reaction:  react.Love.String(),
-		Reacted:   3,
-		ReactedAt: TimeStamp(),
-	},
-	"PhotoBobLove": Reaction{
-		UID:       PhotoFixtures.Get("Photo01").PhotoUID,
+	"PhotoBobComment": {
+		ID:        2,
+		PhotoUID:  PhotoFixtures.Get("Photo01").PhotoUID,
 		UserUID:   UserFixtures.Pointer("bob").UserUID,
-		Reaction:  react.Love.String(),
-		Reacted:   1,
-		ReactedAt: TimeStamp(),
+		Comment:   &reactionComment,
+		CreatedAt: *TimeStamp(),
 	},
 }
 

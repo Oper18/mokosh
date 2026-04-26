@@ -807,6 +807,30 @@ func (m *Session) NotRegistered() bool {
 	return !m.IsRegistered()
 }
 
+// HasSharePerm checks if any of the session's share links grants the specified permission bit.
+// For visitor sessions, permissions come from Link.Perm; for registered users from UserShare.Perm.
+func (m *Session) HasSharePerm(perm uint) bool {
+	if user := m.GetUser(); user.IsRegistered() {
+		return FindUserShares(user.GetUID()).HasPerm(perm)
+	}
+
+	// Visitor: check all redeemed share link tokens.
+	data := m.GetData()
+	if data == nil {
+		return false
+	}
+
+	for _, token := range data.Tokens {
+		for _, link := range FindValidLinks(token, "") {
+			if link.Perm&perm != 0 {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
 // NoShares checks if the session has no shares yet.
 func (m *Session) NoShares() bool {
 	return !m.HasShares()
@@ -851,6 +875,24 @@ func (m *Session) SharedUIDs() UIDs {
 		return UIDs{}
 	} else {
 		return data.SharedUIDs()
+	}
+}
+
+// SharedPhotoUIDs returns only photo UIDs from the session shares.
+func (m *Session) SharedPhotoUIDs() UIDs {
+	if data := m.GetData(); data == nil {
+		return UIDs{}
+	} else {
+		return data.SharedPhotoUIDs()
+	}
+}
+
+// SharedAlbumUIDs returns only album UIDs from the session shares.
+func (m *Session) SharedAlbumUIDs() UIDs {
+	if data := m.GetData(); data == nil {
+		return UIDs{}
+	} else {
+		return data.SharedAlbumUIDs()
 	}
 }
 

@@ -24,7 +24,7 @@ var gzipExcludedExtensions = map[string]struct{}{
 	".gz":   {},
 }
 
-// NewGzipShouldCompressFn returns a high-performance gzip decision function for PhotoPrism.
+// NewGzipShouldCompressFn returns a high-performance gzip decision function for Mokosh.
 // It mirrors the legacy exclusion rules (extensions and path prefixes) and adds targeted
 // route exclusions for binary/streaming endpoints that must not be compressed.
 func NewGzipShouldCompressFn(conf *config.Config) func(c *gin.Context) bool {

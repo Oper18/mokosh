@@ -1,4 +1,4 @@
-## PhotoPrism — Batch Edit Package
+## Mokosh — Batch Edit Package
 
 **Last Updated:** November 23, 2025
 

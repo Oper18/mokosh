@@ -2,7 +2,7 @@
 ## Setup: https://docs.photoprism.app/developer-guide/setup/ ##
 
 services:
-  ## PhotoPrism (Development Environment)
+  ## Mokosh (Development Environment)
   photoprism:
     build: .
     image: photoprism/photoprism:develop
@@ -312,7 +312,7 @@ services:
     volumes:
       - "./storage/services/open-webui:/app/backend/data"
 
-  ## PhotoPrism® Computer Vision API
+  ## Mokosh Computer Vision API
   ## see https://github.com/photoprism/photoprism-vision
   photoprism-vision:
     image: photoprism/vision:latest

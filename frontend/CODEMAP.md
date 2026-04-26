@@ -1,4 +1,4 @@
-PhotoPrism — Frontend CODEMAP
+Mokosh — Frontend CODEMAP
 
 **Last Updated:** March 8, 2026
 

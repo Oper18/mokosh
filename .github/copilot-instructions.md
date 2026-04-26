@@ -2,7 +2,7 @@
 
 ## Purpose
 
-- Provide Copilot with the single sources of truth for building, testing, and contributing to PhotoPrism.
+- Provide Copilot with the single sources of truth for building, testing, and contributing to Mokosh.
 - Improve PR reviews and code suggestions by aligning them with our documented workflows and style.
 
 ## Single Sources of Truth (SOT)

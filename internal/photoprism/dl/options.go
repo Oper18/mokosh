@@ -30,7 +30,7 @@ type Options struct {
 	UseIPV4            bool   // -4 Make all connections via IPv4
 	Cookies            string // --cookies FILE
 	CookiesFromBrowser string // --cookies-from-browser BROWSER[:FOLDER]
-	// Note: The PhotoPrism CLI intentionally does NOT expose a --cookies-from-browser flag
+	// Note: The Mokosh CLI intentionally does NOT expose a --cookies-from-browser flag
 	// because the default runtime is a container without access to local browser profiles.
 	// This field remains for tests and non-container scenarios.
 	AddHeaders        []string                      // --add-header "Name: Value" (repeatable)
@@ -51,7 +51,7 @@ type Options struct {
 	noInfoDownload bool
 }
 
-// DownloadOptions controls how yt-dlp downloads media on behalf of PhotoPrism.
+// DownloadOptions controls how yt-dlp downloads media on behalf of Mokosh.
 type DownloadOptions struct {
 	Filter            string // Download format matched by filter (usually a format id or quality designator).
 	AudioFormats      string // --audio-formats Download audio using formats (best, aac, alac, flac, m4a, mp3, opus, vorbis, wav).

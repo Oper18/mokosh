@@ -121,7 +121,7 @@ func normalizeLabelResult(result *LabelResult) {
 	}
 }
 
-// resolveLabelName returns the canonical label name and metadata, preferring (1) TensorFlow rules, (2) existing PhotoPrism labels, (3) sanitized tokens, then (4) a Title-case fallback.
+// resolveLabelName returns the canonical label name and metadata, preferring (1) TensorFlow rules, (2) existing Mokosh labels, (3) sanitized tokens, then (4) a Title-case fallback.
 func resolveLabelName(raw string) (string, canonicalLabel) {
 	raw = strings.TrimSpace(raw)
 	if raw == "" {

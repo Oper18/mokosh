@@ -1,10 +1,10 @@
-## PhotoPrism — TensorFlow Package
+## Mokosh — TensorFlow Package
 
 **Last Updated:** March 3, 2026
 
 ### Overview
 
-`internal/ai/tensorflow` provides the shared TensorFlow helpers used by PhotoPrism’s built-in AI features (labels, NSFW, and FaceNet embeddings). It wraps SavedModel loading, input/output discovery, image tensor preparation, and label handling so higher-level packages can focus on domain logic.
+`internal/ai/tensorflow` provides the shared TensorFlow helpers used by Mokosh’s built-in AI features (labels, NSFW, and FaceNet embeddings). It wraps SavedModel loading, input/output discovery, image tensor preparation, and label handling so higher-level packages can focus on domain logic.
 
 ### Key Components
 
@@ -21,7 +21,7 @@
 
 ### Memory & Garbage Collection
 
-TensorFlow tensors are allocated in C memory and freed by Go GC finalizers in the TensorFlow bindings. Long-running inference can therefore show increasing RSS even when the Go heap is small. PhotoPrism periodically triggers garbage collection to return freed C-allocated tensor buffers to the OS. Control this behavior with:
+TensorFlow tensors are allocated in C memory and freed by Go GC finalizers in the TensorFlow bindings. Long-running inference can therefore show increasing RSS even when the Go heap is small. Mokosh periodically triggers garbage collection to return freed C-allocated tensor buffers to the OS. Control this behavior with:
 
 - `PHOTOPRISM_TF_GC_EVERY` (default **200**, `0` disables).  
   Lower values reduce peak RSS but increase GC overhead and can slow indexing.

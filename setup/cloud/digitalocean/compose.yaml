@@ -1,8 +1,8 @@
 #  ========================================================================
-#  PhotoPrism for Cloud Servers
+#  Mokosh for Cloud Servers
 #  ========================================================================
 #
-#  Run this script as root to install PhotoPrism on a cloud server e.g. at DigitalOcean:
+#  Run this script as root to install Mokosh on a cloud server e.g. at DigitalOcean:
 #
 #    bash <(curl -s https://dl.photoprism.app/cloud/digitalocean/setup.sh)
 #
@@ -22,7 +22,7 @@
 #
 #    ssh root@<YOUR SERVER IP>
 #
-#  Data and all config files related to PhotoPrism can be found in
+#  Data and all config files related to Mokosh can be found in
 #
 #    /opt/photoprism
 #
@@ -41,7 +41,7 @@
 #  SYSTEM REQUIREMENTS
 #  ------------------------------------------------------------------------
 #
-#  We recommend hosting PhotoPrism on a server with at least 2 cores and
+#  We recommend hosting Mokosh on a server with at least 2 cores and
 #  4 GB of memory. Beyond these minimum requirements, the amount of RAM
 #  should match the number of cores. Indexing large photo and video
 #  collections significantly benefits from fast, local SSD storage.
@@ -91,7 +91,7 @@ services:
     ## Use photoprism/photoprism:preview for testing preview builds:
     image: photoprism/photoprism:latest
     container_name: photoprism
-    ## Don't enable automatic restarts until PhotoPrism has been properly configured and tested!
+    ## Don't enable automatic restarts until Mokosh has been properly configured and tested!
     ## If the service gets stuck in a restart loop, this points to a memory, filesystem, network, or database issue:
     ## https://docs.photoprism.app/getting-started/troubleshooting/#fatal-server-errors
     restart: always

@@ -92,7 +92,7 @@
                 density="compact"
                 color="surface-variant"
                 :label="$gettext('Disable WebDAV')"
-                :hint="$gettext('Prevent other apps from accessing PhotoPrism as a shared network drive.')"
+                :hint="$gettext('Prevent other apps from accessing Mokosh as a shared network drive.')"
                 prepend-icon="mdi-sync-off"
                 persistent-hint
                 @update:model-value="onChange"

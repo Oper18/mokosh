@@ -31,7 +31,7 @@ func (Place) TableName() string {
 	return "places"
 }
 
-// UnknownPlace is PhotoPrism's default place.
+// UnknownPlace is Mokosh's default place.
 var UnknownPlace = Place{
 	ID:            UnknownID,
 	PlaceLabel:    "Unknown",

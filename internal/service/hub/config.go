@@ -260,7 +260,7 @@ func (c *Config) ReSync(token string) (err error) {
 	if c.UserAgent != "" {
 		req.Header.Set(header.UserAgent, c.UserAgent)
 	} else {
-		req.Header.Set(header.UserAgent, "PhotoPrism/Test")
+		req.Header.Set(header.UserAgent, "Mokosh/Test")
 	}
 
 	// Add Content-Type header.

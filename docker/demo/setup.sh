@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# PhotoPrism Demo Environment - Setup Script
+# Mokosh Demo Environment - Setup Script
 #
 # Usage:
 #   bash <(curl -s https://dl.photoprism.app/docker/demo/setup.sh)

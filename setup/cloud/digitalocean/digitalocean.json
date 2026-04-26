@@ -3,7 +3,7 @@
     "do_token": "{{env `DIGITALOCEAN_TOKEN`}}",
     "image_name": "photoprism-ce-marketplace-{{timestamp}}",
     "apt_packages": "software-properties-common apt-transport-https ca-certificates openssl ufw curl",
-    "application_name": "PhotoPrism",
+    "application_name": "Mokosh",
     "application_version": "latest"
   },
   "sensitive-variables": ["do_token"],

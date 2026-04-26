@@ -177,7 +177,7 @@
             >
               <div class="preview__overlay"></div>
               <button
-                v-if="canShare && album.LinkCount > 0"
+                v-if="canShare"
                 class="action-share"
                 @touchstart.stop="input.touchStart($event, index)"
                 @touchend.stop="onShare($event, index)"
@@ -265,7 +265,7 @@
         </div>
       </div>
     </div>
-    <p-share-dialog :visible="dialog.share" :model="model" @upload="webdavUpload" @close="dialog.share = false"></p-share-dialog>
+    <p-share-dialog :visible="dialog.share" :model="model" @close="dialog.share = false"></p-share-dialog>
     <p-service-upload
       :visible="dialog.upload"
       :items="{ albums: selection }"
@@ -360,7 +360,7 @@ export default {
       batchSize: Album.batchSize(),
       offset: 0,
       page: 0,
-      selection: [],
+      selection: this.$albumClipboard.selection,
       settings: settings,
       q: q,
       filter: filter,

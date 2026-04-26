@@ -1,4 +1,4 @@
-# Copyright © 2018 - 2025 PhotoPrism UG. All rights reserved.
+# Copyright © 2018 - 2025 Mokosh. All rights reserved.
 #
 # Questions? Email us at hello@photoprism.app or visit our website to learn
 # more about our team, products and services: https://www.photoprism.app/
@@ -206,7 +206,7 @@ install:
 	chown -R $(INSTALL_USER) $(DESTDIR)
 	chmod -R $(INSTALL_MODE) $(DESTDIR)
 	chmod -R $(INSTALL_MODE_BIN) $(DESTDIR)/bin $(DESTDIR)/lib
-	@echo "PhotoPrism $(BUILD_TAG) has been successfully installed in \"$(DESTDIR)\".\nEnjoy!"
+	@echo "Mokosh $(BUILD_TAG) has been successfully installed in \"$(DESTDIR)\".\nEnjoy!"
 install-go:
 	sudo scripts/dist/install-go.sh latest
 	go build -v ./...

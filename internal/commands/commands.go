@@ -1,7 +1,7 @@
 /*
-Package commands provides the CLI commands of PhotoPrism.
+Package commands provides the CLI commands of Mokosh.
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -49,8 +49,8 @@ func RunNonInteractively(confirmed bool) bool {
 	return confirmed || cliMode == NONINTERACTIVE
 }
 
-// PhotoPrism contains the photoprism CLI (sub-)commands.
-var PhotoPrism = []*cli.Command{
+// Mokosh contains the photoprism CLI (sub-)commands.
+var Mokosh = []*cli.Command{
 	StartCommand,
 	StopCommand,
 	StatusCommand,

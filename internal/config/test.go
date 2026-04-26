@@ -150,9 +150,9 @@ func NewTestOptionsForPath(dbName, dataPath string) *Options {
 
 	// Test config options.
 	opts := &Options{
-		Name:            "PhotoPrism",
+		Name:            "Mokosh",
 		Version:         "0.0.0",
-		Copyright:       "(c) 2018-2025 PhotoPrism UG. All rights reserved.",
+		Copyright:       "(c) 2018-2025 Mokosh. All rights reserved.",
 		Public:          true,
 		Sponsor:         true,
 		AuthMode:        "",
@@ -371,14 +371,14 @@ func NewTestErrorConfig() *Config {
 func NewTestContext(args []string) *cli.Context {
 	// Create new command-line app.
 	app := cli.NewApp()
-	app.Usage = "PhotoPrism®"
+	app.Usage = "Mokosh"
 	app.Version = "test"
-	app.Copyright = "(c) 2018-2025 PhotoPrism UG. All rights reserved."
+	app.Copyright = "(c) 2018-2025 Mokosh. All rights reserved."
 	app.EnableBashCompletion = true
 	app.Flags = Flags.Cli()
 	app.Metadata = Values{
-		"Name":    "PhotoPrism",
-		"About":   "PhotoPrism®",
+		"Name":    "Mokosh",
+		"About":   "Mokosh",
 		"Edition": "ce",
 		"Version": "test",
 	}

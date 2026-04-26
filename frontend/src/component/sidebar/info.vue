@@ -55,6 +55,8 @@
           </v-list-item>
         </template>
       </v-list>
+
+      <p-reaction-panel v-if="featReactions" :model="model"></p-reaction-panel>
     </div>
   </div>
 </template>
@@ -64,11 +66,13 @@ import { DateTime } from "luxon";
 import * as formats from "options/formats";
 
 import PMap from "component/map.vue";
+import PReactionPanel from "component/reaction/panel.vue";
 
 export default {
   name: "PSidebarInfo",
   components: {
     PMap,
+    PReactionPanel,
   },
   props: {
     modelValue: {
@@ -89,6 +93,7 @@ export default {
     return {
       actions: [],
       featPlaces: this.$config.feature("places"),
+      featReactions: this.$config.feature("reactions"),
     };
   },
   computed: {

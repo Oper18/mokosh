@@ -12,7 +12,7 @@ import (
 func TestConfig_AppName(t *testing.T) {
 	c := NewConfig(CliTestContext())
 
-	assert.Equal(t, "PhotoPrism", c.AppName())
+	assert.Equal(t, "Mokosh", c.AppName())
 }
 
 func TestConfig_AppMode(t *testing.T) {

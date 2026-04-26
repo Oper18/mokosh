@@ -4,8 +4,8 @@ from remote sources via yt-dlp. It underpins the `photoprism dl` CLI.
 
 Two download methods are supported:
 
- 1. Pipe method (stdout): yt-dlp streams media to stdout and PhotoPrism
-    writes it to a temporary file. After writing, PhotoPrism remuxes the
+ 1. Pipe method (stdout): yt-dlp streams media to stdout and Mokosh
+    writes it to a temporary file. After writing, Mokosh remuxes the
     file with ffmpeg to ensure a valid MP4 container and to embed basic
     metadata such as title, description, author, source URL (as comment),
     and creation timestamp when available. This method is simple and works
@@ -14,7 +14,7 @@ Two download methods are supported:
 
  2. File method (on-disk): yt-dlp writes output files directly using
     `--output` templates and built-in post-processors (merge/remux/metadata).
-    PhotoPrism captures the final file paths (via `--print after_move:filepath`)
+    Mokosh captures the final file paths (via `--print after_move:filepath`)
     and then optionally runs a final ffmpeg remux to normalize the container
     and embed metadata if necessary. This method is recommended for sources
     that deliver separate audio/video streams or require post-processing.
@@ -27,7 +27,7 @@ downloading. Secrets are not logged; header values are redacted in traces.
 The package exposes convenience constructors around yt-dlp invocation as
 well as small utilities for safer logging and remux metadata preparation.
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):

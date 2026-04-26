@@ -25,7 +25,7 @@ func TestShowCommands_JSON_Flat(t *testing.T) {
 		GlobalFlags []catalogpkg.Flag    `json:"global_flags"`
 		Commands    []catalogpkg.Command `json:"commands"`
 	}{
-		App:         catalogpkg.App{Name: "PhotoPrism", Edition: "ce", Version: "test"},
+		App:         catalogpkg.App{Name: "Mokosh", Edition: "ce", Version: "test"},
 		GeneratedAt: "",
 		GlobalFlags: global,
 		Commands:    flat,

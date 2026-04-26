@@ -9,16 +9,18 @@ var RulesMutex = &sync.Mutex{}
 var Rules = ACL{
 	ResourceFiles: Roles{
 		RoleAdmin:  GrantFullAccess,
+		RoleGuest:  GrantGuestOwn,
 		RoleClient: GrantFullAccess,
 	},
 	ResourceFolders: Roles{
 		RoleAdmin:   GrantFullAccess,
-		RoleGuest:   GrantSearchShared,
+		RoleGuest:   GrantGuestOwn,
 		RoleVisitor: GrantSearchShared,
 		RoleClient:  GrantFullAccess,
 	},
 	ResourceShares: Roles{
 		RoleAdmin:  GrantFullAccess,
+		RoleGuest:  GrantFullAccess,
 		RoleClient: GrantFullAccess,
 	},
 	ResourcePhotos: GrantDefaults,
@@ -30,13 +32,13 @@ var Rules = ACL{
 	ResourceAlbums: GrantDefaults,
 	ResourceMoments: Roles{
 		RoleAdmin:   GrantFullAccess,
-		RoleGuest:   GrantSearchShared,
+		RoleGuest:   GrantGuestOwn,
 		RoleVisitor: GrantSearchShared,
 		RoleClient:  GrantFullAccess,
 	},
 	ResourceCalendar: Roles{
 		RoleAdmin:   GrantFullAccess,
-		RoleGuest:   GrantSearchShared,
+		RoleGuest:   GrantGuestOwn,
 		RoleVisitor: GrantSearchShared,
 		RoleClient:  GrantFullAccess,
 	},
@@ -46,7 +48,7 @@ var Rules = ACL{
 	},
 	ResourcePlaces: Roles{
 		RoleAdmin:    GrantFullAccess,
-		RoleGuest:    GrantReactShared,
+		RoleGuest:    GrantGuestOwn,
 		RoleVisitor:  GrantViewShared,
 		RoleInstance: GrantUseOwn,
 		RoleService:  GrantUseOwn,
@@ -95,6 +97,7 @@ var Rules = ACL{
 	ResourceSessions: Roles{
 		RoleAdmin:   GrantManageOwn,
 		RolePortal:  GrantFullAccess,
+		RoleVisitor: GrantViewOwn,
 		RoleDefault: GrantOwn,
 	},
 	ResourceLogs: Roles{
@@ -134,6 +137,10 @@ var Rules = ACL{
 		RoleService:  GrantSearchDownloadUpdateOwn,
 		RolePortal:   GrantFullAccess,
 		RoleClient:   GrantSearchDownloadUpdateOwn,
+	},
+	ResourceTeams: Roles{
+		RoleAdmin: GrantFullAccess,
+		RoleGuest: GrantManageOwn,
 	},
 	ResourceFeedback: Roles{
 		RoleAdmin: GrantFullAccess,

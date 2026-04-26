@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 Mokosh. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -90,7 +90,7 @@ export default class Config {
         name: "Test",
       };
       this.page = {
-        title: "PhotoPrism",
+        title: "Mokosh",
         caption: "AI-Powered Photos App",
       };
       return;
@@ -869,7 +869,7 @@ export default class Config {
     const s = this.get("name");
 
     if (!s) {
-      return "PhotoPrism";
+      return "Mokosh";
     }
 
     return s;
@@ -879,7 +879,7 @@ export default class Config {
     const s = this.get("about");
 
     if (!s) {
-      return "PhotoPrism®";
+      return "Mokosh";
     }
 
     return s;

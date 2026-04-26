@@ -134,6 +134,21 @@ var (
 		ActionDownload:  true,
 		ActionUpdateOwn: true,
 	}
+	GrantGuestOwn = Grant{
+		AccessOwn:       true,
+		AccessShared:    true,
+		ActionSearch:    true,
+		ActionView:      true,
+		ActionCreate:    true,
+		ActionUpdate:    true,
+		ActionDelete:    true,
+		ActionUpload:    true,
+		ActionDownload:  true,
+		ActionShare:     true,
+		ActionReact:     true,
+		ActionManageOwn: true,
+		ActionSubscribe: true,
+	}
 	GrantSubscribeOwn = Grant{
 		AccessOwn:       true,
 		ActionSubscribe: true,
@@ -156,8 +171,8 @@ var (
 // GrantDefaults defines default grants for all supported roles.
 var GrantDefaults = Roles{
 	RoleAdmin:    GrantFullAccess,
-	RoleGuest:    GrantReactShared,
-	RoleVisitor:  GrantViewShared,
+	RoleGuest:    GrantGuestOwn,
+	RoleVisitor:  GrantSearchShared,
 	RoleInstance: GrantSearchShared,
 	RoleService:  GrantSearchShared,
 	RolePortal:   GrantFullAccess,

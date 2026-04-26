@@ -2071,8 +2071,8 @@ msgid "Location"
 msgstr "Sijainti"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "Lokiviestit näkyvät täällä aina, kun PhotoPrism löytää rikkinäisiä tiedostoja tai muita mahdollisia ongelmia."
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "Lokiviestit näkyvät täällä aina, kun Mokosh löytää rikkinäisiä tiedostoja tai muita mahdollisia ongelmia."
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2415,8 +2415,8 @@ msgid "Note:"
 msgstr "Huomautus:"
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "Huomautus: Vain WebDAV-palvelimet, kuten Nextcloud tai PhotoPrism, voidaan määrittää etäpalveluiksi varmuuskopiointia ja tiedostojen lataamista varten."
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "Huomautus: Vain WebDAV-palvelimet, kuten Nextcloud tai Mokosh, voidaan määrittää etäpalveluiksi varmuuskopiointia ja tiedostojen lataamista varten."
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2645,12 +2645,12 @@ msgid "Photo"
 msgstr "Kuva"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "PhotoPrism on 100-prosenttisesti omarahoitteinen ja riippumaton."
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "Mokosh on 100-prosenttisesti omarahoitteinen ja riippumaton."
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
-msgstr "PhotoPrism+ jäsenyys"
+msgid "Mokosh+ Membership"
+msgstr "Mokosh+ jäsenyys"
 
 #: src/app/routes.js:178
 msgid "Photos"
@@ -2754,8 +2754,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "Estää tietokannan ja albumin varmuuskopioiden sekä YAML-sivukarttatiedostojen luomisen."
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "Estä muita sovelluksia käyttämästä PhotoPrismia jaettuna verkkoasemana."
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "Estä muita sovelluksia käyttämästä Mokoshia jaettuna verkkoasemana."
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3534,8 +3534,8 @@ msgstr "Kiitos tuestasi!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "Siksi PhotoPrism rakennettiin alusta alkaen toimimaan siellä, missä sitä tarvitset, tinkimättä vapaudesta, yksityisyydestä tai toiminnallisuudesta."
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "Siksi Mokosh rakennettiin alusta alkaen toimimaan siellä, missä sitä tarvitset, tinkimättä vapaudesta, yksityisyydestä tai toiminnallisuudesta."
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3949,12 +3949,12 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "WebDAV-ohjelmat voivat muodostaa yhteyden PhotoPrismiin käyttämällä seuraavaa URL-osoitetta:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "WebDAV-ohjelmat voivat muodostaa yhteyden Mokoshiin käyttämällä seuraavaa URL-osoitetta:"
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
-msgstr "WebDAV-ohjelmat, kuten Microsoftin Windows Explorer tai Applen Finder, voivat muodostaa yhteyden suoraan PhotoPrismiin."
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
+msgstr "WebDAV-ohjelmat, kuten Microsoftin Windows Explorer tai Applen Finder, voivat muodostaa yhteyden suoraan Mokoshiin."
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4379,8 +4379,8 @@ msgstr "Arkisto"
 #~ msgid "Estimates"
 #~ msgstr "Arvioitu"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "PhotoPrism on päivitetty…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Mokosh on päivitetty…"
 
 #~ msgid "Album Name"
 #~ msgstr "Albumin nimi"
@@ -4455,8 +4455,8 @@ msgstr "Arkisto"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
-#~ msgstr "WebDAV-ohjelmat, kuten Microsoftin Windows Explorer tai Applen Finder, voivat muodostaa yhteyden suoraan PhotoPrismiin."
+#~ "          Mokosh."
+#~ msgstr "WebDAV-ohjelmat, kuten Microsoftin Windows Explorer tai Applen Finder, voivat muodostaa yhteyden suoraan Mokoshiin."
 
 #~ msgid "Basic"
 #~ msgstr "Basic"
@@ -4533,8 +4533,8 @@ msgstr "Arkisto"
 #~ msgid "Something went wrong, are you offline?"
 #~ msgstr "Jokin meni pieleen, oletko offline?"
 
-#~ msgid "At PhotoPrism, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
-#~ msgstr "Me PhotoPrismillä uskomme, että jokainen valokuvaan vangittu hetki on arvokas, ja tehtävämme on antaa ihmisille mahdollisuus vaalia näitä hetkiä tulevien sukupolvien ajan."
+#~ msgid "At Mokosh, we believe that every moment captured through a photograph is precious, and our mission is to enable people to cherish those moments for generations to come."
+#~ msgstr "Me Mokoshillä uskomme, että jokainen valokuvaan vangittu hetki on arvokas, ja tehtävämme on antaa ihmisille mahdollisuus vaalia näitä hetkiä tulevien sukupolvien ajan."
 
 #~ msgid "Become a member today to enjoy additional features and support our mission!"
 #~ msgstr "Liity jäseneksi jo tänään nauttiaksesi lisäominaisuuksista ja tukeaksesi missiotamme!"
@@ -4644,8 +4644,8 @@ msgstr "Arkisto"
 #~ msgid "It makes use of the latest technologies to tag and find pictures automatically without getting in your way."
 #~ msgstr "Se hyödyntää uusinta teknologiaa merkitäkseen ja löytääkseen kuvia automaattisesti ilman, että se on tielläsi."
 
-#~ msgid "PhotoPrism® is an AI-Powered Photos App for the Decentralized Web."
-#~ msgstr "PhotoPrism® on tekoälyavusteinen valokuvasovellus hajautetussa verkossa."
+#~ msgid "Mokosh is an AI-Powered Photos App for the Decentralized Web."
+#~ msgstr "Mokosh on tekoälyavusteinen valokuvasovellus hajautetussa verkossa."
 
 #~ msgid "Uploader"
 #~ msgstr "Lataaja"
@@ -4683,8 +4683,8 @@ msgstr "Arkisto"
 #~ msgid "Our team decides this on an ongoing basis depending on the support effort required, server and licensing costs, and whether the features are generally needed by everyone or mainly requested by organizations and advanced users. As this allows us to make more features available to the public, we encourage all users to support our mission."
 #~ msgstr "Tiimimme arvioi tätä jatkuvasti sen mukaan, kuinka paljon tukipalvelua ominaisuudet vaativat, kuinka paljon ne maksavat meille ja ovatko ne yleisesti kaikkien tarvitsemia vai lähinnä organisaatioiden ja edistyneiden käyttäjien pyytämiä. Koska näin voimme tarjota enemmän ominaisuuksia yleisölle, kannustamme kaikkia käyttäjiä tukemaan tehtäviämme."
 
-#~ msgid "PhotoPrism is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
-#~ msgstr "PhotoPrism on 100-prosenttisesti omarahoitteinen. Vapaaehtoiset lahjoitukset eivät kata kustannuksia, jotka aiheutuvat kokopäiväisesti työskentelevästä tiimistä, joka tarjoaa sinulle päivityksiä, dokumentaatiota ja tukea. On sinun päätöksesi, haluatko rekisteröityä ja nauttia lisäeduista."
+#~ msgid "Mokosh is 100% self-funded. Voluntary donations do not cover the cost of a team working full time to provide you with updates, documentation, and support. It is your decision whether you want to sign up to enjoy additional benefits."
+#~ msgstr "Mokosh on 100-prosenttisesti omarahoitteinen. Vapaaehtoiset lahjoitukset eivät kata kustannuksia, jotka aiheutuvat kokopäiväisesti työskentelevästä tiimistä, joka tarjoaa sinulle päivityksiä, dokumentaatiota ja tukea. On sinun päätöksesi, haluatko rekisteröityä ja nauttia lisäeduista."
 
 #~ msgid "Shouldn't free software be free of costs?"
 #~ msgstr "Eikö ilmaisen ohjelmiston pitäisi olla ilmainen?"

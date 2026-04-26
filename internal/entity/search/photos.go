@@ -134,6 +134,10 @@ func searchPhotos(frm form.SearchPhotos, sess *entity.Session, resultCols string
 		frm.Scope = ""
 	}
 
+	// sharedUIDs holds the directly shared photo/album UIDs for the current visitor session.
+	// It is populated inside the session block and reused by quality/private filters below.
+	var sharedUIDs entity.UIDs
+
 	// Check session permissions and apply as needed.
 	if sess != nil {
 		user := sess.GetUser()
@@ -157,23 +161,50 @@ func searchPhotos(frm form.SearchPhotos, sess *entity.Session, resultCols string
 		}
 
 		// Visitors and other restricted users can only access shared content.
-		if frm.Scope != "" && album.CreatedBy != user.UserUID && !sess.HasShare(frm.Scope) && (sess.GetUser().HasSharedAccessOnly(acl.ResourcePhotos) || sess.NotRegistered()) ||
-			frm.Scope == "" && acl.Rules.Deny(acl.ResourcePhotos, aclRole, acl.ActionSearch) {
+		scopeRestricted := frm.Scope != "" && album.CreatedBy != user.UserUID && !sess.HasShare(frm.Scope) &&
+			(sess.GetUser().HasSharedAccessOnly(acl.ResourcePhotos) || sess.NotRegistered())
+
+		// Allow visitors with directly shared photos to access albums containing those photos.
+		// The restriction WHERE clause below ensures only the shared photos are returned.
+		if scopeRestricted && frm.Scope != "" {
+			if photoUIDs := sess.SharedPhotoUIDs(); len(photoUIDs) > 0 {
+				var n int
+				if err = UnscopedDb().Table("photos_albums").
+					Where("album_uid = ? AND photo_uid IN (?) AND hidden = 0 AND missing = 0", album.AlbumUID, photoUIDs).
+					Count(&n).Error; err == nil && n > 0 {
+					scopeRestricted = false
+				}
+			}
+		}
+
+		if scopeRestricted ||
+			frm.Scope == "" && acl.Rules.Deny(acl.ResourcePhotos, aclRole, acl.ActionSearch) && !sess.HasShares() {
 			event.AuditErr([]string{sess.IP(), "session %s", "%s %s as %s", status.Denied}, sess.RefID, acl.ActionSearch.String(), string(acl.ResourcePhotos), aclRole)
 			return PhotoResults{}, 0, ErrForbidden
 		}
 
 		// Limit results for external users.
-		if frm.Scope == "" && acl.Rules.DenyAll(acl.ResourcePhotos, aclRole, acl.Permissions{acl.AccessAll, acl.AccessLibrary}) {
-			sharedAlbums := "photos.photo_uid IN (SELECT photo_uid FROM photos_albums WHERE hidden = 0 AND missing = 0 AND album_uid IN (?)) OR "
-
+		if acl.Rules.DenyAll(acl.ResourcePhotos, aclRole, acl.Permissions{acl.AccessAll, acl.AccessLibrary}) {
 			if sess.IsVisitor() || sess.NotRegistered() {
-				s = s.Where(sharedAlbums+"photos.published_at > ?", sess.SharedUIDs(), entity.Now())
-			} else if basePath := user.GetBasePath(); basePath == "" {
-				s = s.Where(sharedAlbums+"photos.created_by = ? OR photos.published_at > ?", sess.SharedUIDs(), user.UserUID, entity.Now())
-			} else {
-				s = s.Where(sharedAlbums+"photos.created_by = ? OR photos.published_at > ? OR photos.photo_path = ? OR photos.photo_path LIKE ?",
-					sess.SharedUIDs(), user.UserUID, entity.Now(), basePath, basePath+"/%")
+				sharedUIDs = sess.SharedUIDs()
+
+				if frm.Scope != "" && !sess.HasShare(frm.Scope) {
+					// Scoped album view via photo share: only return the visitor's directly shared photos.
+					s = s.Where("photos.photo_uid IN (?)", sess.SharedPhotoUIDs())
+				} else {
+					// Unscoped or direct album share: include photos in shared albums and directly shared photos.
+					sharedAlbums := "photos.photo_uid IN (SELECT photo_uid FROM photos_albums WHERE hidden = 0 AND missing = 0 AND album_uid IN (?)) OR "
+					s = s.Where("photos.photo_uid IN (?) OR "+sharedAlbums+"photos.published_at > ?", sharedUIDs, sharedUIDs, entity.Now())
+				}
+			} else if frm.Scope == "" {
+				sharedAlbums := "photos.photo_uid IN (SELECT photo_uid FROM photos_albums WHERE hidden = 0 AND missing = 0 AND album_uid IN (?)) OR "
+
+				if basePath := user.GetBasePath(); basePath == "" {
+					s = s.Where(sharedAlbums+"photos.created_by = ? OR photos.published_at > ?", sess.SharedUIDs(), user.UserUID, entity.Now())
+				} else {
+					s = s.Where(sharedAlbums+"photos.created_by = ? OR photos.published_at > ? OR photos.photo_path = ? OR photos.photo_path LIKE ?",
+						sess.SharedUIDs(), user.UserUID, entity.Now(), basePath, basePath+"/%")
+				}
 			}
 		}
 	}
@@ -473,13 +504,23 @@ func searchPhotos(frm form.SearchPhotos, sess *entity.Session, resultCols string
 		if frm.Review {
 			s = s.Where("photos.photo_quality < 3")
 		} else if frm.Quality != 0 && frm.Private == false {
-			s = s.Where("photos.photo_quality >= ?", frm.Quality)
+			if len(sharedUIDs) > 0 {
+				// Directly shared photos bypass the quality threshold.
+				s = s.Where("(photos.photo_quality >= ? OR photos.photo_uid IN (?))", frm.Quality, sharedUIDs)
+			} else {
+				s = s.Where("photos.photo_quality >= ?", frm.Quality)
+			}
 		}
 	}
 
 	// Filter private pictures.
 	if frm.Public {
-		s = s.Where("photos.photo_private = 0")
+		if len(sharedUIDs) > 0 {
+			// Directly shared photos bypass the private flag.
+			s = s.Where("(photos.photo_private = 0 OR photos.photo_uid IN (?))", sharedUIDs)
+		} else {
+			s = s.Where("photos.photo_private = 0")
+		}
 	} else if frm.Private {
 		s = s.Where("photos.photo_private = 1")
 	}

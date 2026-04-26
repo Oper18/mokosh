@@ -11,6 +11,9 @@ func (c *Config) UploadNSFW() bool {
 
 // UploadAllow returns the file extensions that users are allowed to upload.
 func (c *Config) UploadAllow() fs.ExtList {
+	if c.options.UploadAllow == "" {
+		return fs.NewExtList("jpg,jpeg,png,webp,heic,heif,svg,gif,tiff,bmp,avif")
+	}
 	return fs.NewExtList(c.options.UploadAllow)
 }
 

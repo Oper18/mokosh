@@ -1,10 +1,10 @@
-## PhotoPrism — OIDC Integration
+## Mokosh — OIDC Integration
 
 **Last Updated:** February 22, 2026
 
 ### Overview
 
-`internal/auth/oidc` implements PhotoPrism’s OpenID Connect (OIDC) Relying Party (RP) flow so users can sign in with third‑party identity providers. The package wraps the `zitadel/oidc` client to perform discovery, build the RP, redirect users to the provider, exchange codes for tokens, and retrieve profile claims in a predictable, testable way.
+`internal/auth/oidc` implements Mokosh’s OpenID Connect (OIDC) Relying Party (RP) flow so users can sign in with third‑party identity providers. The package wraps the `zitadel/oidc` client to perform discovery, build the RP, redirect users to the provider, exchange codes for tokens, and retrieve profile claims in a predictable, testable way.
 
 #### Constraints
 
@@ -23,7 +23,7 @@
 #### Non-Goals
 
 - Managing upstream identity provider configuration or enrollment.
-- Implementing a full OIDC Provider; PhotoPrism acts only as a Relying Party.
+- Implementing a full OIDC Provider; Mokosh acts only as a Relying Party.
 - Handling every custom claim set; extension hooks should live beside claim parsing code.
 
 ### Package Layout (Code Map)
@@ -70,13 +70,13 @@ The following features are supported by the current implementation:
 
 #### Integration Guide for Entra ID
 
-1. Register an app in Microsoft Entra ID (v2) or reuse your existing PhotoPrism registration. Note the instance ID and the application (client) ID.
+1. Register an app in Microsoft Entra ID (v2) or reuse your existing Mokosh registration. Note the instance ID and the application (client) ID.
 2. Redirect URI: add [`https://{hostname}/api/v1/oidc/redirect`](https://docs.photoprism.app/getting-started/advanced/openid-connect/#redirect-url).
 3. Token configuration → **Add optional claim** → **Token type** = ID (and Access if you prefer) → **Groups** → choose **Security groups**.
 4. Under “Emit groups as”, pick **Group name** (cloud-only) or **sAMAccountName** / **DNSDomainName\sAMAccountName** for synced AD; this makes tokens carry human-friendly names instead of GUIDs.
-5. If you keep **Group ID**, leave PhotoPrism config in GUID mode; if you emit names, set `PHOTOPRISM_OIDC_GROUP` / `PHOTOPRISM_OIDC_GROUP_ROLE` to those names (lowercase in config for consistency). When Microsoft signals group **overage** (too many groups to fit in the token), it sets `_claim_names.groups` and may omit groups entirely; PhotoPrism will currently block login if required groups are configured and no groups are present.
+5. If you keep **Group ID**, leave Mokosh config in GUID mode; if you emit names, set `PHOTOPRISM_OIDC_GROUP` / `PHOTOPRISM_OIDC_GROUP_ROLE` to those names (lowercase in config for consistency). When Microsoft signals group **overage** (too many groups to fit in the token), it sets `_claim_names.groups` and may omit groups entirely; Mokosh will currently block login if required groups are configured and no groups are present.
 6. Grant admin consent for the chosen scopes (at minimum `openid profile email`, plus `offline_access` if you need refresh tokens).
-7. Configure PhotoPrism (example `.env-oidc` with placeholder secrets):
+7. Configure Mokosh (example `.env-oidc` with placeholder secrets):
    ```
    PHOTOPRISM_OIDC_URI="https://login.microsoftonline.com/f8b10857-a7f2-49ba-b73c-6f619715f574/v2.0"
    PHOTOPRISM_OIDC_CLIENT="11111111-2222-3333-4444-555555555555"
@@ -85,26 +85,26 @@ The following features are supported by the current implementation:
    PHOTOPRISM_OIDC_GROUP="photoprism-admins, photoprism-users"        # names or GUIDs
    PHOTOPRISM_OIDC_GROUP_ROLE="photoprism-admins=admin, photoprism-users=user"
    ```
-8. Restart PhotoPrism; on login the service will:
+8. Restart Mokosh; on login the service will:
    - Read groups from ID token, then fall back to userinfo if absent.
    - Deny login if required groups are configured but none are present (and overage is signaled).
    - Apply the first matching group→role mapping; otherwise assign the fallback role.
 
 Please note:
 
-- Entra ID security groups are only supported in PhotoPrism® Pro.
+- Entra ID security groups are only supported in Mokosh Pro.
 - If tokens still contain GUIDs, revisit Token configuration → Groups and change “Emit groups as” to a name format; reissue tokens by signing out/in. Names must be unique in your instance for deterministic mapping.
-- Overage: when the `_claim_names.groups` marker is present and no groups are in the token, PhotoPrism cannot validate membership and will block login if `oidc-group` is set. (Graph-based resolution is described in the next section but is not yet implemented.)
+- Overage: when the `_claim_names.groups` marker is present and no groups are in the token, Mokosh cannot validate membership and will block login if `oidc-group` is set. (Graph-based resolution is described in the next section but is not yet implemented.)
 - For mixed environments, you can supply both names and GUIDs in `oidc-group` / `oidc-group-role`; all entries are normalized and deduplicated.
 
 #### Entra App Roles
 
 As an alternative to security groups, we may use *Microsoft/Entra App Roles* to provide a more business-friendly option if needed:
 
-- To implement this, PhotoPrism must read the `roles` claim, normalize it as with groups, and allow mapping by adding a new flag (e.g., `--oidc-role-claim=roles` or `--oidc-app-role=ROLE=photoprismRole`).
+- To implement this, Mokosh must read the `roles` claim, normalize it as with groups, and allow mapping by adding a new flag (e.g., `--oidc-role-claim=roles` or `--oidc-app-role=ROLE=photoprismRole`).
 - This would require an estimated 80–150 lines of code (LOC), including wiring and tests, without introducing new dependencies.
 - Once this feature is available, Entra admins can create app roles (e.g., `admin` or `viewer`) and assign them to users or groups in Entra.
-- PhotoPrism would then receive readable role strings in tokens, eliminating the need to rely on security group names or GUIDs.
+- Mokosh would then receive readable role strings in tokens, eliminating the need to rely on security group names or GUIDs.
 
 #### Microsoft Graph API
 
@@ -128,7 +128,7 @@ Implementation outline:
 
 Impact:
 
-- Allows administrators to configure PhotoPrism with recognizable group names instead of GUIDs.
+- Allows administrators to configure Mokosh with recognizable group names instead of GUIDs.
 - Makes log/debug output more readable and reduces reliance on Azure portal lookups for GUIDs.
 - Provides a path to honor group-based access when tokens exceed size limits and omit groups by default.
 

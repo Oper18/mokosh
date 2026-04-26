@@ -1,8 +1,8 @@
 @echo off
 
-Rem With Docker up and running, change to the directory where you want to install PhotoPrism,
+Rem With Docker up and running, change to the directory where you want to install Mokosh,
 Rem and then run the following commands in a terminal (command prompt) to download our
-Rem configuration examples and start PhotoPrism on your local PC:
+Rem configuration examples and start Mokosh on your local PC:
 Rem
 Rem   curl.exe -o install.bat https://dl.photoprism.app/docker/windows/install.bat
 Rem   install.bat
@@ -35,7 +35,7 @@ echo Pulling Docker images...
 docker compose pull
 
 echo:
-echo Starting PhotoPrism and MariaDB...
+echo Starting Mokosh and MariaDB...
 
 docker compose up -d
 timeout /t 20

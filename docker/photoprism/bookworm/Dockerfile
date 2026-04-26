@@ -1,7 +1,7 @@
 ##################################################### BUILD STAGE ######################################################
 FROM photoprism/develop:bookworm AS build
 
-# Copyright © 2018 - 2025 PhotoPrism UG. All rights reserved.
+# Copyright © 2018 - 2025 Mokosh. All rights reserved.
 #
 # Questions? Email us at hello@photoprism.app or visit our website to learn
 # more about our team, products and services: https://www.photoprism.app/
@@ -23,13 +23,13 @@ FROM photoprism/develop:bookworm-slim
 
 # Add Open Container Initiative (OCI) annotations.
 # See: https://github.com/opencontainers/image-spec/blob/main/annotations.md
-LABEL org.opencontainers.image.title="PhotoPrism® (Debian 12)"
+LABEL org.opencontainers.image.title="Mokosh (Debian 12)"
 LABEL org.opencontainers.image.description="Debian 12 (Bookworm)"
 LABEL org.opencontainers.image.url="https://hub.docker.com/r/photoprism/photoprism"
 LABEL org.opencontainers.image.source="https://github.com/photoprism/photoprism"
 LABEL org.opencontainers.image.documentation="https://docs.photoprism.app/getting-started/"
-LABEL org.opencontainers.image.authors="PhotoPrism UG <hello@photoprism.app>"
-LABEL org.opencontainers.image.vendor="PhotoPrism UG"
+LABEL org.opencontainers.image.authors="Mokosh <hello@photoprism.app>"
+LABEL org.opencontainers.image.vendor="Mokosh"
 
 # Declare build parameters.
 ARG TARGETARCH

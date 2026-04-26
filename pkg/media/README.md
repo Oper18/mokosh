@@ -1,4 +1,4 @@
-## PhotoPrism — Media Package
+## Mokosh — Media Package
 
 **Last Updated:** February 14, 2026
 
@@ -6,7 +6,7 @@
 
 [iOS Live Photos](https://developer.apple.com/live-photos/) consist of a JPEG/HEIC image and a QuickTime AVC/HEVC video, which are both required for viewing.
 
-We recommend [using an app like PhotoSync](https://docs.photoprism.app/user-guide/sync/mobile-devices/#photosync) to upload Live Photos to PhotoPrism, since the iOS web upload usually only submits the HEIC image file without the video.
+We recommend [using an app like PhotoSync](https://docs.photoprism.app/user-guide/sync/mobile-devices/#photosync) to upload Live Photos to Mokosh, since the iOS web upload usually only submits the HEIC image file without the video.
 
 ### Android Devices
 

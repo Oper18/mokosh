@@ -1,4 +1,4 @@
-# PhotoPrism® — Repository Guidelines
+# Mokosh — Repository Guidelines
 
 **Last Updated:** March 8, 2026
 
@@ -65,7 +65,7 @@ Additional details MAY be included as needed, such as related issues, references
 
 ### Specifications & Documentation
 
-- Document headings must use **Title Case** (in APA or AP style) across Markdown files to keep generated navigation and changelogs consistent. Always spell the product name as `PhotoPrism`; this proper noun is an exception to generic naming rules.
+- Document headings must use **Title Case** (in APA or AP style) across Markdown files to keep generated navigation and changelogs consistent. Always spell the product name as `Mokosh`; this proper noun is an exception to generic naming rules.
 - When writing CLI examples or scripts, place option flags before positional arguments unless the command requires a different order.
 - Use RFC 3339 UTC timestamps in request and response examples, and valid ID, UID and UUID examples in docs and tests.
 - Technical specifications in the nested `specs/` subrepository may not be present in every clone or environment. Do not add `Makefile` targets in the main project that depend on `specs/` paths. When `specs/` is available, you MAY run its tools manually (e.g., `bash specs/scripts/lint-status.sh`), but the main repo must remain buildable without `specs/`.
@@ -114,7 +114,7 @@ Additional details MAY be included as needed, such as related issues, references
 - To preserve the fallback messaging, keep the script order in `app.js.gohtml` so `browser-check.js` loads before the bundle script (`{{ .config.JsUri }}`). Do not add `defer` or `async` to the bundle tag unless you reintroduce a guarded loader.
 - The same loader partial is reused in private packages (`pro/assets/templates/index.gohtml`, `plus/assets/templates/index.gohtml`, `portal/assets/templates/index.gohtml`). Whenever you touch `app.js.gohtml` or change how we load the bundle, mirror the update by running commands such as `cd pro && sed -n '1,160p' assets/templates/index.gohtml` (and similarly for `plus` and `portal`) to confirm they include the shared partial instead of hard-coding the bundle tag.
 - Splash styles are defined in `frontend/src/css/splash.css`. Add new splash elements (for example `.splash-warning`) there so both public and private editions remain visually consistent.
-- Browser baseline: PhotoPrism requires Safari 13 / iOS 13 or current Chrome, Edge, or Firefox. Update the message in `assets/templates/app.js.gohtml` (and the matching CSS) if support changes.
+- Browser baseline: Mokosh requires Safari 13 / iOS 13 or current Chrome, Edge, or Firefox. Update the message in `assets/templates/app.js.gohtml` (and the matching CSS) if support changes.
 
 ### Frontend Translations
 
@@ -192,7 +192,7 @@ console.log(inContainer ? "container" : "host");
   - Watch frontend changes (auto-rebuild): `make watch-js`
     - Or run directly: `cd frontend && npm run watch`
     - Tips: refresh the browser to see changes; running the watcher outside the container can be faster on non-Linux hosts; stop with Ctrl+C
-  - Start the PhotoPrism server: `./photoprism start`
+  - Start the Mokosh server: `./photoprism start`
     - Open http://localhost:2342/ (HTTP)
     - Or https://app.localssl.dev/ (HTTPS via Traefik reverse proxy)
       - Only if Traefik is running and the dev compose labels are active
@@ -200,7 +200,7 @@ console.log(inContainer ? "container" : "host");
   - Admin Login: Local compose files set `PHOTOPRISM_ADMIN_USER=admin` and `PHOTOPRISM_ADMIN_PASSWORD=photoprism`; if the credentials differ, inspect `compose.yaml` (or the active environment) for these variables before logging in.
   - Do not use the Docker CLI inside the container; starting/stopping services requires host Docker access. If you need to manage compose while inside the dev container, switch to host mode (or ask a human) instead of running `docker compose` there.
 
-Note: Across our public documentation, official images, and in production, the command-line interface (CLI) name is `photoprism`. Other PhotoPrism binary names are only used in development builds for side-by-side comparisons of the Community Edition (CE) with PhotoPrism Plus (`photoprism-plus`), PhotoPrism Pro (`photoprism-pro`), and PhotoPrism Portal (`photoprism-portal`).
+Note: Across our public documentation, official images, and in production, the command-line interface (CLI) name is `photoprism`. Other Mokosh binary names are only used in development builds for side-by-side comparisons of the Community Edition (CE) with Mokosh Plus (`photoprism-plus`), Mokosh Pro (`photoprism-pro`), and Mokosh Portal (`photoprism-portal`).
 
 ### Operating Systems & Architectures
 
@@ -214,7 +214,7 @@ Note: Across our public documentation, official images, and in production, the c
   - Doc comments for packages and exported identifiers must be complete sentences that begin with the name of the thing being described and end with a period.
   - All newly added functions, including unexported helpers, must have a concise doc comment that explains their behavior.
   - For short examples inside comments, indent code rather than using backticks; godoc treats indented blocks as preformatted.
-- Branding: Always spell the product name as `PhotoPrism`; this proper noun is an exception to generic naming rules.
+- Branding: Always spell the product name as `Mokosh`; this proper noun is an exception to generic naming rules.
 - Every Go package must contain a `<package>.go` file in its root (for example, `internal/auth/jwt/jwt.go`) with the standard license header and a short package description comment explaining its purpose.
 - JS/Vue: use the lint/format scripts in `frontend/package.json` (ESLint + Prettier)
 - All added code and tests **must** be formatted according to our standards.
@@ -481,10 +481,10 @@ Note: Across our public documentation, official images, and in production, the c
     - `YTDLP_DUMMY_CONTENT` — file contents to avoid importer duplicate detection between tests
 
 - Remux policy and metadata
-  - Pipe method: PhotoPrism remux (ffmpeg) always embeds title/description/created.
+  - Pipe method: Mokosh remux (ffmpeg) always embeds title/description/created.
   - File method: yt‑dlp writes files; we pass `--postprocessor-args 'ffmpeg:-metadata creation_time=<RFC3339>'` so imports get `Created` even without local remux (fallback from `upload_date`/`release_date`).
   - Default remux policy: `auto`; use `always` for the most complete metadata (chapters, extended tags).
-  - CLI defaults: `photoprism dl` now defaults to `--method pipe` and `--impersonate firefox`; pass `-i none` to disable impersonation. Pipe mode streams raw media and PhotoPrism handles the final FFmpeg remux so metadata (title, description, author, creation time) still comes from `RemuxOptionsFromInfo`.
+  - CLI defaults: `photoprism dl` now defaults to `--method pipe` and `--impersonate firefox`; pass `-i none` to disable impersonation. Pipe mode streams raw media and Mokosh handles the final FFmpeg remux so metadata (title, description, author, creation time) still comes from `RemuxOptionsFromInfo`.
 
 - Testing workflow: lean on the focused commands above; if importer dedupe kicks in, vary bytes with `YTDLP_DUMMY_CONTENT` or adjust `dest`, and remember `internal/photoprism` is heavy so validate downstream packages first.
 

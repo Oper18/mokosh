@@ -1,10 +1,10 @@
-## PhotoPrism — HTTP Server
+## Mokosh — HTTP Server
 
 **Last Updated:** March 4, 2026
 
 ### Overview
 
-`internal/server` wires Gin, middleware, and configuration into the PhotoPrism HTTP/HTTPS/WebDAV servers. It owns startup/shutdown orchestration, route registration, and helpers for recovery/logging. Subpackages (`process`, `limits`, etc.) are kept lightweight so CLI commands and workers can embed the same server behavior without duplicating boilerplate.
+`internal/server` wires Gin, middleware, and configuration into the Mokosh HTTP/HTTPS/WebDAV servers. It owns startup/shutdown orchestration, route registration, and helpers for recovery/logging. Subpackages (`process`, `limits`, etc.) are kept lightweight so CLI commands and workers can embed the same server behavior without duplicating boilerplate.
 
 #### Constraints
 

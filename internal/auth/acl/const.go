@@ -77,6 +77,7 @@ const (
 	ResourceVision    Resource = "vision"
 	ResourceCluster   Resource = "cluster"
 	ResourceFeedback  Resource = "feedback"
+	ResourceTeams     Resource = "teams"
 	ResourceDefault   Resource = "default"
 )
 

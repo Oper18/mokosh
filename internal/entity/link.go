@@ -27,6 +27,7 @@ type Link struct {
 	ShareUID    string    `gorm:"type:VARBINARY(42);unique_index:idx_links_uid_token;" json:"ShareUID" yaml:"ShareUID"`
 	ShareSlug   string    `gorm:"type:VARBINARY(160);index;" json:"Slug" yaml:"Slug,omitempty"`
 	LinkToken   string    `gorm:"type:VARBINARY(160);unique_index:idx_links_uid_token;" json:"Token" yaml:"Token,omitempty"`
+	LinkName    string    `gorm:"size:160;" json:"Name" yaml:"Name,omitempty"`
 	LinkExpires int       `json:"Expires" yaml:"Expires,omitempty"`
 	LinkViews   uint      `json:"Views" yaml:"-"`
 	MaxViews    uint      `json:"MaxViews" yaml:"-"`

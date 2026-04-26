@@ -297,8 +297,9 @@ func (m *Session) LogIn(frm form.Login, c *gin.Context) (err error) {
 		}
 
 		// Upgrade the session user role to visitor if a valid share token has been provided.
+		// Use the per-link visitor user when one exists, so reactions carry the right identity.
 		if user.IsUnknown() {
-			user = &Visitor
+			user = visitorForToken(frm.Token)
 			event.AuditDebug([]string{m.IP(), "session %s", "role upgraded to %s"}, m.RefID, user.AclRole().String())
 			expires := UTC().Add(time.Hour * 24)
 			m.Expires(expires)

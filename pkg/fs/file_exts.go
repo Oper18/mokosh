@@ -8,7 +8,7 @@ import (
 // FileExtensions maps file extensions to standard formats
 type FileExtensions map[string]Type
 
-// Extensions contains the filename extensions of file formats known to PhotoPrism.
+// Extensions contains the filename extensions of file formats known to Mokosh.
 var Extensions = FileExtensions{
 	ExtZip:      ArchiveZip,
 	ExtPDF:      DocumentPDF, // .pdf

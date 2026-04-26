@@ -1,5 +1,5 @@
 <template>
-  <div id="photoprism" :class="['theme-' + themeName]">
+  <div id="mokosh" :class="['theme-' + themeName]">
     <p-loading-bar height="4"></p-loading-bar>
 
     <v-app :class="appClass">
@@ -8,6 +8,8 @@
       <v-main>
         <router-view></router-view>
       </v-main>
+
+      <p-fab></p-fab>
     </v-app>
 
     <p-dialogs></p-dialogs>
@@ -20,6 +22,7 @@ import PLoadingBar from "component/loading-bar.vue";
 import PNotify from "component/notify.vue";
 import PNavigation from "component/navigation.vue";
 import PDialogs from "component/dialogs.vue";
+import PFab from "component/fab.vue";
 
 export default {
   name: "App",
@@ -28,6 +31,7 @@ export default {
     PNotify,
     PNavigation,
     PDialogs,
+    PFab,
   },
   data() {
     return {

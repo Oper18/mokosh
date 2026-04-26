@@ -1,4 +1,4 @@
-## PhotoPrism — Glossary
+## Mokosh — Glossary
 
 **Last Updated:** February 23, 2026
 
@@ -16,11 +16,11 @@
 - **client** — OAuth/API client identity and credentials (`ClientID`, `ClientSecret`), and broadly a caller of an API.
 - **cluster domain** — DNS domain used to derive cluster defaults (for example portal/instance URLs).
 - **cluster UUID** — stable cluster identifier used by provisioning and cluster metadata.
-- **instance** — PhotoPrism runtime with role `instance` (a cluster member serving UI/API/media features).
+- **instance** — Mokosh runtime with role `instance` (a cluster member serving UI/API/media features).
 - **Join Token** — bootstrap bearer token used for initial registration (`/api/v1/cluster/nodes/register`).
 - **node** — technical identifier used in API/config contracts (for example `/api/v1/cluster/nodes`, `NodeName`, `PHOTOPRISM_NODE_*`, `config/node/...` paths).
-- **portal** — PhotoPrism runtime with role `portal`, providing cluster control-plane APIs and routing.
-- **service** — PhotoPrism runtime with role `service` (non-instance cluster member focused on service workloads).
+- **portal** — Mokosh runtime with role `portal`, providing cluster control-plane APIs and routing.
+- **service** — Mokosh runtime with role `service` (non-instance cluster member focused on service workloads).
 - **SiteUrl** — canonical public URL/origin for an instance.
 - **tenant** — shared-domain routing ownership label used in path-based URLs such as `/i/<tenant>/...`; typically maps to a registered instance name.
 

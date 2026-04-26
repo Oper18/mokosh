@@ -91,7 +91,7 @@ func (c *Config) SendFeedback(frm form.Feedback) (err error) {
 	if c.UserAgent != "" {
 		req.Header.Set(header.UserAgent, c.UserAgent)
 	} else {
-		req.Header.Set(header.UserAgent, "PhotoPrism/Test")
+		req.Header.Set(header.UserAgent, "Mokosh/Test")
 	}
 
 	req.Header.Add(header.AcceptLanguage, frm.UserLocales)

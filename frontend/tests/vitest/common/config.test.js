@@ -146,7 +146,7 @@ describe("common/config", () => {
   });
 
   it("should return app about", () => {
-    expect(defaultConfig.getAbout()).toBe("PhotoPrism® CE");
+    expect(defaultConfig.getAbout()).toBe("Mokosh CE");
   });
 
   it("honors forced themes when setting theme", () => {

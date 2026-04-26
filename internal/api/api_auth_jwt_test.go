@@ -33,7 +33,7 @@ func TestAuthAnyJWT(t *testing.T) {
 		c, _ := gin.CreateTestContext(w)
 		req, _ := http.NewRequest(http.MethodGet, "/api/v1/cluster/theme", nil)
 		req.Header.Set("Authorization", "Bearer "+token)
-		req.Header.Set(header.UserAgent, "PhotoPrism Portal/1.0")
+		req.Header.Set(header.UserAgent, "Mokosh Portal/1.0")
 		req.RemoteAddr = "192.0.2.10:12345"
 		c.Request = req
 
@@ -48,7 +48,7 @@ func TestAuthAnyJWT(t *testing.T) {
 		assert.Equal(t, authn.ProviderAccessToken.String(), session.AuthProvider)
 		assert.Equal(t, authn.GrantJwtBearer.String(), session.GrantType)
 		assert.Equal(t, "192.0.2.10", session.ClientIP)
-		assert.Equal(t, "PhotoPrism Portal/1.0", session.UserAgent)
+		assert.Equal(t, "Mokosh Portal/1.0", session.UserAgent)
 		assert.Equal(t, token, session.AuthToken())
 		assert.True(t, strings.HasPrefix(session.AuthID, "jwt"))
 		assert.Equal(t, session.AuthID, session.RefID)
@@ -79,7 +79,7 @@ func TestAuthAnyJWT(t *testing.T) {
 		c, _ := gin.CreateTestContext(w)
 		req, _ := http.NewRequest(http.MethodGet, "/api/v1/cluster/theme", nil)
 		req.Header.Set("Authorization", "Bearer "+token)
-		req.Header.Set(header.UserAgent, "PhotoPrism Portal/1.0")
+		req.Header.Set(header.UserAgent, "Mokosh Portal/1.0")
 		req.RemoteAddr = "192.0.2.50:4567"
 		c.Request = req
 
@@ -113,7 +113,7 @@ func TestAuthAnyJWT(t *testing.T) {
 		c, _ := gin.CreateTestContext(w)
 		req, _ := http.NewRequest(http.MethodGet, "/api/v1/config", nil)
 		req.Header.Set("Authorization", "Bearer "+token)
-		req.Header.Set(header.UserAgent, "PhotoPrism Portal/1.0")
+		req.Header.Set(header.UserAgent, "Mokosh Portal/1.0")
 		req.RemoteAddr = "192.0.2.51:1234"
 		c.Request = req
 

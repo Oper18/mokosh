@@ -23,7 +23,7 @@ ENV TF_CPP_MIN_LOG_LEVEL=4 \
     PHOTOPRISM_PNG_SIZE=4096 \
     PHOTOPRISM_APP_NAME="Demo" \
     PHOTOPRISM_APP_ICON="favicon" \
-    PHOTOPRISM_SITE_TITLE="PhotoPrism" \
+    PHOTOPRISM_SITE_TITLE="Mokosh" \
     PHOTOPRISM_SITE_CAPTION="Demo" \
     PHOTOPRISM_SITE_DESCRIPTION="AI-Powered Photos App for the Decentralized Web"
 
@@ -40,5 +40,5 @@ RUN photoprism restore -a && \
     rm /photoprism/storage/config/*.yml && \
     chmod -R a+rwX /photoprism/originals /photoprism/storage
 
-# Start PhotoPrism server
+# Start Mokosh server
 CMD ["photoprism", "--public", "start"]

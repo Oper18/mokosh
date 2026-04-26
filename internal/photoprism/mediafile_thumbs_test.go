@@ -194,7 +194,7 @@ func TestMediaFile_GenerateThumbnails(t *testing.T) {
 		assert.FileExists(t, thumbFilename)
 		assert.NoError(t, m.GenerateThumbnails(thumbsPath, false))
 	})
-	t.Run("PhotoPrismPng", func(t *testing.T) {
+	t.Run("MokoshPng", func(t *testing.T) {
 		m, err := NewMediaFile("testdata/photoprism.png")
 
 		if err != nil {

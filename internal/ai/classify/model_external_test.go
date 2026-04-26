@@ -199,7 +199,7 @@ func TestExternalModel_AllModels(t *testing.T) {
 }
 
 func downloadLabels(t *testing.T, url, dst string) {
-	resp, err := http.Get(url) //nolint:gosec // test downloads from trusted PhotoPrism asset host
+	resp, err := http.Get(url) //nolint:gosec // test downloads from trusted Mokosh asset host
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -234,7 +234,7 @@ func downloadRemoteModel(t *testing.T, url, tmpPath string) (model string) {
 		t.Fatal(err)
 	}
 
-	resp, err := http.Get(url) //nolint:gosec // test downloads from trusted PhotoPrism asset host
+	resp, err := http.Get(url) //nolint:gosec // test downloads from trusted Mokosh asset host
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -1,4 +1,4 @@
-## PhotoPrism — Ordered List Package
+## Mokosh — Ordered List Package
 
 **Last Updated:** November 17, 2025
 

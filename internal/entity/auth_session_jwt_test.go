@@ -33,7 +33,7 @@ func TestNewSessionFromJWT(t *testing.T) {
 	}
 
 	expectedIP := "192.0.2.100"
-	expectedAgent := "PhotoPrism Portal (1.2510.29)"
+	expectedAgent := "Mokosh Portal (1.2510.29)"
 
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)

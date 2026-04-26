@@ -1,4 +1,4 @@
-## PhotoPrism — Download Helpers
+## Mokosh — Download Helpers
 
 **Last Updated:** January 28, 2026
 
@@ -7,8 +7,8 @@
 This package provides thin wrappers around `yt-dlp`, which the `photoprism dl` command uses for metadata discovery and downloading.
 
 It currently supports two invocation methods:
-  - Pipe: stream to stdout, PhotoPrism writes a file and remuxes with ffmpeg to ensure MP4 + embedded metadata.
-  - File: `yt-dlp` writes files to disk using `--output`; PhotoPrism captures final paths via `--print after_move:filepath` and may remux when needed.
+  - Pipe: stream to stdout, Mokosh writes a file and remuxes with ffmpeg to ensure MP4 + embedded metadata.
+  - File: `yt-dlp` writes files to disk using `--output`; Mokosh captures final paths via `--print after_move:filepath` and may remux when needed.
 
 ### Auth & Headers
 
@@ -35,7 +35,7 @@ It currently supports two invocation methods:
   - Our CLI exposes this as `photoprism dl --format-sort` (alias `-s`). When omitted, pipe mode uses `lang,quality,res,fps,codec:avc:m4a,channels,size,br,asr,proto,ext,hasaud,source,id`; file mode leaves sorting to yt-dlp defaults.
 - **Metadata & Post-processing**
   - `--embed-metadata` writes tags (title, artist, comment) via ffmpeg/mutagen.
-  - `--postprocessor-args "ffmpeg:-metadata creation_time=<RFC3339>"` lets us inject timestamps when skipping local remux; PhotoPrism sets this when `CreatedFromInfo` yields a value.
+  - `--postprocessor-args "ffmpeg:-metadata creation_time=<RFC3339>"` lets us inject timestamps when skipping local remux; Mokosh sets this when `CreatedFromInfo` yields a value.
   - `--merge-output-format mp4` and `--remux-video mp4` keep downloads MP4-friendly when yt-dlp has to join streams.
 - **Other frequently used knobs**
   - `--download-sections`, `--add-header`, `--cookies`, `--proxy`, `--impersonate` – passed through via `dl.Options` when callers need them.

@@ -28,7 +28,7 @@ Contribution Agreement:
 After submitting your first pull request, you will be asked to confirm our contribution agreement. This allows us to safely use your Contribution in all our projects without risking unexpected legal disputes or having to repeatedly ask for permission.
 The agreement is solely for our protection and that of our users. It does not grant us exclusive rights to your code.
 
-PhotoPrism UG ("PhotoPrism", "we" or "us") hereby confirms to you that, to the fullest extent permitted by applicable law, this Contribution is provided "AS IS" WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OR CONDITIONS OF NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE. You have no obligation to provide support, maintenance, or other services for your Contribution.
+Mokosh ("Mokosh", "we" or "us") hereby confirms to you that, to the fullest extent permitted by applicable law, this Contribution is provided "AS IS" WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OR CONDITIONS OF NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE. You have no obligation to provide support, maintenance, or other services for your Contribution.
 
 Thank you very much! 🌈💎✨
 -->

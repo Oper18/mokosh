@@ -57,6 +57,9 @@
         :open-location="openLocation"
         :is-shared-view="isShared"
       ></p-photo-view-cards>
+      <p class="text-caption text-center text-medium-emphasis py-3">
+        Powered by <a href="https://github.com/Oper18/mokosh" target="_blank" rel="noopener" class="text-link">GitHub</a>
+      </p>
     </div>
   </div>
 </template>

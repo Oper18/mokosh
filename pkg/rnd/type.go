@@ -11,7 +11,7 @@ const (
 	TypeMixed Type = "mixed"
 	// TypeUUID identifies standard UUID strings.
 	TypeUUID Type = "UUID"
-	// TypeUID identifies PhotoPrism UID strings.
+	// TypeUID identifies Mokosh UID strings.
 	TypeUID Type = "UID"
 	// TypeRefID identifies reference IDs (RID).
 	TypeRefID Type = "RID"

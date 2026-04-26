@@ -1,7 +1,7 @@
 version: 3
 
 project:
-  name: "PhotoPrism"
+  name: "Mokosh"
   id: "github.com/photoprism/photoprism"
   url: "https://github.com/photoprism/photoprism"
   link: "https://www.photoprism.app/"

@@ -2071,8 +2071,8 @@ msgid "Location"
 msgstr "Vị trí"
 
 #: src/page/library/errors.vue:74
-msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
-msgstr "Thông báo nhật ký xuất hiện ở đây bất cứ khi nào PhotoPrism gặp phải các tệp bị hỏng hoặc có các sự cố tiềm ẩn khác."
+msgid "Log messages appear here whenever Mokosh comes across broken files, or there are other potential issues."
+msgstr "Thông báo nhật ký xuất hiện ở đây bất cứ khi nào Mokosh gặp phải các tệp bị hỏng hoặc có các sự cố tiềm ẩn khác."
 
 #: src/component/navigation.vue:320 src/component/navigation.vue:585
 #: src/component/navigation.vue:698
@@ -2415,8 +2415,8 @@ msgid "Note:"
 msgstr "Ghi chú:"
 
 #: src/component/service/add.vue:60
-msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
-msgstr "Lưu ý: Chỉ các máy chủ WebDAV, như Nextcloud hoặc PhotoPrism, mới có thể được định cấu hình làm dịch vụ từ xa để sao lưu và tải tệp lên."
+msgid "Note: Only WebDAV servers, like Nextcloud or Mokosh, can be configured as remote service for backup and file upload."
+msgstr "Lưu ý: Chỉ các máy chủ WebDAV, như Nextcloud hoặc Mokosh, mới có thể được định cấu hình làm dịch vụ từ xa để sao lưu và tải tệp lên."
 
 #: src/component/photo/edit/details.vue:376
 msgid "Notes"
@@ -2645,12 +2645,12 @@ msgid "Photo"
 msgstr "hình chụp"
 
 #: src/page/about/about.vue:83 src/page/about/about.vue:65
-msgid "PhotoPrism is 100% self-funded and independent."
-msgstr "PhotoPrism được tự tài trợ 100% và độc lập."
+msgid "Mokosh is 100% self-funded and independent."
+msgstr "Mokosh được tự tài trợ 100% và độc lập."
 
 #: src/page/about/about.vue:42 src/page/about/about.vue:28
-msgid "PhotoPrism+ Membership"
-msgstr "PhotoPrism+ Tư cách thành viên"
+msgid "Mokosh+ Membership"
+msgstr "Mokosh+ Tư cách thành viên"
 
 #: src/app/routes.js:178
 msgid "Photos"
@@ -2754,8 +2754,8 @@ msgid "Prevent database and album backups as well as YAML sidecar files from bei
 msgstr "Ngăn chặn việc tạo các bản sao lưu cơ sở dữ liệu và album cũng như các tệp sidecar YAML."
 
 #: src/page/settings/advanced.vue:95
-msgid "Prevent other apps from accessing PhotoPrism as a shared network drive."
-msgstr "Ngăn các ứng dụng khác truy cập PhotoPrism dưới dạng ổ đĩa mạng chung."
+msgid "Prevent other apps from accessing Mokosh as a shared network drive."
+msgstr "Ngăn các ứng dụng khác truy cập Mokosh dưới dạng ổ đĩa mạng chung."
 
 #: src/component/photo/edit/files.vue:38
 msgid "Preview"
@@ -3534,8 +3534,8 @@ msgstr "Cảm ơn sự hỗ trợ của bạn!"
 
 #: src/page/about/about.vue:33 src/page/about/about.vue:34
 #: src/page/about/about.vue:18
-msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
-msgstr "Đó là lý do tại sao PhotoPrism được xây dựng từ đầu để chạy ở bất cứ nơi nào bạn cần mà không ảnh hưởng đến quyền tự do, quyền riêng tư hoặc chức năng."
+msgid "That's why Mokosh was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
+msgstr "Đó là lý do tại sao Mokosh được xây dựng từ đầu để chạy ở bất cứ nơi nào bạn cần mà không ảnh hưởng đến quyền tự do, quyền riêng tư hoặc chức năng."
 
 #: src/page/library/index.vue:72
 msgid "The index currently contains %{n} hidden files."
@@ -3949,14 +3949,14 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: src/component/settings/webdav.vue:19
-msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
-msgstr "Máy khách WebDAV có thể kết nối với PhotoPrism bằng URL sau:"
+msgid "WebDAV clients can connect to Mokosh using the following URL:"
+msgstr "Máy khách WebDAV có thể kết nối với Mokosh bằng URL sau:"
 
 #: src/page/settings/services.vue:63
-msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. "
+msgid "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to Mokosh. "
 msgstr ""
 "Các máy khách WebDAV, như Windows Explorer của Microsoft hoặc Finder của Apple, có thể kết nối trực tiếp với\n"
-"          PhotoPrism."
+"          Mokosh."
 
 #: src/component/service/upload.vue:16 src/component/share/dialog.vue:123
 msgid "WebDAV Upload"
@@ -4381,8 +4381,8 @@ msgstr "Lưu trữ"
 #~ msgid "Estimates"
 #~ msgstr "ước tính"
 
-#~ msgid "PhotoPrism has been updated…"
-#~ msgstr "PhotoPrism đã được cập nhật…"
+#~ msgid "Mokosh has been updated…"
+#~ msgstr "Mokosh đã được cập nhật…"
 
 #~ msgid "Album Name"
 #~ msgstr "Tên album"
@@ -4459,7 +4459,7 @@ msgstr "Lưu trữ"
 
 #~ msgid ""
 #~ "WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to\n"
-#~ "          PhotoPrism."
+#~ "          Mokosh."
 #~ msgstr ""
 #~ "Các máy khách WebDAV, như Windows Explorer của Microsoft hoặc Finder của Apple, có thể kết nối trực tiếp với\n"
-#~ "          PhotoPrism."
+#~ "          Mokosh."

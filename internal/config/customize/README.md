@@ -1,10 +1,10 @@
-## PhotoPrism — Customize Package
+## Mokosh — Customize Package
 
 **Last Updated:** November 21, 2025
 
 ### Overview
 
-The `customize` package defines user-facing configuration defaults for PhotoPrism’s Web UI, search, maps, imports, indexing, and feature flags. The settings are assembled by `NewDefaultSettings()` / `NewSettings()` and serialized through YAML so they can be stored or loaded at runtime.
+The `customize` package defines user-facing configuration defaults for Mokosh’s Web UI, search, maps, imports, indexing, and feature flags. The settings are assembled by `NewDefaultSettings()` / `NewSettings()` and serialized through YAML so they can be stored or loaded at runtime.
 
 ### Feature Defaults
 

@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-LABEL maintainer="PhotoPrism UG <hello@photoprism.app>"
+LABEL maintainer="Mokosh <hello@photoprism.app>"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TMP=/tmp

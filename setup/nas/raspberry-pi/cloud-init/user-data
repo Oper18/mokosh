@@ -22,7 +22,7 @@ packages:
 # Install Docker Engine (latest version)
 runcmd:
   # Print welcome message
-  - printf "\e[0s;35m[SETUP] Starting PhotoPrism installation on Raspberry Pi...\e[0m\n"
+  - printf "\e[0s;35m[SETUP] Starting Mokosh installation on Raspberry Pi...\e[0m\n"
   
   # Uninstall old versions if they exist
   - printf "\e[0;35m[SETUP] Removing old Docker versions if present...\e[0m\n"
@@ -49,8 +49,8 @@ runcmd:
   - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   - printf "\e[0;35m[SETUP] ✓ Docker Engine installed\e[0m\n"
 
-  # Create directories for PhotoPrism and Traefik
-  - printf "\e[0;35m[SETUP] Creating directory structure for PhotoPrism...\e[0m\n"
+  # Create directories for Mokosh and Traefik
+  - printf "\e[0;35m[SETUP] Creating directory structure for Mokosh...\e[0m\n"
   - mkdir -p /opt/photoprism/photos
   - mkdir -p /opt/photoprism/storage
   - mkdir -p /opt/photoprism/database
@@ -66,7 +66,7 @@ runcmd:
   - chmod -R ug+rwX,o-rwx /opt/photoprism/import
   - chmod -R ug+rwX,o-rwx /opt/photoprism/originals
   - chmod -R ug+rwX,o-rwx /opt/photoprism/photos
-  - printf "\e[0;35m[SETUP] ✓ PhotoPrism directory structure created\e[0m\n"
+  - printf "\e[0;35m[SETUP] ✓ Mokosh directory structure created\e[0m\n"
 
   
   # Create mount points for external drives
@@ -127,12 +127,12 @@ runcmd:
   - systemctl enable avahi-daemon
   - printf "\e[0;35m[SETUP] ✓ Services enabled\e[0m\n"
   
-  # Add a service to start PhotoPrism on boot
-  - printf "\e[0;35m[SETUP] Creating PhotoPrism service...\e[0m\n"
+  # Add a service to start Mokosh on boot
+  - printf "\e[0;35m[SETUP] Creating Mokosh service...\e[0m\n"
   - |
     cat > /etc/systemd/system/photoprism.service << 'EOF'
     [Unit]
-    Description=PhotoPrism Service
+    Description=Mokosh Service
     After=docker.service network-online.target
     Requires=docker.service network-online.target
     
@@ -146,13 +146,13 @@ runcmd:
     [Install]
     WantedBy=multi-user.target
     EOF
-  - printf "\e[0;35m[SETUP] ✓ PhotoPrism service created\e[0m\n"
+  - printf "\e[0;35m[SETUP] ✓ Mokosh service created\e[0m\n"
   
-  # Enable PhotoPrism service
-  - printf "\e[0;35m[SETUP] Enabling and starting PhotoPrism service...\e[0m\n"
+  # Enable Mokosh service
+  - printf "\e[0;35m[SETUP] Enabling and starting Mokosh service...\e[0m\n"
   - systemctl enable photoprism.service
   - systemctl start photoprism.service
-  - printf "\e[0;35m[SETUP] ✓ PhotoPrism service started\e[0m\n"
+  - printf "\e[0;35m[SETUP] ✓ Mokosh service started\e[0m\n"
   
   # Configure Avahi for .local domain
   - printf "\e[0;35m[SETUP] Restarting and configuring Avahi for .local domain...\e[0m\n"
@@ -169,7 +169,7 @@ runcmd:
     cat > /etc/issue << EOF
     
                                                                    
-      Welcome to PhotoPrism Pi!                                    
+      Welcome to Mokosh Pi!                                    
                                                                    
       You should soon be able to access the web interface
       by navigating to one of the following URLs:
@@ -199,7 +199,7 @@ write_files:
     permissions: '0644'
     content: |
       
-      Welcome to PhotoPrism Pi!                                   
+      Welcome to Mokosh Pi!                                   
       
       You should soon be able to access the web interface
       by navigating to one of the following URLs:
@@ -398,7 +398,7 @@ write_files:
 # Configure users
 users:
   - name: pi
-    gecos: PhotoPrism User
+    gecos: Mokosh User
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: adm,dialout,cdrom,floppy,sudo,audio,dip,video,plugdev,netdev,docker
     shell: /bin/bash

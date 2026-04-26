@@ -106,8 +106,8 @@ func Shortcuts(scope string, frontendUri string) Urls {
 	}
 }
 
-// PhotoPrism specifies the developer contact URL.
-var PhotoPrism = Url{
-	"PhotoPrism",
-	"https://www.photoprism.app/",
+// Mokosh specifies the developer contact URL.
+var Mokosh = Url{
+	"Mokosh",
+	"https://github.com/Oper18/mokosh",
 }

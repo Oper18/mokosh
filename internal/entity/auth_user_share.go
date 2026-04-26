@@ -47,6 +47,16 @@ func (m UserShares) Empty() bool {
 	return m == nil || len(m) == 0
 }
 
+// HasPerm checks if any share in the list grants the specified permission bit.
+func (m UserShares) HasPerm(perm uint) bool {
+	for _, share := range m {
+		if share.Perm&perm != 0 {
+			return true
+		}
+	}
+	return false
+}
+
 // Contains checks the uid is shared.
 func (m UserShares) Contains(uid string) bool {
 	if len(m) == 0 {
@@ -126,6 +136,44 @@ func FindUserShares(userUid string) UserShares {
 	}
 
 	return found
+}
+
+// FindTeamSharesForUser returns synthetic UserShare entries for all albums and
+// photos accessible to the user through their team memberships.
+func FindTeamSharesForUser(userUID string) UserShares {
+	if rnd.InvalidUID(userUID, UserUID) {
+		return nil
+	}
+
+	var result UserShares
+
+	// Albums accessible via teams.
+	var teamAlbums []TeamAlbum
+
+	if err := Db().
+		Where("team_uid IN (SELECT team_uid FROM teams_users WHERE user_uid = ?)", userUID).
+		Find(&teamAlbums).Error; err != nil {
+		event.AuditWarn([]string{"user %s", "find team album shares", status.Error(err)}, clean.Log(userUID))
+	} else {
+		for _, ta := range teamAlbums {
+			result = append(result, UserShare{UserUID: userUID, ShareUID: ta.AlbumUID})
+		}
+	}
+
+	// Photos accessible via teams.
+	var teamPhotos []TeamPhoto
+
+	if err := Db().
+		Where("team_uid IN (SELECT team_uid FROM teams_users WHERE user_uid = ?)", userUID).
+		Find(&teamPhotos).Error; err != nil {
+		event.AuditWarn([]string{"user %s", "find team photo shares", status.Error(err)}, clean.Log(userUID))
+	} else {
+		for _, tp := range teamPhotos {
+			result = append(result, UserShare{UserUID: userUID, ShareUID: tp.PhotoUID})
+		}
+	}
+
+	return result
 }
 
 // HasID tests if the entity has a valid uid.

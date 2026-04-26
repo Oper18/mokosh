@@ -1,4 +1,4 @@
-PhotoPrism — Backend CODEMAP
+Mokosh — Backend CODEMAP
 
 **Last Updated:** March 8, 2026
 
@@ -21,7 +21,7 @@ Quick Start
 Executables & Entry Points
 - CLI app (binary name across docs/images is `photoprism`):
   - Main: `cmd/photoprism/photoprism.go`
-  - Commands registry: `internal/commands/commands.go` (array `commands.PhotoPrism`)
+  - Commands registry: `internal/commands/commands.go` (array `commands.Mokosh`)
   - Catalog helpers: `internal/commands/catalog` (DTOs and builders to enumerate commands/flags; Markdown renderer)
 - Web server:
   - Startup: `internal/commands/start.go` → `server.Start` (starts HTTP(S), workers, session cleanup)
@@ -152,7 +152,7 @@ Server Startup Flow (happy path)
 Common How‑Tos
 - Add a CLI command
   - Create `internal/commands/<name>.go` with a `*cli.Command`
-  - Add it to `PhotoPrism` in `internal/commands/commands.go`
+  - Add it to `Mokosh` in `internal/commands/commands.go`
   - Tests: prefer `RunWithTestContext` from `internal/commands/commands_test.go` to avoid `os.Exit`
 
 - Add a REST endpoint
