@@ -1,18 +1,3 @@
-## Local development environment — Mokosh + MariaDB
-## Usage: docker compose -f compose.localdev.yaml --env-file localdev.env up --build
-##
-## Before starting, copy localdev.env.example → localdev.env and set HOST_IP to your machine's LAN IP
-## so the backend is reachable from mobile devices on the same WiFi network.
-##
-## Two app containers share the source tree:
-##   frontend   — Node/webpack watch, rebuilds assets/static/ on change
-##   photoprism — Go backend, serves rebuilt assets and the REST API
-##
-## Workflow:
-##   - Edit Go code  → restart the photoprism service (no image rebuild)
-##   - Edit frontend → webpack auto-rebuilds; refresh the browser
-##   - Mobile app    → connect to http://${HOST_IP}:2342
-
 services:
 
   ## MariaDB 11.4 Database Server
@@ -64,7 +49,7 @@ services:
     working_dir: /photoprism/frontend
 
   ## Mokosh backend — runs via `go run`, no binary compilation needed
-  photoprism:
+  mokosh:
     build:
       context: .
       dockerfile: Dockerfile_scratch_dev_backend
@@ -78,7 +63,7 @@ services:
       # Full source tree — go run reads from here; also serves assets/static/ built by frontend.
       - .:/go/src/github.com/photoprism/photoprism:z
       # Persistent storage for photos, thumbnails, sidecar files, etc.
-      - photoprism_storage:/photoprism/storage:z
+      - mokosh_storage:/photoprism/storage:z
     working_dir: /go/src/github.com/photoprism/photoprism
     environment:
       PHOTOPRISM_ADMIN_USER: "admin"
@@ -121,7 +106,13 @@ services:
       PHOTOPRISM_THUMB_SIZE_UNCACHED: "7680"
       PHOTOPRISM_JPEG_SIZE: "7680"
       TF_CPP_MIN_LOG_LEVEL: "1"
+      ## S3 / object storage (leave bucket name empty to use local storage)
+      PHOTOPRISM_S3_FILES_BUCKET_NAME: "${PHOTOPRISM_S3_FILES_BUCKET_NAME:-}"
+      PHOTOPRISM_AWS_ACCESS_KEY_ID: "${PHOTOPRISM_AWS_ACCESS_KEY_ID:-}"
+      PHOTOPRISM_AWS_SECRET_ACCESS_KEY: "${PHOTOPRISM_AWS_SECRET_ACCESS_KEY:-}"
+      PHOTOPRISM_AWS_REGION: "${PHOTOPRISM_AWS_REGION:-us-east-1}"
+      PHOTOPRISM_AWS_BASE_ENDPOINT: "${PHOTOPRISM_AWS_BASE_ENDPOINT:-}"
 
 volumes:
   mariadb_data:
-  photoprism_storage:
+  mokosh_storage:

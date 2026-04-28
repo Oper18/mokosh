@@ -478,6 +478,7 @@ export default {
           .then(() => {
             ctx.reset();
             $notify.success(ctx.$gettext("Upload complete"));
+            ctx.$event.publish("upload.complete");
             ctx.$emit("confirm");
           })
           .catch(() => {

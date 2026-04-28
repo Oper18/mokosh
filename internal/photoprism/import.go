@@ -16,6 +16,7 @@ import (
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/event"
 	"github.com/photoprism/photoprism/internal/mutex"
+	"github.com/photoprism/photoprism/internal/storage"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/media"
@@ -26,6 +27,7 @@ type Import struct {
 	conf     *config.Config
 	index    *Index
 	convert  *Convert
+	storage  storage.Backend
 	AllowExt fs.ExtList
 }
 
@@ -35,10 +37,18 @@ func NewImport(conf *config.Config, index *Index, convert *Convert) *Import {
 		conf:     conf,
 		index:    index,
 		convert:  convert,
+		storage:  storage.NewLocal(),
 		AllowExt: conf.ImportAllow(),
 	}
 
 	return instance
+}
+
+// SetStorage replaces the storage backend used when uploading imported files.
+func (imp *Import) SetStorage(b storage.Backend) {
+	if b != nil {
+		imp.storage = b
+	}
 }
 
 // originalsPath returns the original media files path as string.

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"net/http"
 	"path/filepath"
 	"strings"
@@ -11,6 +12,7 @@ import (
 	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/photoprism"
 	"github.com/photoprism/photoprism/internal/photoprism/get"
+	"github.com/photoprism/photoprism/internal/storage"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/http/header"
@@ -194,6 +196,18 @@ func GetVideo(router *gin.RouterGroup) {
 
 		// Add HTTP cache header.
 		AddVideoCacheHeader(c, conf.CdnVideo())
+
+		// For original (non-transcoded) files redirect to a presigned S3 URL when available.
+		if videoFileName == photoprism.FileName(f.FileRoot, f.FileName) {
+			if presignedURL, presignErr := get.Storage().PresignedGetURL(
+				context.Background(), f.FileName, storage.PresignExpiry,
+			); presignErr != nil {
+				log.Warnf("video: failed to generate presigned URL for %s (%s)", clean.Log(f.FileName), presignErr)
+			} else if presignedURL != "" {
+				c.Redirect(http.StatusFound, presignedURL)
+				return
+			}
+		}
 
 		// Return requested content.
 		if c.Query("download") != "" {

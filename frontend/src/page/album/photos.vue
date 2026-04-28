@@ -212,6 +212,7 @@ export default {
 
     this.subscriptions.push(this.$event.subscribe("touchmove.top", () => this.refresh()));
     this.subscriptions.push(this.$event.subscribe("touchmove.bottom", () => this.loadMore()));
+    this.subscriptions.push(this.$event.subscribe("upload.complete", () => this.refresh()));
   },
   mounted() {
     this.$view.enter(this, this.$refs?.page);

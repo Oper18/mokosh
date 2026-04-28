@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"net/http"
 	"path/filepath"
 
@@ -11,6 +12,7 @@ import (
 	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/photoprism"
 	"github.com/photoprism/photoprism/internal/photoprism/get"
+	"github.com/photoprism/photoprism/internal/storage"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/rnd"
@@ -74,6 +76,16 @@ func GetDownload(router *gin.RouterGroup) {
 
 		if err != nil {
 			c.AbortWithStatusJSON(404, gin.H{"error": err.Error()})
+			return
+		}
+
+		// Redirect to a presigned S3 URL when S3 storage is active.
+		if presignedURL, presignErr := get.Storage().PresignedGetURL(
+			context.Background(), f.FileName, storage.PresignExpiry,
+		); presignErr != nil {
+			log.Warnf("download: failed to generate presigned URL for %s (%s)", clean.Log(f.FileName), presignErr)
+		} else if presignedURL != "" {
+			c.Redirect(http.StatusFound, presignedURL)
 			return
 		}
 

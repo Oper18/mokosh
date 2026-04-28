@@ -1,11 +1,14 @@
 package photoprism
 
 import (
+	"context"
+	"os"
 	"path/filepath"
 
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/event"
+	"github.com/photoprism/photoprism/internal/storage"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 )
@@ -98,12 +101,16 @@ func ImportWorker(jobs <-chan ImportJob) {
 						logRelName := clean.Log(fs.RelName(destMainFileName, imp.originalsPath()))
 						log.Error(moveErr)
 						log.Warnf("import: could not move file to %s, is another import running?", logRelName)
+					} else {
+						imp.uploadToS3(destFileName)
 					}
 				} else {
 					if copyErr := f.Copy(destFileName, false); copyErr != nil {
 						logRelName := clean.Log(fs.RelName(destMainFileName, imp.originalsPath()))
 						log.Error(copyErr)
 						log.Warnf("import: could not copy file to %s, is another import running?", logRelName)
+					} else {
+						imp.uploadToS3(destFileName)
 					}
 				}
 			} else {
@@ -264,4 +271,40 @@ func ImportWorker(jobs <-chan ImportJob) {
 			}
 		}
 	}
+}
+
+// uploadToS3 uploads destPath to the configured S3 backend using its path
+// relative to originalsPath as the object key. It is a no-op for local storage.
+func (imp *Import) uploadToS3(destPath string) {
+	if _, isLocal := imp.storage.(*storage.Local); isLocal {
+		log.Tracef("import: skipping S3 upload for %s (local storage)", clean.Log(destPath))
+		return
+	}
+
+	log.Debugf("import: uploading %s to S3", clean.Log(destPath))
+
+	key := fs.RelName(destPath, imp.originalsPath())
+	if key == "" {
+		return
+	}
+
+	f, err := os.Open(destPath) // #nosec G304 — path is the verified import destination
+	if err != nil {
+		log.Errorf("import: cannot open %s for S3 upload (%s)", clean.Log(key), err)
+		return
+	}
+	defer f.Close()
+
+	info, err := f.Stat()
+	if err != nil {
+		log.Errorf("import: cannot stat %s for S3 upload (%s)", clean.Log(key), err)
+		return
+	}
+
+	if putErr := imp.storage.Put(context.Background(), key, f, info.Size()); putErr != nil {
+		log.Errorf("import: S3 upload failed for %s (%s)", clean.Log(key), putErr)
+		return
+	}
+
+	log.Debugf("import: uploaded %s to S3", clean.Log(key))
 }

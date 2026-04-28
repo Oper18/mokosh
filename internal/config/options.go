@@ -14,6 +14,17 @@ import (
 	"github.com/photoprism/photoprism/pkg/fs"
 )
 
+// AWSConfiguration holds AWS/S3 object storage credentials and endpoint settings.
+// Set S3FilesBucketName (plus credentials) to enable S3 storage; leave it empty
+// to keep the default local-filesystem behaviour.
+type AWSConfiguration struct {
+	AWSBaseEndpoint    string
+	AWSRegion          string
+	AWSAccessKeyID     string
+	AWSSecretAccessKey string
+	S3FilesBucketName  string
+}
+
 // Options hold the global configuration values without further validation or processing.
 // Application code should retrieve option values via getter functions since they provide
 // validation and return defaults if a value is empty.
@@ -260,6 +271,14 @@ type Options struct {
 	FaceMatchDist             float64       `yaml:"-" json:"-" flag:"face-match-dist"`
 	FaceSkipChildren          bool          `yaml:"-" json:"-" flag:"face-skip-children"`
 	FaceAllowBackground       bool          `yaml:"-" json:"-" flag:"face-allow-background"`
+	// AWS/S3 object storage configuration.
+	// When S3FilesBucketName is non-empty (together with credentials), originals
+	// are also published to S3 and served to clients via presigned URLs.
+	AWSBaseEndpoint    string `yaml:"AWSBaseEndpoint" json:"-" flag:"aws-base-endpoint"`
+	AWSRegion          string `yaml:"AWSRegion" json:"-" flag:"aws-region"`
+	AWSAccessKeyID     string `yaml:"AWSAccessKeyID" json:"-" flag:"aws-access-key-id"`
+	AWSSecretAccessKey string `yaml:"AWSSecretAccessKey" json:"-" flag:"aws-secret-access-key"`
+	S3FilesBucketName  string `yaml:"S3FilesBucketName" json:"-" flag:"s3-files-bucket-name"`
 	PIDFilename               string        `yaml:"PIDFilename" json:"-" flag:"pid-filename"`
 	LogFilename               string        `yaml:"LogFilename" json:"-" flag:"log-filename"`
 	DetachServer              bool          `yaml:"DetachServer" json:"-" flag:"detach-server"`

@@ -69,6 +69,8 @@ func SetConfig(c *config.Config) {
 
 	resetJWT()
 	resetOIDC()
+	ResetStorage()
+	ResetImport()
 
 	conf = c
 

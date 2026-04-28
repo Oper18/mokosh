@@ -1,6 +1,5 @@
 services:
 
-  ## MariaDB 11.4 Database Server
   mariadb:
     image: mariadb:11.4
     restart: unless-stopped
@@ -17,8 +16,6 @@ services:
       --max-connections=512
       --innodb-rollback-on-timeout=OFF
       --innodb-lock-wait-timeout=120
-    ports:
-      - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql:z
     environment:
@@ -38,7 +35,7 @@ services:
   ## Reads from frontend/src/, writes built assets to assets/static/build/.
 
   ## Mokosh backend — runs via `go run`, no binary compilation needed
-  photoprism:
+  mokosh:
     build:
       context: .
       dockerfile: Dockerfile_scratch
@@ -76,6 +73,12 @@ services:
       PHOTOPRISM_CORS_ORIGIN: "*"
       PHOTOPRISM_CORS_HEADERS: "Authorization,X-Auth-Token,X-Client-Uri,X-Client-Version,Content-Type"
       PHOTOPRISM_CORS_METHODS: "GET,POST,PUT,DELETE,OPTIONS,HEAD"
+      ## S3 / object storage (leave bucket name empty to use local storage)
+      PHOTOPRISM_S3_FILES_BUCKET_NAME: "${PHOTOPRISM_S3_FILES_BUCKET_NAME:-}"
+      PHOTOPRISM_AWS_ACCESS_KEY_ID: "${PHOTOPRISM_AWS_ACCESS_KEY_ID:-}"
+      PHOTOPRISM_AWS_SECRET_ACCESS_KEY: "${PHOTOPRISM_AWS_SECRET_ACCESS_KEY:-}"
+      PHOTOPRISM_AWS_REGION: "${PHOTOPRISM_AWS_REGION:-us-east-1}"
+      PHOTOPRISM_AWS_BASE_ENDPOINT: "${PHOTOPRISM_AWS_BASE_ENDPOINT:-}"
       PHOTOPRISM_DISABLE_CHOWN: "false"
       PHOTOPRISM_DISABLE_BACKUPS: "false"
       PHOTOPRISM_DISABLE_WEBDAV: "false"
@@ -93,4 +96,3 @@ services:
 
 volumes:
   mariadb_data:
-  photoprism_storage:
