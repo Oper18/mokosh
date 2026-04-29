@@ -30,7 +30,7 @@ WORKDIR /go/src/github.com/photoprism/photoprism
 COPY . .
 
 # Install JS dependencies and build the frontend.
-RUN npm ci --prefix frontend && npm run build --prefix frontend
+RUN npm install --prefix frontend && npm run build --prefix frontend
 
 # Download Go module dependencies.
 RUN go mod download
