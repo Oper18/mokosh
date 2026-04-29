@@ -50,7 +50,7 @@ services:
       PHOTOPRISM_ADMIN_USER: "admin"
       PHOTOPRISM_ADMIN_PASSWORD: "photoprism"
       PHOTOPRISM_AUTH_MODE: "password"
-      PHOTOPRISM_SITE_URL: "http://${HOST_IP:-localhost}:2342/"
+      PHOTOPRISM_SITE_URL: "${PHOTOPRISM_SITE_URL}"
       PHOTOPRISM_SITE_CAPTION: "AI-Powered Photos App"
       PHOTOPRISM_DEBUG: "true"
       PHOTOPRISM_LOG_LEVEL: "debug"
