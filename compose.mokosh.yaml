@@ -66,6 +66,7 @@ services:
       PHOTOPRISM_DATABASE_USER: "photoprism"
       PHOTOPRISM_DATABASE_PASSWORD: "photoprism"
       PHOTOPRISM_STORAGE_PATH: "/photoprism/storage"
+      PHOTOPRISM_MODELS_PATH: "/photoprism/storage/models"
       PHOTOPRISM_ORIGINALS_PATH: "/photoprism/storage/originals"
       PHOTOPRISM_IMPORT_PATH: "/photoprism/storage/import"
       PHOTOPRISM_ASSETS_PATH: "/photoprism/assets"
