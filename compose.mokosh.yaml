@@ -17,7 +17,7 @@ services:
       --innodb-rollback-on-timeout=OFF
       --innodb-lock-wait-timeout=120
     volumes:
-      - mariadb_data:/var/lib/mysql:z
+      - ${MARIADB_DATA_PATH:-./mariadb_data}:/var/lib/mysql:z
     environment:
       MARIADB_AUTO_UPGRADE: "1"
       MARIADB_INITDB_SKIP_TZINFO: "1"
@@ -93,6 +93,3 @@ services:
       PHOTOPRISM_THUMB_SIZE_UNCACHED: "7680"
       PHOTOPRISM_JPEG_SIZE: "7680"
       TF_CPP_MIN_LOG_LEVEL: "1"
-
-volumes:
-  mariadb_data:
