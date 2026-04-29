@@ -26,6 +26,10 @@ RUN curl -fsSL "https://dl.google.com/go/go1.25.0.linux-amd64.tar.gz" \
 
 WORKDIR /go/src/github.com/photoprism/photoprism
 
+# Install TensorFlow C library (headers + .so needed for wamuir/graft CGO build).
+RUN curl -fsSL "https://dl.photoprism.app/tensorflow/amd64/libtensorflow-amd64-2.18.0.tar.gz" \
+        | tar --overwrite --mode=755 -C /usr -xz && ldconfig
+
 # Copy the full source tree.
 COPY . .
 
@@ -59,6 +63,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates tzdata libvips42 libjpeg-turbo8 libpng16-16 libwebp7 \
         ffmpeg exiftool imagemagick libheif1 \
     && rm -rf /var/lib/apt/lists/*
+
+# Copy TensorFlow shared libraries from builder.
+COPY --from=builder /usr/lib/libtensorflow*.so* /usr/lib/
+RUN ldconfig
 
 # Copy binary and assets from the builder stage.
 COPY --from=builder /dist/photoprism /usr/local/bin/photoprism
