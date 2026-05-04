@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/photoprism/photoprism/internal/auth/acl"
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/photoprism"
@@ -56,22 +57,30 @@ func AlbumCover(router *gin.RouterGroup) {
 			return
 		}
 
-		// For visitor sessions that have photo-level (not album-level) shares, restrict cover
+		// For sessions that have photo-level (not album-level) shares, restrict cover
 		// to only photos accessible to that session. Image requests don't carry the X-Auth-Token
 		// header, so we look up the session via the per-session preview token in the URL.
 		var allowedPhotoUIDs entity.UIDs
 		if token := clean.UrlToken(c.Param("token")); token != "" {
 			if sessionID := entity.PreviewToken.Get(token); sessionID != "" && sessionID != entity.TokenConfig {
-				if sess, sessErr := entity.FindSession(sessionID); sessErr == nil && sess != nil && (sess.IsVisitor() || sess.NotRegistered()) {
-					albumDirectlyShared := false
-					for _, aUID := range sess.SharedAlbumUIDs() {
-						if aUID == uid {
-							albumDirectlyShared = true
-							break
+				if sess, sessErr := entity.FindSession(sessionID); sessErr == nil && sess != nil {
+					user := sess.GetUser()
+					isRestricted := sess.IsVisitor() || sess.NotRegistered() ||
+						(user.IsRegistered() && user.HasSharedAccessOnly(acl.ResourceAlbums))
+					if isRestricted {
+						albumDirectlyShared := false
+						for _, aUID := range sess.SharedAlbumUIDs() {
+							if aUID == uid {
+								albumDirectlyShared = true
+								break
+							}
 						}
-					}
-					if !albumDirectlyShared {
-						allowedPhotoUIDs = sess.SharedPhotoUIDs()
+						if !albumDirectlyShared {
+							// Only restrict cover when the user is not the album owner.
+							if a, aErr := query.AlbumByUID(uid); aErr != nil || a.CreatedBy != user.UserUID {
+								allowedPhotoUIDs = sess.SharedPhotoUIDs()
+							}
+						}
 					}
 				}
 			}

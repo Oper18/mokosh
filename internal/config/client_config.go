@@ -760,6 +760,15 @@ func (c *Config) ClientSession(sess *entity.Session) (cfg *ClientConfig) {
 			cfg.ACL[acl.ResourcePhotos] = acl.GrantReactShared
 			cfg.Settings.Features.Reactions = true
 		}
+		if !sess.HasSharePerm(entity.PermDownload) {
+			photosGrant := make(acl.Grant)
+			for k, v := range cfg.ACL[acl.ResourcePhotos] {
+				photosGrant[k] = v
+			}
+			photosGrant[acl.ActionDownload] = false
+			cfg.ACL[acl.ResourcePhotos] = photosGrant
+			cfg.Settings.Features.Download = false
+		}
 	case sess.GetUser().IsRegistered():
 		cfg = c.ClientUser(false).ApplyACL(acl.Rules, sess.GetUserRole())
 		cfg.Settings = c.SessionSettings(sess)

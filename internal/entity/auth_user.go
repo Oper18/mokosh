@@ -1246,11 +1246,14 @@ func (m *User) HasShares() bool {
 
 // HasShare if an uid was shared with the user.
 func (m *User) HasShare(uid string) bool {
-	if m.NotRegistered() || m.NoShares() {
+	if m.NotRegistered() {
 		return false
 	}
 
-	// Check if the share list contains the specified UID.
+	if m.NoShares() {
+		m.RefreshShares()
+	}
+
 	return m.UserShares.Contains(uid)
 }
 
@@ -1293,6 +1296,9 @@ func (m *User) RedeemToken(token string) (n int) {
 			event.AuditErr([]string{"user %s", "share token update failed", status.Error(err)}, m.RefID)
 		}
 	}
+
+	// Sync the in-memory share list so cached sessions see the new shares immediately.
+	m.RefreshShares()
 
 	return n
 }

@@ -278,7 +278,7 @@ func (m *Session) LogIn(frm form.Login, c *gin.Context) (err error) {
 				m.Status = http.StatusNotFound
 				return i18n.Error(i18n.ErrInvalidLink)
 			} else {
-				event.AuditInfo([]string{m.IP(), "session %s", "token redeemed for %d shares"}, m.RefID, user.RedeemToken(frm.Token))
+				event.AuditInfo([]string{m.IP(), "session %s", "token redeemed for %d shares"}, m.RefID, shares)
 			}
 		} else if data := m.GetData(); data == nil {
 			m.Status = http.StatusInternalServerError

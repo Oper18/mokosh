@@ -21,6 +21,7 @@ const (
 	PermEdit
 	PermShare
 	PermAll
+	PermDownload
 )
 
 // SharePrefix for RefID.

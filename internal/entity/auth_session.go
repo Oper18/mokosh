@@ -880,7 +880,16 @@ func (m *Session) SharedUIDs() UIDs {
 
 // SharedPhotoUIDs returns only photo UIDs from the session shares.
 func (m *Session) SharedPhotoUIDs() UIDs {
-	if data := m.GetData(); data == nil {
+	if user := m.GetUser(); user.IsRegistered() {
+		all := user.SharedUIDs()
+		result := make(UIDs, 0, len(all))
+		for _, uid := range all {
+			if len(uid) == 16 && uid[0] == PhotoUID {
+				result = append(result, uid)
+			}
+		}
+		return result
+	} else if data := m.GetData(); data == nil {
 		return UIDs{}
 	} else {
 		return data.SharedPhotoUIDs()
@@ -889,7 +898,16 @@ func (m *Session) SharedPhotoUIDs() UIDs {
 
 // SharedAlbumUIDs returns only album UIDs from the session shares.
 func (m *Session) SharedAlbumUIDs() UIDs {
-	if data := m.GetData(); data == nil {
+	if user := m.GetUser(); user.IsRegistered() {
+		all := user.SharedUIDs()
+		result := make(UIDs, 0, len(all))
+		for _, uid := range all {
+			if len(uid) == 16 && uid[0] == AlbumUID {
+				result = append(result, uid)
+			}
+		}
+		return result
+	} else if data := m.GetData(); data == nil {
 		return UIDs{}
 	} else {
 		return data.SharedAlbumUIDs()

@@ -196,14 +196,29 @@ func searchPhotos(frm form.SearchPhotos, sess *entity.Session, resultCols string
 					sharedAlbums := "photos.photo_uid IN (SELECT photo_uid FROM photos_albums WHERE hidden = 0 AND missing = 0 AND album_uid IN (?)) OR "
 					s = s.Where("photos.photo_uid IN (?) OR "+sharedAlbums+"photos.published_at > ?", sharedUIDs, sharedUIDs, entity.Now())
 				}
+			} else if frm.Scope != "" && album.CreatedBy != user.UserUID && !sess.HasShare(frm.Scope) {
+				// Registered restricted user viewing an album they don't own and can access only via a photo share.
+				// Restrict results to the directly shared photos only, same as the visitor case.
+				s = s.Where("photos.photo_uid IN (?)", sess.SharedPhotoUIDs())
 			} else if frm.Scope == "" {
+				albumUIDs := sess.SharedAlbumUIDs()
+				photoUIDs := sess.SharedPhotoUIDs()
 				sharedAlbums := "photos.photo_uid IN (SELECT photo_uid FROM photos_albums WHERE hidden = 0 AND missing = 0 AND album_uid IN (?)) OR "
 
 				if basePath := user.GetBasePath(); basePath == "" {
-					s = s.Where(sharedAlbums+"photos.created_by = ? OR photos.published_at > ?", sess.SharedUIDs(), user.UserUID, entity.Now())
+					if len(photoUIDs) > 0 {
+						s = s.Where("photos.photo_uid IN (?) OR "+sharedAlbums+"photos.created_by = ? OR photos.published_at > ?", photoUIDs, albumUIDs, user.UserUID, entity.Now())
+					} else {
+						s = s.Where(sharedAlbums+"photos.created_by = ? OR photos.published_at > ?", albumUIDs, user.UserUID, entity.Now())
+					}
 				} else {
-					s = s.Where(sharedAlbums+"photos.created_by = ? OR photos.published_at > ? OR photos.photo_path = ? OR photos.photo_path LIKE ?",
-						sess.SharedUIDs(), user.UserUID, entity.Now(), basePath, basePath+"/%")
+					if len(photoUIDs) > 0 {
+						s = s.Where("photos.photo_uid IN (?) OR "+sharedAlbums+"photos.created_by = ? OR photos.published_at > ? OR photos.photo_path = ? OR photos.photo_path LIKE ?",
+							photoUIDs, albumUIDs, user.UserUID, entity.Now(), basePath, basePath+"/%")
+					} else {
+						s = s.Where(sharedAlbums+"photos.created_by = ? OR photos.published_at > ? OR photos.photo_path = ? OR photos.photo_path LIKE ?",
+							albumUIDs, user.UserUID, entity.Now(), basePath, basePath+"/%")
+					}
 				}
 			}
 		}

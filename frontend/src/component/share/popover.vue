@@ -141,6 +141,7 @@ const PermComment = 8;
 const PermUpload = 16;
 const PermEdit = 32;
 const PermShare = 64;
+const PermDownload = 256;
 
 export default {
   name: "PSharePopover",
@@ -163,6 +164,7 @@ export default {
       expiresOptions: options.Expires(),
       permOptions: [
         { value: PermView, label: this.$gettext("View") },
+        { value: PermDownload, label: this.$gettext("Download") },
         { value: PermReact, label: this.$gettext("React") },
         { value: PermComment, label: this.$gettext("Comment") },
         { value: PermUpload, label: this.$gettext("Upload") },

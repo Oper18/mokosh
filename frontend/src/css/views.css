@@ -793,6 +793,41 @@
     visibility: visible;
 }
 
+.cards-view .input-shared,
+.mosaic-view .input-shared {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 4px;
+    opacity: 0.85;
+    top: 0;
+    color: #f6f6f6;
+    text-shadow:
+        -1px -1px 0 #0003,
+        1px -1px 0 #0003,
+        -1px 1px 0 #0003,
+        1px 1px 0 #0003;
+}
+
+.is-ltr .cards-view .input-shared,
+.is-ltr .mosaic-view .input-shared {
+    right: 0;
+}
+
+.is-rtl .cards-view .input-shared,
+.is-rtl .mosaic-view .input-shared {
+    left: 0;
+}
+
+.search-results .result.is-shared .input-shared {
+    display: flex;
+}
+
 .cards-view .input-open,
 .cards-view .input-view,
 .mosaic-view .input-open,

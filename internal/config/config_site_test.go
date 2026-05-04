@@ -152,7 +152,7 @@ func TestConfig_SiteFavicon(t *testing.T) {
 
 func TestConfig_SitePreview(t *testing.T) {
 	c := NewConfig(CliTestContext())
-	assert.Equal(t, "https://i.photoprism.app/prism?cover=64&style=centered%20dark&caption=none&title=Mokosh", c.SitePreview())
+	assert.Equal(t, "http://localhost:2342/static/img/preview.jpg", c.SitePreview())
 	c.options.SitePreview = "http://preview.jpg"
 	assert.Equal(t, "http://preview.jpg", c.SitePreview())
 	c.options.SitePreview = "preview123.jpg"

@@ -34,6 +34,7 @@ export class Album extends Collection {
       Month: -1,
       Favorite: false,
       Private: false,
+      Shared: false,
       PhotoCount: 0,
       LinkCount: 0,
       CreatedAt: "",
@@ -53,6 +54,7 @@ export class Album extends Collection {
 
     if (this.Favorite) classes.push("is-favorite");
     if (this.Private) classes.push("is-private");
+    if (this.Shared) classes.push("is-shared");
     if (selected) classes.push("is-selected");
 
     return classes;

@@ -152,14 +152,18 @@ export default class Session {
     // Say hello.
     if (shared && shared.token) {
       this.config.progress(80);
+      // When already authenticated, redirect immediately after redemption so the
+      // user lands in the main app with their full session rather than seeing the
+      // visitor share page for a full second.
+      const alreadyAuthed = this.isAuthenticated();
       this.redeemToken(shared.token).finally(() => {
         this.config.progress(99);
 
         // Redirect URL.
         const location = shared.uri ? shared.uri : this.config.baseUri + "/";
 
-        // Redirect to URL after one second.
-        this.followRedirect(location, 1000);
+        // Skip the 1-second delay for already-authenticated users.
+        this.followRedirect(location, alreadyAuthed ? 100 : 1000);
       });
     } else {
       this.config.progress(80);

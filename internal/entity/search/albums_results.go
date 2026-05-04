@@ -30,6 +30,8 @@ type Album struct {
 	AlbumDay         int       `json:"Day"`
 	AlbumFavorite    bool      `json:"Favorite"`
 	AlbumPrivate     bool      `json:"Private"`
+	AlbumShared      bool      `json:"Shared"`
+	CreatedBy        string    `json:"-"`
 	PhotoCount       int       `json:"PhotoCount"`
 	LinkCount        int       `json:"LinkCount"`
 	CreatedAt        time.Time `json:"CreatedAt"`

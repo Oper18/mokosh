@@ -89,16 +89,8 @@ func ShareTokenShared(router *gin.RouterGroup) {
 			// Full album shared: go directly to the album view.
 			uri = conf.FrontendUri(path.Join("/albums", uid, "view"))
 		} else {
-			// Single photo shared: redirect to albums if the photo belongs to at least one album
-			// (it will appear as a "Private" album), otherwise to the photos/media page.
-			var albumCount int
-			if err := entity.Db().Table("photos_albums").
-				Where("photo_uid = ? AND hidden = 0 AND missing = 0", uid).
-				Count(&albumCount).Error; err != nil || albumCount == 0 {
-				uri = conf.FrontendUri("/photos")
-			} else {
-				uri = conf.FrontendUri("/albums")
-			}
+			// Single photo shared: redirect to the photos page so the shared photo is visible.
+			uri = conf.FrontendUri("/photos")
 		}
 
 		c.HTML(http.StatusOK, "share.gohtml", gin.H{"shared": gin.H{"token": token, "uri": uri}, "config": clientConfig})

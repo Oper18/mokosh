@@ -76,7 +76,17 @@ func UserAlbums(frm form.SearchAlbums, sess *entity.Session) (results AlbumResul
 				s = s.Where("albums.album_uid IN (?) OR albums.published_at > ?", albumUIDs, entity.Now())
 			}
 		} else if acl.Rules.DenyAll(aclResource, aclRole, acl.Permissions{acl.AccessAll, acl.AccessLibrary}) {
-			s = s.Where("albums.album_uid IN (?) OR albums.created_by = ? OR albums.published_at > ?", sess.SharedUIDs(), user.UserUID, entity.Now())
+			albumUIDs := sess.SharedAlbumUIDs()
+			photoUIDs := sess.SharedPhotoUIDs()
+
+			if len(photoUIDs) > 0 {
+				s = s.Where(
+					"albums.album_uid IN (?) OR albums.album_uid IN (SELECT album_uid FROM photos_albums WHERE hidden = 0 AND missing = 0 AND photo_uid IN (?)) OR albums.created_by = ? OR albums.published_at > ?",
+					albumUIDs, photoUIDs, user.UserUID, entity.Now(),
+				)
+			} else {
+				s = s.Where("albums.album_uid IN (?) OR albums.created_by = ? OR albums.published_at > ?", albumUIDs, user.UserUID, entity.Now())
+			}
 		}
 
 		// Exclude private content?
@@ -225,27 +235,58 @@ func UserAlbums(frm form.SearchAlbums, sess *entity.Session) (results AlbumResul
 		return results, result.Error
 	}
 
-	// For visitor sessions with photo shares, mask albums that contain shared photos but are not
-	// directly shared: show them as "Private" to avoid leaking album names and metadata.
-	if sess != nil && (sess.IsVisitor() || sess.NotRegistered()) {
-		albumUIDs := sess.SharedAlbumUIDs()
-		directShares := make(map[string]struct{}, len(albumUIDs))
+	// Post-process results for sessions with restricted access.
+	if sess != nil {
+		user := sess.GetUser()
 
-		for _, uid := range albumUIDs {
-			directShares[uid] = struct{}{}
-		}
+		if sess.IsVisitor() || sess.NotRegistered() {
+			// For visitor sessions with photo shares, mask albums that contain shared photos but are not
+			// directly shared: show them as "Private" to avoid leaking album names and metadata.
+			albumUIDs := sess.SharedAlbumUIDs()
+			directShares := make(map[string]struct{}, len(albumUIDs))
 
-		for i := range results {
-			if _, direct := directShares[results[i].AlbumUID]; !direct {
-				results[i].AlbumTitle = "Private"
-				results[i].AlbumDescription = ""
-				results[i].AlbumCaption = ""
-				results[i].AlbumNotes = ""
-				results[i].AlbumLocation = ""
-				results[i].AlbumCategory = ""
-				// Clear the precomputed cover hash so the frontend uses the /albums/{uid}/t/...
-				// endpoint, which filters cover candidates to the visitor's accessible photos.
-				results[i].Thumb = ""
+			for _, uid := range albumUIDs {
+				directShares[uid] = struct{}{}
+			}
+
+			for i := range results {
+				if _, direct := directShares[results[i].AlbumUID]; !direct {
+					results[i].AlbumTitle = "Private"
+					results[i].AlbumDescription = ""
+					results[i].AlbumCaption = ""
+					results[i].AlbumNotes = ""
+					results[i].AlbumLocation = ""
+					results[i].AlbumCategory = ""
+					// Clear the precomputed cover hash so the frontend uses the /albums/{uid}/t/...
+					// endpoint, which filters cover candidates to the visitor's accessible photos.
+					results[i].Thumb = ""
+				} else {
+					results[i].AlbumShared = true
+				}
+			}
+		} else if user.IsRegistered() && user.HasSharedAccessOnly(acl.ResourceAlbums) {
+			// Mark albums as shared. Albums that appear only via a photo share (not a direct album share)
+			// are masked like the visitor case to avoid leaking album metadata.
+			albumUIDs := sess.SharedAlbumUIDs()
+			sharedSet := make(map[string]struct{}, len(albumUIDs))
+			for _, uid := range albumUIDs {
+				sharedSet[uid] = struct{}{}
+			}
+
+			for i := range results {
+				if _, isShared := sharedSet[results[i].AlbumUID]; isShared {
+					results[i].AlbumShared = true
+				} else if results[i].CreatedBy != user.UserUID {
+					// Album appeared via photo share subquery — mask metadata and mark as shared.
+					results[i].AlbumShared = true
+					results[i].AlbumTitle = "Private"
+					results[i].AlbumDescription = ""
+					results[i].AlbumCaption = ""
+					results[i].AlbumNotes = ""
+					results[i].AlbumLocation = ""
+					results[i].AlbumCategory = ""
+					results[i].Thumb = ""
+				}
 			}
 		}
 	}

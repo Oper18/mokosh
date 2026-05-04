@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/photoprism"
 	"github.com/photoprism/photoprism/internal/photoprism/get"
@@ -15,6 +16,9 @@ import (
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 )
+
+// watermarkTextTTL is how long the watermark text decision is cached per session.
+const watermarkTextTTL = 5 * time.Minute
 
 // GetThumb returns a thumbnail image matching the file hash, crop area, and type.
 //
@@ -37,6 +41,9 @@ func GetThumb(router *gin.RouterGroup) {
 			c.Data(http.StatusForbidden, "image/svg+xml", brokenIconSvg)
 			return
 		}
+
+		// Resolve watermark label for sessions that have no download permission.
+		watermarkText := thumbWatermarkText(c)
 
 		logPrefix := "thumb"
 
@@ -72,6 +79,25 @@ func GetThumb(router *gin.RouterGroup) {
 			// Add HTTP cache header.
 			AddImmutableCacheHeader(c)
 
+			if watermarkText != "" {
+				wmKey := CacheKey("wm", watermarkText+":"+fileHash, string(cropName))
+				wmCache := get.ThumbCache()
+				if wmData, ok := wmCache.Get(wmKey); ok {
+					c.Data(http.StatusOK, "image/jpeg", wmData.(ByteCache).Data)
+				} else if wmBytes, wmErr := thumb.WatermarkFile(fileName, watermarkText); wmErr == nil {
+					wmCache.SetDefault(wmKey, ByteCache{Data: wmBytes})
+					c.Data(http.StatusOK, "image/jpeg", wmBytes)
+				} else {
+					log.Warnf("%s: watermark failed: %s", logPrefix, wmErr)
+					if attachment {
+						c.FileAttachment(fileName, cropName.Jpeg())
+					} else {
+						c.File(fileName)
+					}
+				}
+				return
+			}
+
 			if attachment {
 				c.FileAttachment(fileName, cropName.Jpeg())
 			} else {
@@ -103,6 +129,7 @@ func GetThumb(router *gin.RouterGroup) {
 
 		cache := get.ThumbCache()
 		cacheKey := CacheKey("thumbs", fileHash, string(sizeName))
+		wmCacheKey := CacheKey("wm", watermarkText+":"+fileHash, string(sizeName))
 
 		if cacheData, ok := cache.Get(cacheKey); ok {
 			log.Tracef("api: cache hit for %s [%s]", cacheKey, time.Since(start))
@@ -118,6 +145,23 @@ func GetThumb(router *gin.RouterGroup) {
 			// Add HTTP cache header.
 			AddImmutableCacheHeader(c)
 
+			if watermarkText != "" {
+				if wmData, ok := cache.Get(wmCacheKey); ok {
+					c.Data(http.StatusOK, "image/jpeg", wmData.(ByteCache).Data)
+				} else if wmBytes, wmErr := thumb.WatermarkFile(cached.FileName, watermarkText); wmErr == nil {
+					cache.SetDefault(wmCacheKey, ByteCache{Data: wmBytes})
+					c.Data(http.StatusOK, "image/jpeg", wmBytes)
+				} else {
+					log.Warnf("%s: watermark failed: %s", logPrefix, wmErr)
+					if attachment {
+						c.FileAttachment(cached.FileName, cached.ShareName)
+					} else {
+						c.File(cached.FileName)
+					}
+				}
+				return
+			}
+
 			if attachment {
 				c.FileAttachment(cached.FileName, cached.ShareName)
 			} else {
@@ -127,14 +171,35 @@ func GetThumb(router *gin.RouterGroup) {
 			return
 		}
 
-		// Return existing thumbs straight away.
-		if !attachment {
+		// Return existing thumbs straight away; skip this fast path for watermarked responses
+		// so that we can apply the watermark before serving.
+		if watermarkText == "" && !attachment {
 			if fileName, err := size.ResolvedName(fileHash, conf.ThumbCachePath()); err == nil {
 				// Add HTTP cache header.
 				AddImmutableCacheHeader(c)
 
 				// Return requested content.
 				c.File(fileName)
+				return
+			}
+		} else if watermarkText != "" && !attachment {
+			// Check watermark cache before doing a full DB lookup.
+			if wmData, ok := cache.Get(wmCacheKey); ok {
+				AddImmutableCacheHeader(c)
+				c.Data(http.StatusOK, "image/jpeg", wmData.(ByteCache).Data)
+				return
+			}
+
+			// Serve watermarked thumbnail from existing disk cache if available.
+			if fileName, err := size.ResolvedName(fileHash, conf.ThumbCachePath()); err == nil {
+				AddImmutableCacheHeader(c)
+				if wmBytes, wmErr := thumb.WatermarkFile(fileName, watermarkText); wmErr == nil {
+					cache.SetDefault(wmCacheKey, ByteCache{Data: wmBytes})
+					c.Data(http.StatusOK, "image/jpeg", wmBytes)
+				} else {
+					log.Warnf("%s: watermark failed: %s", logPrefix, wmErr)
+					c.File(fileName)
+				}
 				return
 			}
 		}
@@ -194,6 +259,19 @@ func GetThumb(router *gin.RouterGroup) {
 			// Add HTTP cache header.
 			AddImmutableCacheHeader(c)
 
+			if watermarkText != "" {
+				if wmData, ok := cache.Get(wmCacheKey); ok {
+					c.Data(http.StatusOK, "image/jpeg", wmData.(ByteCache).Data)
+				} else if wmBytes, wmErr := thumb.WatermarkFile(fileName, watermarkText); wmErr == nil {
+					cache.SetDefault(wmCacheKey, ByteCache{Data: wmBytes})
+					c.Data(http.StatusOK, "image/jpeg", wmBytes)
+				} else {
+					log.Warnf("%s: watermark failed: %s", logPrefix, wmErr)
+					c.File(fileName)
+				}
+				return
+			}
+
 			// Return requested content.
 			c.File(fileName)
 			return
@@ -227,6 +305,23 @@ func GetThumb(router *gin.RouterGroup) {
 		// Add HTTP cache header.
 		AddImmutableCacheHeader(c)
 
+		if watermarkText != "" {
+			if wmData, ok := cache.Get(wmCacheKey); ok {
+				c.Data(http.StatusOK, "image/jpeg", wmData.(ByteCache).Data)
+			} else if wmBytes, wmErr := thumb.WatermarkFile(thumbName, watermarkText); wmErr == nil {
+				cache.SetDefault(wmCacheKey, ByteCache{Data: wmBytes})
+				c.Data(http.StatusOK, "image/jpeg", wmBytes)
+			} else {
+				log.Warnf("%s: watermark failed: %s", logPrefix, wmErr)
+				if attachment {
+					c.FileAttachment(thumbName, f.DownloadName(DownloadName(c), 0))
+				} else {
+					c.File(thumbName)
+				}
+			}
+			return
+		}
+
 		// Return requested content.
 		if attachment {
 			c.FileAttachment(thumbName, f.DownloadName(DownloadName(c), 0))
@@ -234,4 +329,91 @@ func GetThumb(router *gin.RouterGroup) {
 			c.File(thumbName)
 		}
 	})
+}
+
+// thumbWatermarkText resolves the watermark label for the session associated with the request token.
+// Returns an empty string when no watermark should be applied (public mode, no shares, or download is permitted).
+// The result is cached in the thumb cache for watermarkTextTTL to avoid repeated DB lookups per thumbnail.
+func thumbWatermarkText(c *gin.Context) string {
+	token := clean.UrlToken(c.Param("token"))
+	if token == "" {
+		token = clean.UrlToken(c.Query("t"))
+	}
+
+	// Resolve session ID from the preview or download token maps.
+	sessionID := entity.PreviewToken.Get(token)
+	if sessionID == "" {
+		sessionID = entity.DownloadToken.Get(token)
+	}
+	if sessionID == "" {
+		return ""
+	}
+
+	// Check the short-lived cache to avoid repeated DB queries on every thumbnail request.
+	cache := get.ThumbCache()
+	wmTextKey := CacheKey("wmtext", sessionID, "")
+	if cached, ok := cache.Get(wmTextKey); ok {
+		return cached.(string)
+	}
+
+	sess, err := entity.FindSession(sessionID)
+	if err != nil || sess == nil {
+		return ""
+	}
+
+	user := sess.GetUser()
+	text := ""
+
+	if user.IsRegistered() {
+		// For registered users, check shares explicitly since UserShares is not auto-loaded.
+		shares := entity.FindUserShares(user.GetUID())
+		for _, share := range shares {
+			if share.Perm&entity.PermDownload != 0 {
+				continue
+			}
+			if share.LinkUID == "" {
+				continue
+			}
+			if link := entity.FindLink(share.LinkUID); link != nil && link.CreatedBy != "" {
+				if owner := entity.FindUserByUID(link.CreatedBy); owner != nil {
+					text = ownerLabel(owner)
+					break
+				}
+			}
+		}
+	} else {
+		// Visitor session: find the owner from redeemed share link tokens.
+		data := sess.GetData()
+		if data != nil {
+		outer:
+			for _, token := range data.Tokens {
+				for _, link := range entity.FindValidLinks(token, "") {
+					if link.Perm&entity.PermDownload != 0 {
+						continue
+					}
+					if link.CreatedBy == "" {
+						continue
+					}
+					if owner := entity.FindUserByUID(link.CreatedBy); owner != nil {
+						text = ownerLabel(owner)
+						break outer
+					}
+				}
+			}
+		}
+	}
+
+	cache.Set(wmTextKey, text, watermarkTextTTL)
+	return text
+}
+
+// ownerLabel returns the display name or email of the share owner, empty string if neither is set.
+func ownerLabel(user *entity.User) string {
+	if user.DisplayName != "" {
+		return user.DisplayName
+	}
+	if user.UserEmail != "" {
+		return user.UserEmail
+	}
+	return ""
 }

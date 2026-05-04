@@ -216,6 +216,9 @@
               >
                 <i class="mdi mdi-lock" />
               </button>
+              <div v-if="album.Shared" class="input-shared" :title="$gettext('Shared with you')">
+                <i class="mdi mdi-account-arrow-left" />
+              </div>
             </div>
 
             <div class="meta">
