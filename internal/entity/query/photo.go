@@ -257,3 +257,14 @@ func FlagHiddenPhotos() (err error) {
 
 	return nil
 }
+
+// PhotosByCreatedBy returns all photos created/owned by the user with the given UID.
+func PhotosByCreatedBy(userUID string) (photos entity.Photos, err error) {
+	if userUID == "" {
+		return photos, nil
+	}
+
+	err = Db().Where("created_by = ?", userUID).Find(&photos).Error
+
+	return photos, err
+}

@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/photoprism/photoprism/internal/auth/acl"
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/event"
 	"github.com/photoprism/photoprism/internal/form"
@@ -52,14 +53,24 @@ func RegisterUser(router *gin.RouterGroup) {
 			return
 		}
 
-		// Build a full user form with hardcoded safe defaults.
-		// UserRole and SuperAdmin must never come from user input.
+		// Build a full user form with defaults.
+		// Only allow certain safe roles from user input during registration.
+		userRole := "guest" // default role
+		
+		// Allow users to select between guest and photographer roles during registration
+		if frm.Role != "" {
+			formRole := clean.Role(frm.Role)
+			if acl.UserRoles[formRole] != "" && (formRole == "guest" || formRole == "photographer") {
+				userRole = formRole
+			}
+		}
+
 		userForm := form.User{
 			UserName:     frm.UserName,
 			UserEmail:    frm.UserEmail,
 			DisplayName:  frm.DisplayName,
 			Password:     frm.Password,
-			UserRole:     "guest",
+			UserRole:     userRole, // Allow guest or photographer role based on validated form input
 			CanLogin:     true,
 			AuthProvider: string(authn.ProviderLocal),
 			AuthMethod:   string(authn.MethodDefault),

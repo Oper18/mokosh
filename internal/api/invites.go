@@ -21,10 +21,10 @@ import (
 //	@Tags		Invites, Albums
 //	@Accept		json
 //	@Produce	json
-//	@Success	201						{object}	gin.H
-//	@Failure	400,401,403,404,500		{object}	i18n.Response
-//	@Param		uid						path		string		true	"album uid"
-//	@Param		invite					body		form.Invite	true	"invite properties"
+//	@Success	201					{object}	gin.H
+//	@Failure	400,401,403,404,500	{object}	i18n.Response
+//	@Param		uid					path		string		true	"album uid"
+//	@Param		invite				body		form.Invite	true	"invite properties"
 //	@Router		/api/v1/albums/{uid}/invites [post]
 func CreateAlbumInvite(router *gin.RouterGroup) {
 	router.POST("/albums/:uid/invites", func(c *gin.Context) {

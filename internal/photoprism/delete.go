@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/photoprism/photoprism/internal/entity"
+	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 )
@@ -41,6 +42,30 @@ func DeletePhoto(p *entity.Photo, mediaFiles bool, originals bool) (numFiles int
 	} else {
 		numFiles++
 		log.Infof("photo: deleted sidecar file %s", clean.Log(yamlRelName))
+	}
+
+	return numFiles, nil
+}
+
+// DeleteUserPhotos permanently deletes all photos and their files owned (created) by the user with the given UID.
+func DeleteUserPhotos(userUID string) (numFiles int, err error) {
+	if userUID == "" {
+		return 0, errors.New("user uid required")
+	}
+
+	photos, err := query.PhotosByCreatedBy(userUID)
+
+	if err != nil {
+		return 0, err
+	}
+
+	for _, p := range photos {
+		n, delErr := DeletePhoto(p, true, true)
+		numFiles += n
+
+		if delErr != nil {
+			log.Errorf("delete: %s (cleanup media owned by user %s)", delErr, clean.Log(userUID))
+		}
 	}
 
 	return numFiles, nil

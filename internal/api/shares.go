@@ -49,11 +49,11 @@ func GetShares(router *gin.RouterGroup) {
 //	@Tags		Shares
 //	@Accept		json
 //	@Produce	json
-//	@Success	200						{object}	entity.UserShare
-//	@Failure	400,401,403,404,500		{object}	i18n.Response
-//	@Param		shareUID				path		string			true	"resource UID (album or photo)"
-//	@Param		userUID					path		string			true	"user UID of the share recipient"
-//	@Param		perm					body		form.SharePerm	true	"updated permission"
+//	@Success	200					{object}	entity.UserShare
+//	@Failure	400,401,403,404,500	{object}	i18n.Response
+//	@Param		shareUID			path		string			true	"resource UID (album or photo)"
+//	@Param		userUID				path		string			true	"user UID of the share recipient"
+//	@Param		perm				body		form.SharePerm	true	"updated permission"
 //	@Router		/api/v1/shares/{shareUID}/users/{userUID} [put]
 func UpdateSharePerm(router *gin.RouterGroup) {
 	router.PUT("/shares/:shareUID/users/:userUID", func(c *gin.Context) {

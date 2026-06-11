@@ -347,6 +347,40 @@ func (m *User) Delete() (err error) {
 	return err
 }
 
+// DeletePermanently permanently removes the user account and its related records from the database.
+func (m *User) DeletePermanently() (err error) {
+	if m.ID <= 1 {
+		return fmt.Errorf("cannot delete system user")
+	} else if m.UserUID == "" {
+		return fmt.Errorf("uid is required to delete user")
+	}
+
+	// Remove all sessions belonging to the user.
+	if err = UnscopedDb().Delete(Session{}, "user_uid = ?", m.UserUID).Error; err != nil {
+		event.AuditErr([]string{"user %s", "delete", "failed to remove sessions", status.Error(err)}, m.RefID)
+	}
+
+	// Remove related profile details, settings, and shares.
+	if err = UnscopedDb().Delete(UserDetails{}, "user_uid = ?", m.UserUID).Error; err != nil {
+		event.AuditErr([]string{"user %s", "delete", "failed to remove details", status.Error(err)}, m.RefID)
+	}
+
+	if err = UnscopedDb().Delete(UserSettings{}, "user_uid = ?", m.UserUID).Error; err != nil {
+		event.AuditErr([]string{"user %s", "delete", "failed to remove settings", status.Error(err)}, m.RefID)
+	}
+
+	if err = UnscopedDb().Delete(UserShare{}, "user_uid = ?", m.UserUID).Error; err != nil {
+		event.AuditErr([]string{"user %s", "delete", "failed to remove shares", status.Error(err)}, m.RefID)
+	}
+
+	// Permanently remove the user record itself (ignoring soft-delete).
+	err = UnscopedDb().Delete(m).Error
+
+	FlushSessionCache()
+
+	return err
+}
+
 // IsDeleted checks if the user account has been deleted.
 func (m *User) IsDeleted() bool {
 	if m.DeletedAt == nil {
@@ -1389,6 +1423,17 @@ func (m *User) SaveForm(frm form.User, u *User) error {
 			m.SetRole(frm.Role())
 			m.CanLogin = frm.CanLogin
 		}
+	} else if u.Equal(m) { // user updating own profile
+		// Allow users to change role between guest and photographer
+		currentRole := m.AclRole()
+		newRole := acl.ParseRole(frm.Role())
+		
+		// Only allow switching between guest and photographer roles
+		if (currentRole == acl.RoleGuest || currentRole == acl.RolePhotographer) &&
+		   (newRole == acl.RoleGuest || newRole == acl.RolePhotographer) &&
+		   currentRole != newRole {
+			m.SetRole(frm.Role())
+		}
 
 		m.WebDAV = frm.WebDAV
 		m.UserAttr = frm.Attr()
@@ -1511,4 +1556,3 @@ func visitorForToken(token string) *User {
 	}
 	return &Visitor
 }
-

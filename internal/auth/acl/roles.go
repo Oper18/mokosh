@@ -10,11 +10,12 @@ type RoleStrings map[string]Role
 
 // UserRoles maps valid user account roles.
 var UserRoles = RoleStrings{
-	string(RoleAdmin):   RoleAdmin,
-	string(RoleGuest):   RoleGuest,
-	string(RoleVisitor): RoleVisitor,
-	string(RoleNone):    RoleNone,
-	RoleAliasNone:       RoleNone,
+	string(RoleAdmin):       RoleAdmin,
+	string(RolePhotographer): RolePhotographer,
+	string(RoleGuest):       RoleGuest,
+	string(RoleVisitor):     RoleVisitor,
+	string(RoleNone):        RoleNone,
+	RoleAliasNone:           RoleNone,
 }
 
 // ClientRoles maps valid API client roles.

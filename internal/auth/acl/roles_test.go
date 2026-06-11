@@ -95,7 +95,7 @@ func TestRoleStrings_GlobalMaps_AliasNoneAndUsage(t *testing.T) {
 	})
 	t.Run("UserRolesStringsIncludeAliasNoneExcludeEmpty", func(t *testing.T) {
 		got := UserRoles.Strings()
-		assert.ElementsMatch(t, []string{"admin", "guest", "none", "visitor"}, got)
+		assert.ElementsMatch(t, []string{"admin", "photographer", "guest", "none", "visitor"}, got)
 		for _, s := range got {
 			assert.NotEqual(t, "", s)
 		}
@@ -110,7 +110,7 @@ func TestRoleStrings_GlobalMaps_AliasNoneAndUsage(t *testing.T) {
 	})
 	t.Run("UserRolesCliUsageStringIncludesNoneAndOrBeforeLast", func(t *testing.T) {
 		u := UserRoles.CliUsageString()
-		for _, s := range []string{"admin", "guest", "visitor", "none"} {
+		for _, s := range []string{"admin", "photographer", "guest", "visitor", "none"} {
 			assert.Contains(t, u, s)
 		}
 		assert.Regexp(t, `, or none$`, u)

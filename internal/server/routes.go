@@ -79,6 +79,7 @@ func registerRoutes(router *gin.Engine, conf *config.Config) {
 	api.DeactivateUserPasscode(APIv1)
 	api.UpdateUserPassword(APIv1)
 	api.UpdateUser(APIv1)
+	api.DeleteUser(APIv1)
 
 	// Service Accounts.
 	api.SearchServices(APIv1)

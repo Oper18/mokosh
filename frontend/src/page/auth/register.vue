@@ -107,6 +107,22 @@
                       @keyup.enter="onRegister"
                     ></v-text-field>
                   </v-col>
+                  <v-col cols="12" class="pb-1">
+                    <v-autocomplete
+                      id="register-role"
+                      v-model="selectedRole"
+                      :items="roleOptions"
+                      :disabled="loading"
+                      :placeholder="$gettext('Account Role')"
+                      item-title="title"
+                      item-value="value"
+                      variant="solo"
+                      density="comfortable"
+                      hide-details
+                      class="input-role text-selectable"
+                      prepend-inner-icon="mdi-account-group-outline"
+                    ></v-autocomplete>
+                  </v-col>
                   <v-col cols="12" class="auth-actions">
                     <div class="action-buttons auth-buttons pb-1 d-flex ga-3 align-center justify-center">
                       <v-btn :block="$vuetify.display.xs" color="highlight" variant="outlined" class="action-login opacity-80" @click.stop.prevent="onLogin">
@@ -154,7 +170,12 @@ export default {
       email: "",
       password: "",
       passwordConfirm: "",
+      selectedRole: "guest", // Default to guest role
       showPassword: false,
+      roleOptions: [
+        { title: this.$gettext('Guest'), value: 'guest' },
+        { title: this.$gettext('Photographer'), value: 'photographer' }
+      ],
       wallpaperUri: this.$config.values.wallpaperUri,
     };
   },
@@ -206,6 +227,7 @@ export default {
           UserEmail: this.email.trim(),
           DisplayName: this.displayName.trim(),
           Password: password,
+          Role: this.selectedRole,
         })
         .then(() => this.$session.login(username, password))
         .then(() => {

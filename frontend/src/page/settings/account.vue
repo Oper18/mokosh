@@ -314,8 +314,64 @@
             </v-row>
           </v-card-actions>
         </v-card>
+        <v-card flat tile class="my-3 pa-0 bg-background">
+          <v-card-title class="ma-0 pa-2 text-subtitle-2">
+            {{ $gettext(`Account Role`) }}
+          </v-card-title>
+          <v-card-actions class="ma-0 pa-0">
+            <v-row align="start" dense>
+              <v-col cols="12" sm="6">
+                <v-autocomplete
+                  v-model="user.Role"
+                  :disabled="busy"
+                  :label="$gettext('Role')"
+                  density="comfortable"
+                  item-value="value"
+                  item-title="title"
+                  :items="roleOptions"
+                  class="input-role"
+                  @update:model-value="onChange"
+                >
+                </v-autocomplete>
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+        <v-card flat tile class="my-3 pa-0 bg-background">
+          <v-card-title class="ma-0 pa-2 text-subtitle-2">
+            {{ $gettext(`Delete Account`) }}
+          </v-card-title>
+          <v-card-text class="ma-0 pa-2 text-caption">
+            {{ $gettext(`Deleting your account will permanently remove it along with all photos you have uploaded. This cannot be undone.`) }}
+          </v-card-text>
+          <v-card-actions class="ma-0 pa-0">
+            <v-row align="start" dense>
+              <v-col cols="12" sm="6">
+                <v-btn
+                  block
+                  variant="flat"
+                  color="error"
+                  class="action-delete-account"
+                  :disabled="isPublic || isDemo || user.ID <= 1"
+                  @click.stop="showDialog('deleteAccount')"
+                >
+                  {{ $gettext(`Delete Account`) }}
+                  <v-icon end>mdi-delete-outline</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </v-card>
       </v-form>
     </div>
+    <p-confirm-dialog
+      :visible="dialog.deleteAccount"
+      icon="mdi-delete-outline"
+      :text="$gettext(`Permanently delete your account and all photos you have uploaded? This cannot be undone.`)"
+      :action="$gettext(`Delete`)"
+      @close="dialog.deleteAccount = false"
+      @confirm="onDeleteAccount"
+    ></p-confirm-dialog>
     <p-settings-apps :visible="dialog.apps" :model="user" @close="dialog.apps = false"></p-settings-apps>
     <p-settings-passcode :visible="dialog.passcode" :model="user" @close="dialog.passcode = false" @update-user="updateUser()"></p-settings-passcode>
     <p-settings-password :visible="dialog.password" :model="user" @close="dialog.password = false"></p-settings-password>
@@ -324,6 +380,7 @@
 </template>
 
 <script>
+import PConfirmDialog from "component/confirm/dialog.vue";
 import PSettingsApps from "component/settings/apps.vue";
 import PSettingsPasscode from "component/settings/passcode.vue";
 import PSettingsPassword from "component/settings/password.vue";
@@ -336,6 +393,7 @@ import { rules } from "common/form";
 export default {
   name: "PSettingsAccount",
   components: {
+    PConfirmDialog,
     PSettingsApps,
     PSettingsPasscode,
     PSettingsPassword,
@@ -357,11 +415,16 @@ export default {
       user: user,
       countries: countries,
       session: this.$session,
+      roleOptions: [
+        { title: this.$gettext('Guest'), value: 'guest' },
+        { title: this.$gettext('Photographer'), value: 'photographer' }
+      ],
       dialog: {
         apps: false,
         passcode: false,
         password: false,
         webdav: false,
+        deleteAccount: false,
       },
     };
   },
@@ -407,6 +470,25 @@ export default {
         .refresh()
         .then(() => {
           this.user = this.$session.getUser();
+        })
+        .finally(() => {
+          this.$notify.unblockUI();
+        });
+    },
+    onDeleteAccount() {
+      this.dialog.deleteAccount = false;
+
+      if (this.isPublic || this.isDemo || this.user.ID <= 1) {
+        return;
+      }
+
+      this.$notify.blockUI("busy");
+      this.user
+        .remove()
+        .then(() => {
+          this.$notify.success(this.$gettext("Account deleted"));
+          // Account and sessions are gone server-side; clear local state and redirect to login.
+          this.$session.onLogout();
         })
         .finally(() => {
           this.$notify.unblockUI();

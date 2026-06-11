@@ -25,6 +25,7 @@ var ResourceNames = []Resource{
 	ResourceApi,
 	ResourceWebDAV,
 	ResourceWebhooks,
+	ResourceTeams,
 	ResourceMetrics,
 	ResourceVision,
 	ResourceCluster,

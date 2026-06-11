@@ -20,8 +20,8 @@ import (
 //	@Id			GetTeams
 //	@Tags		Teams
 //	@Produce	json
-//	@Success	200			{array}		entity.Team
-//	@Failure	401,403		{object}	i18n.Response
+//	@Success	200		{array}		entity.Team
+//	@Failure	401,403	{object}	i18n.Response
 //	@Router		/api/v1/teams [get]
 func GetTeams(router *gin.RouterGroup) {
 	router.GET("/teams", func(c *gin.Context) {
@@ -55,9 +55,9 @@ func GetTeams(router *gin.RouterGroup) {
 //	@Id			GetTeam
 //	@Tags		Teams
 //	@Produce	json
-//	@Success	200				{object}	entity.Team
-//	@Failure	401,403,404		{object}	i18n.Response
-//	@Param		uid				path		string	true	"Team UID"
+//	@Success	200			{object}	entity.Team
+//	@Failure	401,403,404	{object}	i18n.Response
+//	@Param		uid			path		string	true	"Team UID"
 //	@Router		/api/v1/teams/{uid} [get]
 func GetTeam(router *gin.RouterGroup) {
 	router.GET("/teams/:uid", func(c *gin.Context) {
@@ -248,10 +248,10 @@ func DeleteTeam(router *gin.RouterGroup) {
 //	@Tags		Teams
 //	@Accept		json
 //	@Produce	json
-//	@Success	200				{object}	entity.TeamUser
+//	@Success	200					{object}	entity.TeamUser
 //	@Failure	400,401,403,404,500	{object}	i18n.Response
-//	@Param		uid				path		string			true	"Team UID"
-//	@Param		member			body		form.TeamUser	true	"user to add"
+//	@Param		uid					path		string			true	"Team UID"
+//	@Param		member				body		form.TeamUser	true	"user to add"
 //	@Router		/api/v1/teams/{uid}/users [post]
 func AddUserToTeam(router *gin.RouterGroup) {
 	router.POST("/teams/:uid/users", func(c *gin.Context) {
@@ -317,10 +317,10 @@ func AddUserToTeam(router *gin.RouterGroup) {
 //	@Id			RemoveUserFromTeam
 //	@Tags		Teams
 //	@Produce	json
-//	@Success	200					{object}	gin.H
-//	@Failure	401,403,404,500		{object}	i18n.Response
-//	@Param		uid					path		string	true	"Team UID"
-//	@Param		userUID				path		string	true	"User UID"
+//	@Success	200				{object}	gin.H
+//	@Failure	401,403,404,500	{object}	i18n.Response
+//	@Param		uid				path		string	true	"Team UID"
+//	@Param		userUID			path		string	true	"User UID"
 //	@Router		/api/v1/teams/{uid}/users/{userUID} [delete]
 func RemoveUserFromTeam(router *gin.RouterGroup) {
 	router.DELETE("/teams/:uid/users/:userUID", func(c *gin.Context) {
@@ -439,10 +439,10 @@ func AddTeamToAlbum(router *gin.RouterGroup) {
 //	@Id			RemoveTeamFromAlbum
 //	@Tags		Teams
 //	@Produce	json
-//	@Success	200					{object}	gin.H
-//	@Failure	401,403,404,500		{object}	i18n.Response
-//	@Param		uid					path		string	true	"Team UID"
-//	@Param		albumUID			path		string	true	"Album UID"
+//	@Success	200				{object}	gin.H
+//	@Failure	401,403,404,500	{object}	i18n.Response
+//	@Param		uid				path		string	true	"Team UID"
+//	@Param		albumUID		path		string	true	"Album UID"
 //	@Router		/api/v1/teams/{uid}/albums/{albumUID} [delete]
 func RemoveTeamFromAlbum(router *gin.RouterGroup) {
 	router.DELETE("/teams/:uid/albums/:albumUID", func(c *gin.Context) {
@@ -559,10 +559,10 @@ func AddTeamToPhoto(router *gin.RouterGroup) {
 //	@Id			RemoveTeamFromPhoto
 //	@Tags		Teams
 //	@Produce	json
-//	@Success	200					{object}	gin.H
-//	@Failure	401,403,404,500		{object}	i18n.Response
-//	@Param		uid					path		string	true	"Team UID"
-//	@Param		photoUID			path		string	true	"Photo UID"
+//	@Success	200				{object}	gin.H
+//	@Failure	401,403,404,500	{object}	i18n.Response
+//	@Param		uid				path		string	true	"Team UID"
+//	@Param		photoUID		path		string	true	"Photo UID"
 //	@Router		/api/v1/teams/{uid}/photos/{photoUID} [delete]
 func RemoveTeamFromPhoto(router *gin.RouterGroup) {
 	router.DELETE("/teams/:uid/photos/:photoUID", func(c *gin.Context) {

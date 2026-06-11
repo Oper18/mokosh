@@ -1691,6 +1691,9 @@
                 "ModifiedAt": {
                     "type": "string"
                 },
+                "Name": {
+                    "type": "string"
+                },
                 "Perm": {
                     "type": "integer"
                 },
@@ -2298,6 +2301,71 @@
             },
             "type": "object"
         },
+        "entity.Team": {
+            "properties": {
+                "CreatedAt": {
+                    "type": "string"
+                },
+                "ID": {
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "UID": {
+                    "type": "string"
+                },
+                "UpdatedAt": {
+                    "type": "string"
+                },
+                "UserUID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "entity.TeamAlbum": {
+            "properties": {
+                "AlbumUID": {
+                    "type": "string"
+                },
+                "TeamUID": {
+                    "type": "string"
+                },
+                "UID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "entity.TeamPhoto": {
+            "properties": {
+                "PhotoUID": {
+                    "type": "string"
+                },
+                "TeamUID": {
+                    "type": "string"
+                },
+                "UID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "entity.TeamUser": {
+            "properties": {
+                "TeamUID": {
+                    "type": "string"
+                },
+                "UID": {
+                    "type": "string"
+                },
+                "UserUID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "entity.User": {
             "properties": {
                 "Attr": {
@@ -2748,6 +2816,23 @@
             },
             "type": "object"
         },
+        "form.Invite": {
+            "properties": {
+                "Comment": {
+                    "type": "string"
+                },
+                "ExpiresAt": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Perm": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "form.Label": {
             "properties": {
                 "Description": {
@@ -2791,8 +2876,14 @@
                 "MaxViews": {
                     "type": "integer"
                 },
+                "Name": {
+                    "type": "string"
+                },
                 "Password": {
                     "type": "string"
+                },
+                "Perm": {
+                    "type": "integer"
                 },
                 "Slug": {
                     "type": "string"
@@ -3054,6 +3145,34 @@
             },
             "type": "object"
         },
+        "form.React": {
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "emoji": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "form.Register": {
+            "properties": {
+                "DisplayName": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                },
+                "UserEmail": {
+                    "type": "string"
+                },
+                "UserName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "form.Selection": {
             "properties": {
                 "albums": {
@@ -3170,6 +3289,20 @@
             },
             "type": "object"
         },
+        "form.SharePerm": {
+            "properties": {
+                "Comment": {
+                    "type": "string"
+                },
+                "ExpiresAt": {
+                    "type": "string"
+                },
+                "Perm": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "form.Subject": {
             "properties": {
                 "About": {
@@ -3203,6 +3336,38 @@
                     "type": "string"
                 },
                 "ThumbSrc": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "form.Team": {
+            "properties": {
+                "Name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "form.TeamAlbum": {
+            "properties": {
+                "AlbumUID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "form.TeamPhoto": {
+            "properties": {
+                "PhotoUID": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "form.TeamUser": {
+            "properties": {
+                "UserUID": {
                     "type": "string"
                 }
             },
@@ -3846,6 +4011,9 @@
                     "type": "integer"
                 },
                 "Private": {
+                    "type": "boolean"
+                },
+                "Shared": {
                     "type": "boolean"
                 },
                 "Slug": {
@@ -5409,6 +5577,78 @@
                 "tags": [
                     "Albums",
                     "Download"
+                ]
+            }
+        },
+        "/api/v1/albums/{uid}/invites": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "CreateAlbumInvite",
+                "parameters": [
+                    {
+                        "description": "album uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "invite properties",
+                        "in": "body",
+                        "name": "invite",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.Invite"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "creates a visitor user with a share link for the given album",
+                "tags": [
+                    "Invites",
+                    "Albums"
                 ]
             }
         },
@@ -9877,6 +10117,444 @@
                 ]
             }
         },
+        "/api/v1/photos/{uid}/links": {
+            "get": {
+                "operationId": "GetPhotoLinks",
+                "parameters": [
+                    {
+                        "description": "photo uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Link"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "returns all share links for the given photo UID as JSON",
+                "tags": [
+                    "Links",
+                    "Photos"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "CreatePhotoLink",
+                "parameters": [
+                    {
+                        "description": "photo uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "link properties",
+                        "in": "body",
+                        "name": "link",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.Link"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Link"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "adds a new photo share link and returns it as JSON",
+                "tags": [
+                    "Links",
+                    "Photos"
+                ]
+            }
+        },
+        "/api/v1/photos/{uid}/links/{linkuid}": {
+            "delete": {
+                "operationId": "DeletePhotoLink",
+                "parameters": [
+                    {
+                        "description": "photo uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "link uid",
+                        "in": "path",
+                        "name": "linkuid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Link"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "deletes a photo share link",
+                "tags": [
+                    "Links",
+                    "Photos"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "UpdatePhotoLink",
+                "parameters": [
+                    {
+                        "description": "photo uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "link uid",
+                        "in": "path",
+                        "name": "linkuid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "properties to update",
+                        "in": "body",
+                        "name": "link",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.Link"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Link"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "updates an existing photo share link and returns it as JSON",
+                "tags": [
+                    "Links",
+                    "Photos"
+                ]
+            }
+        },
+        "/api/v1/photos/{uid}/react": {
+            "get": {
+                "operationId": "GetPhotoReactions",
+                "parameters": [
+                    {
+                        "description": "photo uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "returns reactions for a photo",
+                "tags": [
+                    "Photos"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "ReactPhoto",
+                "parameters": [
+                    {
+                        "description": "photo uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "optional emoji and/or comment (at least one required)",
+                        "in": "body",
+                        "name": "react",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.React"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "adds a reaction to a photo",
+                "tags": [
+                    "Photos"
+                ]
+            }
+        },
+        "/api/v1/photos/{uid}/react/{id}": {
+            "delete": {
+                "operationId": "DeletePhotoReaction",
+                "parameters": [
+                    {
+                        "description": "photo uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "reaction id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "removes a specific reaction from a photo",
+                "tags": [
+                    "Photos"
+                ]
+            }
+        },
         "/api/v1/photos/{uid}/yaml": {
             "get": {
                 "operationId": "GetPhotoYaml",
@@ -10991,6 +11669,125 @@
                 ]
             }
         },
+        "/api/v1/shares": {
+            "get": {
+                "operationId": "GetShares",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/entity.UserShare"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "returns user shares for resources owned by the authenticated user",
+                "tags": [
+                    "Shares"
+                ]
+            }
+        },
+        "/api/v1/shares/{shareUID}/users/{userUID}": {
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "UpdateSharePerm",
+                "parameters": [
+                    {
+                        "description": "resource UID (album or photo)",
+                        "in": "path",
+                        "name": "shareUID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "user UID of the share recipient",
+                        "in": "path",
+                        "name": "userUID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "updated permission",
+                        "in": "body",
+                        "name": "perm",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.SharePerm"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.UserShare"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "updates permission for a user share",
+                "tags": [
+                    "Shares"
+                ]
+            }
+        },
         "/api/v1/status": {
             "get": {
                 "operationId": "GetStatus",
@@ -11469,7 +12266,766 @@
                 ]
             }
         },
+        "/api/v1/teams": {
+            "get": {
+                "operationId": "GetTeams",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/entity.Team"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "returns teams for the authenticated user",
+                "tags": [
+                    "Teams"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "CreateTeam",
+                "parameters": [
+                    {
+                        "description": "team name",
+                        "in": "body",
+                        "name": "team",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.Team"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Team"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "creates a new team",
+                "tags": [
+                    "Teams"
+                ]
+            }
+        },
+        "/api/v1/teams/{uid}": {
+            "delete": {
+                "operationId": "DeleteTeam",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Team"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "deletes a team",
+                "tags": [
+                    "Teams"
+                ]
+            },
+            "get": {
+                "operationId": "GetTeam",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Team"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "returns a team",
+                "tags": [
+                    "Teams"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "UpdateTeam",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "updated team properties",
+                        "in": "body",
+                        "name": "team",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.Team"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Team"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "updates a team",
+                "tags": [
+                    "Teams"
+                ]
+            }
+        },
+        "/api/v1/teams/{uid}/albums": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "AddTeamToAlbum",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "album to attach",
+                        "in": "body",
+                        "name": "album",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.TeamAlbum"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.TeamAlbum"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "grants a team access to an album",
+                "tags": [
+                    "Teams"
+                ]
+            }
+        },
+        "/api/v1/teams/{uid}/albums/{albumUID}": {
+            "delete": {
+                "operationId": "RemoveTeamFromAlbum",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Album UID",
+                        "in": "path",
+                        "name": "albumUID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "removes a team's access to an album",
+                "tags": [
+                    "Teams"
+                ]
+            }
+        },
+        "/api/v1/teams/{uid}/photos": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "AddTeamToPhoto",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "photo to attach",
+                        "in": "body",
+                        "name": "photo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.TeamPhoto"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.TeamPhoto"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "grants a team access to a photo",
+                "tags": [
+                    "Teams"
+                ]
+            }
+        },
+        "/api/v1/teams/{uid}/photos/{photoUID}": {
+            "delete": {
+                "operationId": "RemoveTeamFromPhoto",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Photo UID",
+                        "in": "path",
+                        "name": "photoUID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "removes a team's access to a photo",
+                "tags": [
+                    "Teams"
+                ]
+            }
+        },
+        "/api/v1/teams/{uid}/users": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "AddUserToTeam",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "user to add",
+                        "in": "body",
+                        "name": "member",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.TeamUser"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.TeamUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "adds a user to a team",
+                "tags": [
+                    "Teams"
+                ]
+            }
+        },
+        "/api/v1/teams/{uid}/users/{userUID}": {
+            "delete": {
+                "operationId": "RemoveUserFromTeam",
+                "parameters": [
+                    {
+                        "description": "Team UID",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "User UID",
+                        "in": "path",
+                        "name": "userUID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "removes a user from a team",
+                "tags": [
+                    "Teams"
+                ]
+            }
+        },
+        "/api/v1/users/register": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "registration data",
+                        "in": "body",
+                        "name": "registration",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.Register"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/entity.User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "register a new user account",
+                "tags": [
+                    "Users"
+                ]
+            }
+        },
         "/api/v1/users/{uid}": {
+            "delete": {
+                "operationId": "DeleteUser",
+                "parameters": [
+                    {
+                        "description": "user uid",
+                        "in": "path",
+                        "name": "uid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    }
+                },
+                "summary": "delete a user account and all owned media",
+                "tags": [
+                    "Users"
+                ]
+            },
             "put": {
                 "consumes": [
                     "application/json"
