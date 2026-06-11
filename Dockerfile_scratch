@@ -12,12 +12,14 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/go/bin:/go/bin"
 
 # Install build dependencies (CGO requires libvips-dev; keep list minimal).
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        ca-certificates curl git make pkg-config \
-        build-essential gcc g++ \
+# Add Node.js 22.x repository (replaces Ubuntu's outdated Node 18).
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y --no-install-recommends \
+        git make pkg-config build-essential gcc g++ \
         libvips-dev libjpeg-dev libpng-dev libwebp-dev \
         libheif-dev libraw-dev \
-        nodejs npm \
+        nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Go 1.25.

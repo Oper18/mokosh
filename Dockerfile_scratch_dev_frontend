@@ -14,7 +14,7 @@ COPY frontend/package.json ./frontend/
 
 # Install all workspace dependencies into /photoprism/node_modules.
 # That directory is outside the ./frontend volume mount, so it survives at runtime.
-RUN npm ci
+RUN npm install
 
 # node_modules is baked into the image.
 # frontend/src/ and assets/static/ are mounted at runtime via compose volumes.
