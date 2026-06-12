@@ -1369,6 +1369,9 @@ func (m *User) PrivilegeLevelChange(frm form.User) bool {
 
 // SaveForm updates the entity using form data and stores it in the database.
 func (m *User) SaveForm(frm form.User, u *User) error {
+	// Remember the current role so cached sessions can be refreshed if it changes.
+	prevRole := m.AclRole()
+
 	if m.UserName == "" || m.ID <= 0 {
 		return fmt.Errorf("system users cannot be modified")
 	} else if (m.ID == 1 || frm.SuperAdmin) && acl.RoleAdmin.NotEqual(frm.Role()) {
@@ -1427,11 +1430,11 @@ func (m *User) SaveForm(frm form.User, u *User) error {
 		// Allow users to change role between guest and photographer
 		currentRole := m.AclRole()
 		newRole := acl.ParseRole(frm.Role())
-		
+
 		// Only allow switching between guest and photographer roles
 		if (currentRole == acl.RoleGuest || currentRole == acl.RolePhotographer) &&
-		   (newRole == acl.RoleGuest || newRole == acl.RolePhotographer) &&
-		   currentRole != newRole {
+			(newRole == acl.RoleGuest || newRole == acl.RolePhotographer) &&
+			currentRole != newRole {
 			m.SetRole(frm.Role())
 		}
 
@@ -1468,7 +1471,17 @@ func (m *User) SaveForm(frm form.User, u *User) error {
 		m.CanLogin = true
 	}
 
-	return m.Save()
+	if err := m.Save(); err != nil {
+		return err
+	}
+
+	// Flush cached sessions when the role changed so the new permissions take
+	// effect immediately instead of after the session cache expires.
+	if prevRole != m.AclRole() {
+		FlushSessionCache()
+	}
+
+	return nil
 }
 
 // SetDisplayName sets a new display name and, if possible, splits it into its components.
