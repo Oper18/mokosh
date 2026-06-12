@@ -123,15 +123,17 @@ func AlbumCover(router *gin.RouterGroup) {
 			return
 		}
 
-		fileName := photoprism.FileName(f.FileRoot, f.FileName)
+		fileName, _, resolveErr := get.ResolveLocalFile(&f)
 
-		if !fs.FileExists(fileName) {
-			log.Errorf("%s: found no original for %s", albumCover, clean.Log(fileName))
+		if resolveErr != nil {
+			log.Errorf("%s: found no original for %s", albumCover, clean.Log(f.FileName))
 			c.Data(http.StatusOK, "image/svg+xml", albumIconSvg)
 
-			// Set missing flag so that the file doesn't show up in search results anymore.
-			log.Warnf("%s: %s is missing", albumCover, clean.Log(f.FileName))
-			logErr(albumCover, f.Update("FileMissing", true))
+			// Only flag as missing when remote storage confirms the original is gone.
+			if !get.RemoteMayHold(&f) {
+				log.Warnf("%s: %s is missing", albumCover, clean.Log(f.FileName))
+				logErr(albumCover, f.Update("FileMissing", true))
+			}
 			return
 		}
 

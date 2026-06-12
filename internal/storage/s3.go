@@ -77,6 +77,18 @@ func (s *S3Backend) Put(ctx context.Context, key string, r io.Reader, size int64
 	return err
 }
 
+// Get returns a reader for the object at key. The caller must close it.
+func (s *S3Backend) Get(ctx context.Context, key string) (io.ReadCloser, error) {
+	out, err := s.client.GetObject(ctx, &s3.GetObjectInput{
+		Bucket: aws.String(s.bucket),
+		Key:    aws.String(key),
+	})
+	if err != nil {
+		return nil, err
+	}
+	return out.Body, nil
+}
+
 // Exists checks whether an object with the given key exists in the bucket.
 //
 // It returns (false, nil) only when the store positively reports the object as

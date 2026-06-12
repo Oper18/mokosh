@@ -8,6 +8,7 @@ package storage
 
 import (
 	"context"
+	"errors"
 	"io"
 	"time"
 )
@@ -15,10 +16,18 @@ import (
 // PresignExpiry is the default lifetime of a presigned read URL.
 const PresignExpiry = 15 * time.Minute
 
+// ErrNotSupported is returned by backends that do not implement an operation,
+// e.g. the local filesystem backend for remote object reads.
+var ErrNotSupported = errors.New("storage: operation not supported by this backend")
+
 // Backend is the interface that all storage implementations satisfy.
 type Backend interface {
 	// Put uploads a file from r to the given key.
 	Put(ctx context.Context, key string, r io.Reader, size int64) error
+
+	// Get returns a reader for the object at key. The caller must close it.
+	// Local backends return ErrNotSupported; callers should read from disk.
+	Get(ctx context.Context, key string) (io.ReadCloser, error)
 
 	// Exists reports whether an object with the given key is present.
 	Exists(ctx context.Context, key string) (bool, error)

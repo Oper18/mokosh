@@ -226,20 +226,28 @@ func GetThumb(router *gin.RouterGroup) {
 			return
 		}
 
-		fileName := photoprism.FileName(f.FileRoot, f.FileName)
+		var fileName string
 
-		if fileName, err = fs.Resolve(fileName); err != nil {
+		// Resolve the original locally, fetching it from remote storage (e.g. S3)
+		// into the local cache when it is not already present on disk.
+		if resolved, _, resolveErr := get.ResolveLocalFile(&f); resolveErr == nil {
+			fileName = resolved
+		} else {
 			log.Errorf("%s: file %s is missing", logPrefix, clean.Log(f.FileName))
 			c.Data(http.StatusOK, "image/svg+xml", brokenIconSvg)
 
-			// Set missing flag so that the file doesn't show up in search results anymore.
-			logErr(logPrefix, f.Update("FileMissing", true))
+			// Only flag the file as missing — and only trash the photo — when remote
+			// storage confirms the original is gone. Never destroy data because of a
+			// missing local cache copy or a transient remote-storage outage.
+			if !get.RemoteMayHold(&f) {
+				logErr(logPrefix, f.Update("FileMissing", true))
 
-			if f.AllFilesMissing() {
-				log.Infof("%s: deleting photo, all files missing for %s", logPrefix, clean.Log(f.FileName))
+				if f.AllFilesMissing() {
+					log.Infof("%s: deleting photo, all files missing for %s", logPrefix, clean.Log(f.FileName))
 
-				if _, err := f.RelatedPhoto().Delete(false); err != nil {
-					log.Errorf("%s: %s while deleting %s", logPrefix, err, clean.Log(f.FileName))
+					if _, err := f.RelatedPhoto().Delete(false); err != nil {
+						log.Errorf("%s: %s while deleting %s", logPrefix, err, clean.Log(f.FileName))
+					}
 				}
 			}
 

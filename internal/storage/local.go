@@ -20,6 +20,11 @@ func (l *Local) Put(_ context.Context, _ string, _ io.Reader, _ int64) error {
 	return nil
 }
 
+// Get is unsupported for local storage; callers read directly from disk.
+func (l *Local) Get(_ context.Context, _ string) (io.ReadCloser, error) {
+	return nil, ErrNotSupported
+}
+
 func (l *Local) Exists(_ context.Context, _ string) (bool, error) {
 	return false, nil
 }
