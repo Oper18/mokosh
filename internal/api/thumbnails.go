@@ -9,7 +9,6 @@ import (
 
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/entity/query"
-	"github.com/photoprism/photoprism/internal/photoprism"
 	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/internal/thumb"
 	"github.com/photoprism/photoprism/internal/thumb/crop"
@@ -230,7 +229,7 @@ func GetThumb(router *gin.RouterGroup) {
 
 		// Resolve the original locally, fetching it from remote storage (e.g. S3)
 		// into the local cache when it is not already present on disk.
-		if resolved, _, resolveErr := get.ResolveLocalFile(&f); resolveErr == nil {
+		if resolved, _, resolveErr := get.ResolveLocalFile(f); resolveErr == nil {
 			fileName = resolved
 		} else {
 			log.Errorf("%s: file %s is missing", logPrefix, clean.Log(f.FileName))
@@ -239,7 +238,7 @@ func GetThumb(router *gin.RouterGroup) {
 			// Only flag the file as missing — and only trash the photo — when remote
 			// storage confirms the original is gone. Never destroy data because of a
 			// missing local cache copy or a transient remote-storage outage.
-			if !get.RemoteMayHold(&f) {
+			if !get.RemoteMayHold(f) {
 				logErr(logPrefix, f.Update("FileMissing", true))
 
 				if f.AllFilesMissing() {
