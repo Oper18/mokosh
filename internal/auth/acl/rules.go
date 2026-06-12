@@ -22,11 +22,11 @@ var Rules = ACL{
 		RoleClient:      GrantFullAccess,
 	},
 	ResourcePhotos: Roles{
-		RoleAdmin:       GrantFullAccess,
-		RolePhotographer:  GrantGuestOwn,
-		RoleGuest:       GrantViewUpdateOwn, // Changed to restrict photo updates for Guests as expected by tests
-		RoleVisitor:     GrantSearchShared,
-		RoleClient:      GrantFullAccess,
+		RoleAdmin:        GrantFullAccess,
+		RolePhotographer: GrantSearchDownloadUpdateOwn, // Align with guest: allow search, download, and own updates, but restrict global updates
+		RoleGuest:        GrantSearchDownloadUpdateOwn, // Restrict global photo updates for Guests, but allow search, download, and own updates
+		RoleVisitor:      GrantSearchShared,
+		RoleClient:       GrantFullAccess,
 	},
 	ResourceVideos: GrantDefaults,
 	ResourceFavorites: Roles{
