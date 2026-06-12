@@ -533,9 +533,9 @@ func searchPhotos(frm form.SearchPhotos, sess *entity.Session, resultCols string
 		if len(sharedUIDs) > 0 {
 			// Directly shared photos bypass the private flag.
 			s = s.Where("(photos.photo_private = 0 OR photos.photo_uid IN (?))", sharedUIDs)
-		} else if acl.Rules.Allow(acl.ResourcePhotos, aclRole, acl.AccessOwn) && user.UserUID != "" {
+		} else if sess != nil && acl.Rules.Allow(acl.ResourcePhotos, sess.GetUserRole(), acl.AccessOwn) && sess.GetUser().UserUID != "" {
 			// Allow users with AccessOwn to see their own private photos.
-			s = s.Where("(photos.photo_private = 0 OR photos.created_by = ?)", user.UserUID)
+			s = s.Where("(photos.photo_private = 0 OR photos.created_by = ?)", sess.GetUser().UserUID)
 		} else {
 			s = s.Where("photos.photo_private = 0")
 		}
