@@ -1,6 +1,7 @@
 package photoprism
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"runtime/debug"
@@ -12,24 +13,85 @@ import (
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/mutex"
+	"github.com/photoprism/photoprism/internal/storage"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 )
 
 // Purge represents a worker that removes missing files from search results.
 type Purge struct {
-	conf  *config.Config
-	files *Files
+	conf    *config.Config
+	files   *Files
+	storage storage.Backend
 }
 
 // NewPurge returns a new purge worker.
 func NewPurge(conf *config.Config, files *Files) *Purge {
 	instance := &Purge{
-		conf:  conf,
-		files: files,
+		conf:    conf,
+		files:   files,
+		storage: storage.NewLocal(),
 	}
 
 	return instance
+}
+
+// SetStorage sets the remote storage backend consulted before a file is flagged
+// as missing. Objects that still exist in remote storage (e.g. S3) are then kept
+// even when absent from the local cache, so they are never purged or trashed.
+func (w *Purge) SetStorage(b storage.Backend) {
+	if b != nil {
+		w.storage = b
+	}
+}
+
+// remoteState describes what the configured remote storage backend knows about
+// a file.
+type remoteState int
+
+const (
+	remoteNotApplicable remoteState = iota // local backend or file not stored remotely — no remote opinion
+	remotePresent                          // object confirmed present in remote storage
+	remoteAbsent                           // object confirmed absent (HTTP 404)
+	remoteUnreachable                      // remote configured but the check failed (transient)
+)
+
+// remoteFileState reports what remote storage knows about the originals file
+// identified by its root and relative name. It returns remoteNotApplicable for
+// the local backend and for files that are not stored remotely, and
+// remoteUnreachable when the backend cannot be reached — so a transient outage
+// is never treated as a deletion.
+func (w *Purge) remoteFileState(fileRoot, fileName string) remoteState {
+	if w.storage == nil {
+		return remoteNotApplicable
+	} else if _, isLocal := w.storage.(*storage.Local); isLocal {
+		return remoteNotApplicable
+	} else if fileRoot != entity.RootOriginals || fileName == "" {
+		return remoteNotApplicable
+	}
+
+	switch exists, err := w.storage.Exists(context.Background(), fileName); {
+	case err != nil:
+		log.Warnf("purge: could not verify %s in remote storage, leaving it unchanged (%s)", clean.Log(fileName), err)
+		return remoteUnreachable
+	case exists:
+		return remotePresent
+	default:
+		return remoteAbsent
+	}
+}
+
+// remoteMayHold reports whether remote storage either holds the file or could
+// not be reached. In both cases the file must not be flagged as missing. It
+// returns false for the local backend and for confirmed-absent objects, which
+// preserves the original local-only purge behaviour.
+func (w *Purge) remoteMayHold(fileRoot, fileName string) bool {
+	switch w.remoteFileState(fileRoot, fileName) {
+	case remotePresent, remoteUnreachable:
+		return true
+	default:
+		return false
+	}
 }
 
 // Start removes missing files from search results.
@@ -103,7 +165,7 @@ func (w *Purge) Start(opt PurgeOptions) (purgedFiles map[string]bool, purgedPhot
 			}
 
 			if file.FileMissing {
-				if fs.FileExists(fileName) {
+				if fs.FileExists(fileName) || w.remoteFileState(file.FileRoot, file.FileName) == remotePresent {
 					if opt.Dry {
 						log.Infof("purge: found %s", clean.Log(file.FileName))
 						continue
@@ -117,7 +179,7 @@ func (w *Purge) Start(opt PurgeOptions) (purgedFiles map[string]bool, purgedPhot
 						log.Infof("purge: found %s", clean.Log(file.FileName))
 					}
 				}
-			} else if !fs.FileExists(fileName) {
+			} else if !fs.FileExists(fileName) && !w.remoteMayHold(file.FileRoot, file.FileName) {
 				if opt.Dry {
 					purgedFiles[fileName] = true
 					log.Infof("purge: file %s would be flagged as missing", clean.Log(file.FileName))
@@ -182,7 +244,7 @@ func (w *Purge) Start(opt PurgeOptions) (purgedFiles map[string]bool, purgedPhot
 				continue
 			}
 
-			if !fs.FileExists(fileName) {
+			if !fs.FileExists(fileName) && !w.remoteMayHold(file.FileRoot, file.FileName) {
 				if opt.Dry {
 					purgedFiles[fileName] = true
 					log.Infof("purge: duplicate %s would be removed from index", clean.Log(file.FileName))

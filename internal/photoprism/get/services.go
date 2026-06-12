@@ -71,6 +71,7 @@ func SetConfig(c *config.Config) {
 	resetOIDC()
 	ResetStorage()
 	ResetImport()
+	ResetPurge()
 
 	conf = c
 

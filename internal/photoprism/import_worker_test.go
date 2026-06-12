@@ -18,7 +18,7 @@ func TestImportWorker_OriginalFileNames(t *testing.T) {
 
 	convert := NewConvert(cfg)
 	ind := NewIndex(cfg, convert, NewFiles(), NewPhotos())
-	imp := &Import{cfg, ind, convert, cfg.ImportAllow()}
+	imp := NewImport(cfg, ind, convert)
 
 	mediaFileName := cfg.SamplesPath() + "/beach_sand.jpg"
 	mediaFile, err := NewMediaFile(mediaFileName)

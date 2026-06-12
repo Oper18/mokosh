@@ -2,13 +2,16 @@ package storage
 
 import (
 	"context"
+	"errors"
 	"io"
+	"net/http"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // S3Backend implements Backend for AWS S3 and S3-compatible object stores
@@ -75,16 +78,29 @@ func (s *S3Backend) Put(ctx context.Context, key string, r io.Reader, size int64
 }
 
 // Exists checks whether an object with the given key exists in the bucket.
+//
+// It returns (false, nil) only when the store positively reports the object as
+// absent (HTTP 404). Any other failure (network error, auth, throttling, an
+// unreachable endpoint) is returned to the caller so that a temporarily
+// unreachable store is never mistaken for a deleted object — callers that purge
+// missing files rely on this distinction to avoid destroying remote-backed data.
 func (s *S3Backend) Exists(ctx context.Context, key string) (bool, error) {
 	_, err := s.client.HeadObject(ctx, &s3.HeadObjectInput{
 		Bucket: aws.String(s.bucket),
 		Key:    aws.String(key),
 	})
-	if err != nil {
-		// Any error (including 404) means the object is not accessible.
+	if err == nil {
+		return true, nil
+	}
+
+	// A 404 response means the object genuinely does not exist.
+	var respErr *smithyhttp.ResponseError
+	if errors.As(err, &respErr) && respErr.HTTPStatusCode() == http.StatusNotFound {
 		return false, nil
 	}
-	return true, nil
+
+	// Any other error is treated as "unknown", not "absent".
+	return false, err
 }
 
 // PresignedGetURL returns a pre-authenticated GET URL for the given key.
