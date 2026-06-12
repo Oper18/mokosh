@@ -129,6 +129,8 @@ var (
 	GrantSearchDownloadUpdateOwn = Grant{
 		AccessShared:    true,
 		AccessOwn:       true,
+		AccessLibrary:   true,
+		AccessPrivate:   true,
 		ActionSearch:    true,
 		ActionView:      true,
 		ActionDownload:  true,
