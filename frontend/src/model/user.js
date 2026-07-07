@@ -10,7 +10,7 @@ import { $config } from "app/session";
 export let BatchSize = 99999;
 export let WebDavRoles = ["admin", "manager", "user", "contributor"];
 export let NoBasePathRoles = ["admin", "manager", "user", "viewer"];
-export let NoUploadPathRoles = ["guest", "viewer"];
+export let NoUploadPathRoles = ["guest", "photographer", "viewer"];
 
 // User encapsulates account metadata, roles, and helpers for access control.
 export class User extends RestModel {

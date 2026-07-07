@@ -23,8 +23,8 @@ var Rules = ACL{
 	},
 	ResourcePhotos: Roles{
 		RoleAdmin:        GrantFullAccess,
-		RolePhotographer: GrantSearchDownloadUpdateOwn, // Align with guest: allow search, download, and own updates, but restrict global updates
-		RoleGuest:        GrantSearchDownloadUpdateOwn, // Restrict global photo updates for Guests, but allow search, download, and own updates
+		RolePhotographer: GrantGuestPhotos, // Align with guest: search, download, and own updates only — no AccessLibrary (see GrantGuestPhotos doc).
+		RoleGuest:        GrantGuestPhotos, // Restrict global photo updates and whole-library visibility; only own + shared photos.
 		RoleVisitor:      GrantSearchShared,
 		RoleClient:       GrantFullAccess,
 	},

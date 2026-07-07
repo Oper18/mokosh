@@ -8,6 +8,7 @@ export const Roles = () => {
     "user": $gettext("User"),
     "viewer": $gettext("Viewer"),
     "contributor": $gettext("Contributor"),
+    "photographer": $gettext("Photographer"),
     "guest": $gettext("Guest"),
     "client": $gettext("Client"),
     "visitor": $gettext("Visitor"),

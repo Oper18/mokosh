@@ -136,6 +136,18 @@ var (
 		ActionDownload:  true,
 		ActionUpdateOwn: true,
 	}
+	// GrantGuestPhotos is like GrantSearchDownloadUpdateOwn but without AccessLibrary,
+	// which acl.Rules.DenyAll(..., {AccessAll, AccessLibrary}) treats as unrestricted
+	// library access. Guests/photographers must only see their own and shared photos.
+	GrantGuestPhotos = Grant{
+		AccessShared:    true,
+		AccessOwn:       true,
+		AccessPrivate:   true,
+		ActionSearch:    true,
+		ActionView:      true,
+		ActionDownload:  true,
+		ActionUpdateOwn: true,
+	}
 	GrantGuestOwn = Grant{
 		AccessOwn:       true,
 		AccessShared:    true,
